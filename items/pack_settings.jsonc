@@ -1,0 +1,56 @@
+[
+	{
+		"name": "Game Version",
+		"type": "progressive",
+		"allow_disabled": false,
+		"loop": true,
+		"stages": [
+			{
+				"name": "Cobi's Journey",
+				"img": "images/settings/CobisJourney.png",
+				"codes": "GameVersion, CobisJourney",
+				"inherit_codes": false
+			},
+			{
+				"name": "Tara's Adventure",
+				"img": "images/settings/TarasAdventure.png",
+				"codes": "GameVersion, TarasAdventure",
+				"inherit_codes": false
+			}
+		]
+	},
+	{
+		"name": "Character",
+		"type": "progressive",
+		"allow_disabled": false,
+		"loop": true,
+		"stages": [
+			{
+				"name": "Cobi",
+				"img": "images/settings/Cobi.png",
+				"codes": "Character, Cobi",
+				"inherit_codes": false
+			},
+			{
+				"name": "Tara",
+				"img": "images/settings/Tara.png",
+				"codes": "Character, Tara",
+				"inherit_codes": false
+			}
+		]
+	},
+	{
+		"name": "Goal",
+		"type": "progressive",
+		"allow_disabled": false,
+		"loop": true,
+		"stages": [
+			{
+				"name": "Cobi",
+				"img": "images/settings/GoalDarck.png",
+				"codes": "GoalSetting, GoalDarck",
+				"inherit_codes": false
+			}
+		]
+	}
+]

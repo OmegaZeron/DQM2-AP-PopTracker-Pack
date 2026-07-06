@@ -1,0 +1,259 @@
+[
+	{
+		"name": "Oasis",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"access_rules": ["OasisKey"],
+		"children": [
+			{
+				"name": "Kalka",
+				"children": [
+					{
+						"name": "Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "kalka",
+								"x": 216,
+								"y": 200
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Vase",
+						"ref": "Oasis/Kalka/Vase/"
+					},
+					{
+						"name": "Canal - Entrance Vase",
+						"ref": "Oasis/Canal/Entrance Vase/"
+					},
+					{
+						"name": "Canal - Northwest Vase 1",
+						"ref": "Oasis/Canal/Northwest Vase 1/"
+					},
+					{
+						"name": "Canal - Northwest Vase 2",
+						"ref": "Oasis/Canal/Northwest Vase 2/"
+					},
+					{
+						"name": "Canal - Northeast Vase 1",
+						"ref": "Oasis/Canal/Northeast Vase 1/"
+					},
+					{
+						"name": "Canal - Northeast Vase 2",
+						"ref": "Oasis/Canal/Northeast Vase 2/"
+					},
+					{
+						"name": "Canal - Chest Above Boss",
+						"ref": "Oasis/Canal/Chest Above Boss/"
+					},
+					{
+						"name": "Canal - East of Boss",
+						"ref": "Oasis/Canal/East of Boss/"
+					},
+					{
+						"name": "Canal - Boss Defeated",
+						"ref": "Oasis/Canal/Boss Defeated/Biino"
+					},
+					{
+						"name": "Canal - Southwest Chest 1",
+						"ref": "Oasis/Canal/Southwest Chest 1/"
+					},
+					{
+						"name": "Canal - Southwest Chest 2",
+						"ref": "Oasis/Canal/Southwest Chest 2/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "oasis",
+						"x": 400,
+						"y": 216
+					}
+				]
+			},
+			{
+				"name": "Asiya",
+				"children": [
+					{
+						"name": "Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "asiya",
+								"x": 280,
+								"y": 536
+							}
+						]
+					},
+					{
+						"name": "Prisoner",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "asiya",
+								"x": 360,
+								"y": 184
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Vase",
+						"ref": "Oasis/Asiya/Vase/"
+					},
+					{
+						"name": "Prisoner",
+						"ref": "Oasis/Asiya/Prisoner/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "oasis",
+						"x": 400,
+						"y": 792
+					}
+				]
+			},
+			{
+				"name": "Canal",
+				"children": [
+					{
+						"name": "Entrance Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "kalka",
+								"x": 296,
+								"y": 104
+							}
+						]
+					},
+					{
+						"name": "Northwest Vase 1",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 24,
+								"y": 248
+							}
+						]
+					},
+					{
+						"name": "Northwest Vase 2",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 40,
+								"y": 264
+							}
+						]
+					},
+					{
+						"name": "Northeast Vase 1",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 296,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "Northeast Vase 2",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 424,
+								"y": 200
+							}
+						]
+					},
+					{
+						"name": "Chest Above Boss",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 200,
+								"y": 330
+							}
+						]
+					},
+					{
+						"name": "East of Boss",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 424,
+								"y": 344
+							}
+						]
+					},
+					{
+						"name": "Southwest Chest 1",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 56,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Southwest Chest 2",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 88,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "Biino"}
+						],
+						"map_locations": [
+							{
+								"map": "canal",
+								"x": 218,
+								"y": 392
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Boss Defeated",
+				"access_rules": ["WaterCall"],
+				"sections": [
+					{"name": "CurseLamp"}
+				],
+				"map_locations": [
+					{
+						"map": "oasis",
+						"x": 880,
+						"y": 792
+					}
+				]
+			}
+		]
+	}
+]

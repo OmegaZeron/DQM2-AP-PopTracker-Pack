@@ -1,0 +1,303 @@
+[
+	{
+		"name": "Ice",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"access_rules": ["IceKey"],
+		"children": [
+			{
+				"name": "Norden",
+				"children": [
+					{
+						"name": "Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "norden",
+								"x": 40,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"access_rules": ["HarMirror"],
+						"sections": [
+							{"name": "AgDevil"}
+						],
+						"map_locations": [
+							{
+								"map": "norden",
+								"x": 72,
+								"y": 72
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Vase",
+						"ref": "Ice/Norden/Vase/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Ice/Norden/Boss Defeated/AgDevil"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 1360,
+						"y": 360
+					}
+				]
+			},
+			{
+				"name": "Spirit's Spring",
+				"children": [
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "spirit",
+								"x": 40,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "GoatHorn and the ArcDemons"}
+						],
+						"map_locations": [
+							{
+								"map": "spirit",
+								"x": 72,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "Sky Shield",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "spirit",
+								"x": 72,
+								"y": 72
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest",
+						"ref": "Ice/Spirit's Spring/Chest/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Ice/Spirit's Spring/Boss Defeated/GoatHorn and the ArcDemons"
+					},
+					{
+						"name": "Sky Shield",
+						"ref": "Ice/Spirit's Spring/Sky Shield/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 880,
+						"y": 72
+					}
+				]
+			},
+			{
+				"name": "Gold Mine",
+				"access_rules": ["HarMirror"],
+				"children": [
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "gold_mine",
+								"x": 668,
+								"y": 488
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "BombCrag"}
+						],
+						"map_locations": [
+							{
+								"map": "gold_mine",
+								"x": 232,
+								"y": 24
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest",
+						"ref": "Ice/Gold Mine/Chest/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Ice/Gold Mine/Boss Defeated/BombCrag"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 728,
+						"y": 936
+					}
+				]
+			},
+			{
+				"name": "Weston",
+				"access_rules": ["HarMirror"],
+				"children": [
+					{
+						"name": "Barrel",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "weston",
+								"x": 152,
+								"y": 232
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Barrel",
+						"ref": "Ice/Weston/Barrel/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 720,
+						"y": 1224
+					}
+				]
+			},
+			{
+				"name": "Westania Castle",
+				"children": [
+					{
+						"name": "Boss Defeated",
+						"access_rules": ["YunaSoul"],
+						"sections": [
+							{"name": "Puppetor"}
+						],
+						"map_locations": [
+							{
+								"map": "westania_castle",
+								"x": 104,
+								"y": 200
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Boss Defeated",
+						"ref": "Ice/Westania Castle/Boss Defeated/Puppetor"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 400,
+						"y": 1368
+					}
+				]
+			},
+			{
+				"name": "Estria",
+				"children": [
+					{
+						"name": "Boss Defeated",
+						"access_rules": ["SleepHerb"],
+						"sections": [
+							{"name": "GoatHorn"}
+						],
+						"map_locations": [
+							{
+								"map": "eastria",
+								"x": 552,
+								"y": 56
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Boss Defeated",
+						"ref": "Ice/Estria/Boss Defeated/GoatHorn"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 1520,
+						"y": 1368
+					}
+				]
+			},
+			{
+				"name": "Eastern Mountain",
+				"children": [
+					{
+						"name": "Sleep Herb",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "east_mountain",
+								"x": 216,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "east_mountain",
+								"x": 280,
+								"y": 184
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Sleep Herb",
+						"ref": "Ice/Eastern Mountain/Sleep Herb/"
+					},
+					{
+						"name": "Chest",
+						"ref": "Ice/Eastern Mountain/Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 1672,
+						"y": 792
+					}
+				]
+			}
+		]
+	}
+]

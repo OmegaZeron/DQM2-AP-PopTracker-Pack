@@ -1,0 +1,16 @@
+{
+	"name": "Dragon Warrior Monsters 2 AP Tracker",
+	"game_name": "Dragon Warrior Monsters 2",
+	"package_version": "0.0.0",
+	"package_uid": "dqm2_ap",
+	"platform": "gbc",
+	"author": "OmegaZeron",
+	"min_poptracker_version": "0.35.1",
+	"variants": {
+		"standard": {
+			"display_name": "AP Autotracker v0.0.0",
+			"flags": ["ap"]
+		}
+	},
+	"versions_url": "https://raw.githubusercontent.com/OmegaZeron/DQM2-AP-PopTracker-Pack/versions/versions.json"
+}

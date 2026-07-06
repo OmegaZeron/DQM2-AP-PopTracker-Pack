@@ -1,0 +1,147 @@
+[
+	{
+		"name": "greatlog",
+		"location_size": 24,
+		"location_border_thickness": 2,
+		"img": "images/maps/greatlog.png"
+	},
+	{
+		"name": "oasis",
+		"location_size": 26,
+		"location_border_thickness": 2,
+		"img": "images/maps/oasis.png"
+	},
+	{
+		"name": "kalka",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/kalka.png"
+	},
+	{
+		"name": "asiya",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/asiya.png"
+	},
+	{
+		"name": "canal",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/canal.png"
+	},
+	{
+		"name": "pirate",
+		"location_size": 26,
+		"location_border_thickness": 2,
+		"img": "images/maps/pirate.png"
+	},
+	{
+		"name": "yold",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/yold.png"
+	},
+	{
+		"name": "polona",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/polona.png"
+	},
+	{
+		"name": "ritz",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/ritz.png"
+	},
+	{
+		"name": "west_cape",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/west_cape.png"
+	},
+	{
+		"name": "ghost_ship",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/ghost_ship.png"
+	},
+	{
+		"name": "lighthouse",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lighthouse.png"
+	},
+	{
+		"name": "volcano1",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/volcano1.png"
+	},
+	{
+		"name": "volcano2",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/volcano2.png"
+	},
+	{
+		"name": "volcano3",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/volcano3.png"
+	},
+	{
+		"name": "ice",
+		"location_size": 42,
+		"location_border_thickness": 3,
+		"img": "images/maps/ice.png"
+	},
+	{
+		"name": "norden",
+		"location_size": 16,
+		"location_border_thickness": 1,
+		"img": "images/maps/norden.png"
+	},
+	{
+		"name": "gold_mine",
+		"location_size": 20,
+		"location_border_thickness": 2,
+		"img": "images/maps/gold_mine.png"
+	},
+	{
+		"name": "weston",
+		"location_size": 8,
+		"location_border_thickness": 1,
+		"img": "images/maps/weston.png"
+	},
+	{
+		"name": "westania_castle",
+		"location_size": 12,
+		"location_border_thickness": 1,
+		"img": "images/maps/westania_castle.png"
+	},
+	{
+		"name": "south_forest",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/southern_forest.png"
+	},
+	{
+		"name": "eastria",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/eastria.png"
+	},
+	{
+		// no point?
+		"name": "nofor",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/nofor.png"
+	},
+	{
+		"name": "east_mountain",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/east_mountain.png"
+	},
+]

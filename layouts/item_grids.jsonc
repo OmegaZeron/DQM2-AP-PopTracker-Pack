@@ -1,0 +1,49 @@
+{
+	"keys": {
+		"type": "itemgrid",
+		"item_size": 48,
+		"rows": [
+			["OasisKey", "PirateKey", "IceKey"]
+		]
+	},
+	"keyItems": {
+		"type": "itemgrid",
+		"h_alignment": "left",
+		"rows": [
+			["WaterCall", "TidalBell", "MoonRock"],
+			["HarMirror", "Crest", "YunaSoul"],
+			["SleepHerb", "SkyShield"]
+		]
+	},
+	"itemGrid": {
+		"type": "dock",
+		"dock": "left",
+		"content": [
+			{
+				"type": "group",
+				"dock": "top",
+				"header": "Keys",
+				"content": {
+					"type": "layout",
+					"key": "keys"
+				}
+			},
+			{
+				"type": "group",
+				"dock": "top",
+				"header": "Key Items",
+				"content": {
+					"type": "layout",
+					"key": "keyItems"
+				}
+			}
+		]
+	},
+	"settings": {
+		"type": "itemgrid",
+		"item_size": "160, 80",
+		"rows": [
+			["GameVersion", "Character"]
+		]
+	}
+}

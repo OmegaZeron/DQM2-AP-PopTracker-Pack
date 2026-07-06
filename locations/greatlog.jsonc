@@ -1,0 +1,147 @@
+[
+	{
+		"name": "GreatLog",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"children": [
+			{
+				"name": "Stable - Vase 1",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 914,
+						"y": 600
+					}
+				]
+			},
+			{
+				"name": "Stable - Vase 2",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 942,
+						"y": 600
+					}
+				]
+			},
+			{
+				"name": "Key Shop Vase",
+				"access_rules": ["@Oasis/Boss Defeated/CurseLamp"],
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 600,
+						"y": 184
+					}
+				]
+			},
+			{
+				"name": "Arena - Vase",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 662,
+						"y": 392
+					}
+				]
+			},
+			{
+				"name": "Housing - Vase",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 790,
+						"y": 248
+					}
+				]
+			},
+			{
+				"name": "Housing - Old Man Vase",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 886,
+						"y": 216
+					}
+				]
+			},
+			{
+				"name": "Treetop - Vase",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 56,
+						"y": 72
+					}
+				]
+			},
+			{
+				"name": "Stable",
+				"sections": [
+					{
+						"name": "Vase 1",
+						"ref": "GreatLog/Stable - Vase 1/"
+					},
+					{
+						"name": "Vase 2",
+						"ref": "GreatLog/Stable - Vase 2/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 744,
+						"y": 632
+					}
+				]
+			},
+			{
+				"name": "Key Shop",
+				"sections": [
+					{
+						"name": "Vase",
+						"ref": "GreatLog/Key Shop Vase/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 216,
+						"y": 360
+					}
+				]
+			},
+			{
+				"name": "Arena/Housing",
+				"sections": [
+					{
+						"name": "Arena - Vase",
+						"ref": "GreatLog/Arena - Vase/"
+					},
+					{
+						"name": "Housing - Vase",
+						"ref": "GreatLog/Housing - Vase/"
+					},
+					{
+						"name": "Housing - Old Man Vase",
+						"ref": "GreatLog/Housing - Old Man Vase/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 200,
+						"y": 488
+					}
+				]
+			}
+		]
+	}
+]

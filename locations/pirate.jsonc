@@ -1,0 +1,635 @@
+[
+	{
+		"name": "Pirate",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"access_rules": ["PirateKey"],
+		"children": [
+			{
+				"name": "Yold",
+				"children": [
+					{
+						"name": "Barrel",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "yold",
+								"x": 136,
+								"y": 168
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Barrel",
+						"ref": "Pirate/Yold/Barrel/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 880,
+						"y": 936
+					}
+				]
+			},
+			{
+				"name": "Polona",
+				"sections": [
+					{
+						"name": "Mermaid Queen",
+						"ref": "Pirate/Mermaid's Cave/Mermaid Queen/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 400,
+						"y": 648
+					}
+				]
+			},
+			{
+				"name": "Mermaid's Cave",
+				"children": [
+					{
+						"name": "Mermaid Queen",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "polona",
+								"x": 72,
+								"y": 40
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Port Ritz",
+				"children": [
+					{
+						"name": "Barrel",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "ritz",
+								"x": 200,
+								"y": 120
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Barrel",
+						"ref": "Pirate/Port Ritz/Barrel/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 720,
+						"y": 360
+					}
+				]
+			},
+			{
+				"name": "West Cape Cave",
+				"children": [
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "Squiz"}
+						],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 552,
+								"y": 488
+							}
+						]
+					},
+					{
+						"name": "Northwest Chest",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 88,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "North Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 232,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "Northeast Chest 1",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 600,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "Northeast Chest 2",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 600,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "Northeast Chest 3",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 600,
+								"y": 120
+							}
+						]
+					},
+					{
+						"name": "Middle Chest",
+						"access_rules": ["TidalBell"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "west_cape",
+								"x": 376,
+								"y": 472
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Northwest Chest",
+						"ref": "Pirate/West Cape Cave/Northwest Chest/"
+					},
+					{
+						"name": "North Chest",
+						"ref": "Pirate/West Cape Cave/North Chest/"
+					},
+					{
+						"name": "Northeast Chest 1",
+						"ref": "Pirate/West Cape Cave/Northeast Chest 1/"
+					},
+					{
+						"name": "Northeast Chest 2",
+						"ref": "Pirate/West Cape Cave/Northeast Chest 2/"
+					},
+					{
+						"name": "Northeast Chest 3",
+						"ref": "Pirate/West Cape Cave/Northeast Chest 3/"
+					},
+					{
+						"name": "Middle Chest",
+						"ref": "Pirate/West Cape Cave/Middle Chest/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Pirate/West Cape Cave/Boss Defeated/Squiz"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 72,
+						"y": 504
+					}
+				]
+			},
+			{
+				"name": "Ghost Ship",
+				"access_rules": ["TidalBell"],
+				"children": [
+					{
+						"name": "Northeast Barrel",
+						"sections": [
+							{"name": "1F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 456,
+								"y": 456
+							}
+						]
+					},
+					{
+						"name": "Middle Barrel",
+						"sections": [
+							{"name": "1F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 248,
+								"y": 504
+							}
+						]
+					},
+					{
+						"name": "South Vase",
+						"sections": [
+							{"name": "1F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 200,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Flooded Vase 1",
+						"sections": [
+							{"name": "1F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 104,
+								"y": 504
+							}
+						]
+					},
+					{
+						"name": "Flooded Vase 2",
+						"sections": [
+							{"name": "1F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 120,
+								"y": 504
+							}
+						]
+					},
+					{
+						"name": "Center Chest",
+						"sections": [
+							{"name": "2F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 248,
+								"y": 360
+							}
+						]
+					},
+					{
+						"name": "Hidden Chest 1",
+						"sections": [
+							{"name": "2F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 72,
+								"y": 312
+							}
+						]
+					},
+					{
+						"name": "Hidden Chest 2",
+						"sections": [
+							{"name": "2F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 88,
+								"y": 312
+							}
+						]
+					},
+					{
+						"name": "Hidden Chest 3",
+						"sections": [
+							{"name": "2F"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 104,
+								"y": 312
+							}
+						]
+					},
+					{
+						"name": "West Barrel",
+						"sections": [
+							{"name": "Deck"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 200,
+								"y": 184
+							}
+						]
+					},
+					{
+						"name": "East Barrel",
+						"sections": [
+							{"name": "Deck"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 312,
+								"y": 184
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "CaptDead"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 424,
+								"y": 40
+							}
+						]
+					},
+					{
+						"name": "Chest",
+						"sections": [
+							{"name": "Captain's Quarters"}
+						],
+						"map_locations": [
+							{
+								"map": "ghost_ship",
+								"x": 424,
+								"y": 24
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "1F Northeast Barrel",
+						"ref": "Pirate/Ghost Ship/Northeast Barrel/1F"
+					},
+					{
+						"name": "1F Middle Barrel",
+						"ref": "Pirate/Ghost Ship/Middle Barrel/1F"
+					},
+					{
+						"name": "1F South Vase",
+						"ref": "Pirate/Ghost Ship/South Vase/1F"
+					},
+					{
+						"name": "1F Flooded Vase 1",
+						"ref": "Pirate/Ghost Ship/Flooded Vase 1/1F"
+					},
+					{
+						"name": "1F Flooded Vase 2",
+						"ref": "Pirate/Ghost Ship/Flooded Vase 2/1F"
+					},
+					{
+						"name": "2F Center Chest",
+						"ref": "Pirate/Ghost Ship/Center Chest/2F"
+					},
+					{
+						"name": "2F Hidden Chest 1",
+						"ref": "Pirate/Ghost Ship/Hidden Chest 1/2F"
+					},
+					{
+						"name": "2F Hidden Chest 2",
+						"ref": "Pirate/Ghost Ship/Hidden Chest 2/2F"
+					},
+					{
+						"name": "2F Hidden Chest 3",
+						"ref": "Pirate/Ghost Ship/Hidden Chest 3/2F"
+					},
+					{
+						"name": "Deck West Barrel",
+						"ref": "Pirate/Ghost Ship/West Barrel/Deck"
+					},
+					{
+						"name": "Deck East Barrel",
+						"ref": "Pirate/Ghost Ship/East Barrel/Deck"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Pirate/Ghost Ship/Boss Defeated/CaptDead"
+					},
+					{
+						"name": "Captain's Quarters Chest",
+						"ref": "Pirate/Ghost Ship/Chest/Captain's Quarters"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 868,
+						"y": 796
+					}
+				]
+			},
+			{
+				"name": "Lighthouse",
+				"children": [
+					{
+						"name": "Chest",
+						"sections": [
+							{"name": "2F"}
+						],
+						"map_locations": [
+							{
+								"map": "lighthouse",
+								"x": 264,
+								"y": 200
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest",
+						"ref": "Pirate/Lighthouse/Chest/2F"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 1032,
+						"y": 360
+					}
+				]
+			},
+			{
+				"name": "Volcano Cave",
+				"access_rules": ["TidalBell, MoonRock"],
+				"children": [
+					{
+						"name": "Chest 1",
+						"sections": [
+							{"name": "B2F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano2",
+								"x": 504,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "Chest 2",
+						"sections": [
+							{"name": "B2F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano2",
+								"x": 584,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "South Chest 1",
+						"access_rules": ["SkyShield"],
+						"sections": [
+							{"name": "B2F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano2",
+								"x": 520,
+								"y": 376
+							}
+						]
+					},
+					{
+						"name": "South Chest 2",
+						"access_rules": ["SkyShield"],
+						"sections": [
+							{"name": "B2F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano2",
+								"x": 552,
+								"y": 376
+							}
+						]
+					},
+					{
+						"name": "South Chest 3",
+						"access_rules": ["SkyShield"],
+						"sections": [
+							{"name": "B2F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano2",
+								"x": 584,
+								"y": 376
+							}
+						]
+					},
+					{
+						"name": "Lava Chest 1",
+						"sections": [
+							{"name": "B3F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano3",
+								"x": 72,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "Lava Chest 2",
+						"sections": [
+							{"name": "B3F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano3",
+								"x": 88,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "Har Mirror",
+						"sections": [
+							{"name": "B3F"}
+						],
+						"map_locations": [
+							{
+								"map": "volcano3",
+								"x": 232,
+								"y": 488
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest 1",
+						"ref": "Pirate/Volcano Cave/Chest 1/B2F"
+					},
+					{
+						"name": "Chest 2",
+						"ref": "Pirate/Volcano Cave/Chest 2/B2F"
+					},
+					{
+						"name": "South Chest 1",
+						"ref": "Pirate/Volcano Cave/South Chest 1/B2F"
+					},
+					{
+						"name": "South Chest 2",
+						"ref": "Pirate/Volcano Cave/South Chest 2/B2F"
+					},
+					{
+						"name": "South Chest 3",
+						"ref": "Pirate/Volcano Cave/South Chest 3/B2F"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "pirate",
+						"x": 872,
+						"y": 504
+					}
+				]
+			}
+		]
+	}
+]

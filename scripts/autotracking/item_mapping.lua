@@ -1,0 +1,17 @@
+ITEM_MAPPING = {
+	[0x02C] = {"TinyMedal", "consumable"},
+	[0x030] = {"WaterCall", "toggle"},
+	[0x031] = {"MoonRock", "toggle"},
+	[0x032] = {"Crest", "toggle"},
+	[0x033] = {"YunaSoul", "toggle"},
+	[0x034] = {"SleepHerb", "toggle"},
+	[0x035] = {"ChangeStaff", "toggle"},
+	[0x036] = {"TidalBell", "toggle"},
+	[0x037] = {"HarMirror", "toggle"},
+	[0x038] = {"SkyShield", "toggle"},
+	[0x082] = {"OasisKey", "static"},
+	[0x083] = {"PirateKey", "toggle"},
+	[0x084] = {"IceKey", "toggle"},
+	[0x085] = {"SkyKey", "toggle"},
+	[0x086] = {"LimboKey", "toggle"},
+}

@@ -1,0 +1,93 @@
+[
+	{
+		"name": "Tiny Medal",
+		"type": "consumable",
+		"img": "images/items/TinyMedal.png",
+		"max_quantity": 0,
+		"codes": "TinyMedal"
+	},
+	{
+		"name": "Water Call",
+		"type": "toggle",
+		"img": "images/items/WaterCall.png",
+		"codes": "WaterCall"
+	},
+	{
+		"name": "Moon Rock",
+		"type": "toggle",
+		"img": "images/items/MoonRock.png",
+		"codes": "MoonRock"
+	},
+	{
+		"name": "Crest",
+		"type": "toggle",
+		"img": "images/items/Crest.png",
+		"codes": "Crest"
+	},
+	{
+		"name": "Yuna Soul",
+		"type": "toggle",
+		"img": "images/items/YunaSoul.png",
+		"codes": "YunaSoul"
+	},
+	{
+		"name": "Sleep Herb",
+		"type": "toggle",
+		"img": "images/items/SleepHerb.png",
+		"codes": "SleepHerb"
+	},
+	{
+		"name": "Change Staff",
+		"type": "toggle",
+		"img": "images/items/ChangeStaff.png",
+		"codes": "ChangeStaff"
+	},
+	{
+		"name": "Tidal Bell",
+		"type": "toggle",
+		"img": "images/items/TidalBell.png",
+		"codes": "TidalBell"
+	},
+	{
+		"name": "Har Mirror",
+		"type": "toggle",
+		"img": "images/items/HarMirror.png",
+		"codes": "HarMirror"
+	},
+	{
+		"name": "Sky Shield",
+		"type": "toggle",
+		"img": "images/items/SkyShield.png",
+		"codes": "SkyShield"
+	},
+	{
+		"name": "Oasis Key",
+		"type": "static",
+		"img": "images/items/OasisKey.png",
+		"codes": "OasisKey"
+	},
+	{
+		"name": "Pirate Key",
+		"type": "toggle",
+		"img": "images/items/PirateKey.png",
+		"codes": "PirateKey"
+	},
+	{
+		"name": "Ice Key",
+		"type": "toggle",
+		"img": "images/items/IceKey.png",
+		"codes": "IceKey"
+	},
+	{
+		"name": "Sky Key",
+		"type": "toggle",
+		"img": "images/items/SkyKey.png",
+		"codes": "SkyKey"
+	},
+	{
+		"name": "Limbo Key",
+		"type": "toggle",
+		"img": "images/items/LimboKey.png",
+		"codes": "LimboKey"
+	}
+]

@@ -1,0 +1,218 @@
+{
+	"tracker_default": {
+		"type": "dock",
+		"content": [
+			{
+				"type": "layout",
+				"key": "itemGrid",
+				"dock": "left"
+			},
+			{
+				"type": "group",
+				"v_alignment": "stretch",
+				"header": "Maps",
+				"content": {
+					"type": "tabbed",
+					"tabs": [
+						{
+							"title": "GreatLog",
+							"content": {
+								"type": "map",
+								"maps": ["greatlog"]
+							}
+						},
+						{
+							"title": "Oasis",
+							"content": {
+								"type": "tabbed",
+								"tabs": [
+									{
+										"title": "Overworld",
+										"content": {
+											"type": "map",
+											"maps": ["oasis"]
+										}
+									},
+									{
+										"title": "Kalka",
+										"content": {
+											"type": "map",
+											"maps": ["kalka"]
+										}
+									},
+									{
+										"title": "Asiya",
+										"content": {
+											"type": "map",
+											"maps": ["asiya"]
+										}
+									},
+									{
+										"title": "Canal",
+										"content": {
+											"type": "map",
+											"maps": ["canal"]
+										}
+									}
+								]
+							}
+						},
+						{
+							"title": "Pirate",
+							"content": {
+								"type": "tabbed",
+								"tabs": [
+									{
+										"title": "Overworld",
+										"content": {
+											"type": "map",
+											"maps": ["pirate"]
+										}
+									},
+									{
+										"title": "Yold",
+										"content": {
+											"type": "map",
+											"maps": ["yold"]
+										}
+									},
+									{
+										"title": "Polona",
+										"content": {
+											"type": "map",
+											"maps": ["polona"]
+										}
+									},
+									{
+										"title": "Port Ritz",
+										"content": {
+											"type": "map",
+											"maps": ["ritz"]
+										}
+									},
+									{
+										"title": "West Cape Cave",
+										"content": {
+											"type": "map",
+											"maps": ["west_cape"]
+										}
+									},
+									{
+										"title": "Ghost Ship",
+										"content": {
+											"type": "map",
+											"maps": ["ghost_ship"]
+										}
+									},
+									{
+										"title": "Lighthouse",
+										"content": {
+											"type": "map",
+											"maps": ["lighthouse"]
+										}
+									},
+									{
+										"title": "Volcano Cave",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "B1F",
+													"content": {
+														"type": "map",
+														"maps": ["volcano1"]
+													}
+												},
+												{
+													"title": "B2F",
+													"content": {
+														"type": "map",
+														"maps": ["volcano2"]
+													}
+												},
+												{
+													"title": "B3F",
+													"content": {
+														"type": "map",
+														"maps": ["volcano3"]
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"title": "Ice",
+							"content": {
+								"type": "tabbed",
+								"tabs": [
+									{
+										"title": "Overworld",
+										"content": {
+											"type": "map",
+											"maps": ["ice"]
+										}
+									},
+									{
+										"title": "Norden",
+										"content": {
+											"type": "map",
+											"maps": ["norden"]
+										}
+									},
+									{
+										"title": "Gold Mine",
+										"content": {
+											"type": "map",
+											"maps": ["gold_mine"]
+										}
+									},
+									{
+										"title": "Weston",
+										"content": {
+											"type": "map",
+											"maps": ["weston"]
+										}
+									},
+									{
+										"title": "Westania Castle",
+										"content": {
+											"type": "map",
+											"maps": ["westania_castle"]
+										}
+									},
+									{
+										"title": "Eastria",
+										"content": {
+											"type": "map",
+											"maps": ["eastria"]
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"settings_popup": {
+		"type": "container",
+		"background": "#212121",
+		"content": {
+			"type": "dock",
+			"content": [
+				{
+					"type": "group",
+					"header": "settings",
+					"content": {
+						"type": "layout",
+						"key": "settings"
+					}
+				}
+			]
+		}
+	}
+}
