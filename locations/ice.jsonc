@@ -297,6 +297,140 @@
 						"y": 792
 					}
 				]
+			},
+			{
+				"name": "Lake Tower",
+				"children": [
+					{
+						"name": "1F Right Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower1",
+								"x": 184,
+								"y": 120
+							}
+						]
+					},
+					{
+						"name": "1F Left Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower1",
+								"x": 136,
+								"y": 168
+							}
+						]
+					},
+					{
+						"name": "2F Left Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower2",
+								"x": 24,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "2F Right Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower2",
+								"x": 72,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "4F Left Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower4",
+								"x": 24,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "4F Right Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower4",
+								"x": 56,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "5F Left Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower5",
+								"x": 56,
+								"y": 120
+							}
+						]
+					},
+					{
+						"name": "5F Right Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "lake_tower5",
+								"x": 104,
+								"y": 120
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "1F Right Chest",
+						"ref": "Ice/Lake Tower/1F Right Chest/"
+					},
+					{
+						"name": "1F Left Chest",
+						"ref": "Ice/Lake Tower/1F Left Chest/"
+					},
+					{
+						"name": "2F Left Chest",
+						"ref": "Ice/Lake Tower/2F Left Chest/"
+					},
+					{
+						"name": "2F Right Chest",
+						"ref": "Ice/Lake Tower/2F Right Chest/"
+					},
+					{
+						"name": "4F Left Chest",
+						"ref": "Ice/Lake Tower/4F Left Chest/"
+					},
+					{
+						"name": "4F Right Chest",
+						"ref": "Ice/Lake Tower/4F Right Chest/"
+					},
+					{
+						"name": "5F Left Chest",
+						"ref": "Ice/Lake Tower/5F Left Chest/"
+					},
+					{
+						"name": "5F Right Chest",
+						"ref": "Ice/Lake Tower/5F Right Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "ice",
+						"x": 1352,
+						"y": 1080
+					}
+				]
 			}
 		]
 	}

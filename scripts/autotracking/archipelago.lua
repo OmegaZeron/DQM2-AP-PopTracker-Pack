@@ -118,10 +118,11 @@ function OnClear(slot_data)
 	if Archipelago.PlayerNumber > -1 then
 		local slotInfo = TEAM_NUMBER.."_"..PLAYER_ID
 		HintsID = "_read_hints_"..slotInfo
+		DataStoreID = "DQM2_"..slotInfo
 		ClientStatusID = "_read_client_status_"..slotInfo
 
-		Archipelago:SetNotify({HintsID, ClientStatusID})
-		Archipelago:Get({HintsID, ClientStatusID})
+		Archipelago:SetNotify({HintsID, DataStoreID, ClientStatusID})
+		Archipelago:Get({HintsID, DataStoreID, ClientStatusID})
 	end
 
 	-- set manual items
@@ -247,6 +248,26 @@ function OnNotify(key, value, old_value)
 				UpdateHints(hint.location, PriorityToHighlight[hint.status])
 			end
 		end
+	elseif key == DataStoreID then
+		-- TODO figure out how this works for subsequent messages
+		local mapID = value["Map ID"]
+		local mapX = value["Map X"]
+		local mapY = value["Map Y"]
+		-- local playerX = value["Player X"]
+		-- local playerY = value["Player Y"]
+
+		-- TODO move these into a table or something
+		local oasis = value["Desert World Complete"]
+		local pirate = value["Pirate World Complete"]
+		local ice = value["Ice World Complete"]
+		local sky = value["Sky World Complete"]
+		local limbo = value["Limbo World Complete"]
+		local elf = value["Elf World Complete"]
+		local lonely = value["Lonely World Complete"]
+		local traveler = value["Traveler World Complete"]
+		local brawn = value["Brawn World Complete"]
+		local baffle = value["Baffle World Complete"]
+		local soul = value["Soul World Complete"]
 	elseif key == ClientStatusID then
 		-- TODO clear goal location
 	end

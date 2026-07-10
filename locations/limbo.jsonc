@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Limbo",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"access_rules": ["LimboKey"],
+		"children": [
+			{
+				"name": "Boss Defeated",
+				"sections": [
+					{"name": "Darck"}
+				],
+				"map_locations": [
+					{
+						"map": "limbo",
+						"x": 240,
+						"y": 216
+					}
+				]
+			}
+		]
+	}
+]

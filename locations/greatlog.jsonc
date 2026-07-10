@@ -72,6 +72,28 @@
 				]
 			},
 			{
+				"name": "Kameha's Room - Chest 1",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 456,
+						"y": 200
+					}
+				]
+			},
+			{
+				"name": "Kameha's Room - Chest 2",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 456,
+						"y": 248
+					}
+				]
+			},
+			{
 				"name": "Treetop - Vase",
 				"sections": [{}],
 				"map_locations": [
@@ -79,6 +101,28 @@
 						"map": "greatlog",
 						"x": 56,
 						"y": 72
+					}
+				]
+			},
+			{
+				"name": "Treetop - Chest 1",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 1016,
+						"y": 936
+					}
+				]
+			},
+			{
+				"name": "Treetop - Chest 2",
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 1064,
+						"y": 936
 					}
 				]
 			},
@@ -139,6 +183,26 @@
 						"map": "greatlog",
 						"x": 200,
 						"y": 488
+					}
+				]
+			},
+			{
+				"name": "Treetop Chests",
+				"sections": [
+					{
+						"name": "Chest 1",
+						"ref": "GreatLog/Treetop - Chest 1/"
+					},
+					{
+						"name": "Chest 2",
+						"ref": "GreatLog/Treetop - Chest 2/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 392,
+						"y": 56
 					}
 				]
 			}

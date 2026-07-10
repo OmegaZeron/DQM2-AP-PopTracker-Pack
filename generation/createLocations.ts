@@ -151,6 +151,8 @@ export default function createLocations() {
 	addLocs(oasis(), "oasis.jsonc")
 	addLocs(pirate(), "pirate.jsonc")
 	addLocs(ice(), "ice.jsonc")
+	addLocs(sky(), "sky.jsonc")
+	addLocs(limbo(), "limbo.jsonc")
 
 	createLocMapping()
 	
@@ -245,6 +247,28 @@ function greatlog() {
 					]
 				},
 				{
+					name: "Kameha's Room - Chest 1",
+					sections: [{id: 0x00E}],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 456,
+							y: 200
+						}
+					]
+				},
+				{
+					name: "Kameha's Room - Chest 2",
+					sections: [{id: 0x00F}],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 456,
+							y: 248
+						}
+					]
+				},
+				{
 					name: "Treetop - Vase",
 					sections: [{id: 0x010}],
 					map_locations: [
@@ -255,6 +279,29 @@ function greatlog() {
 						}
 					]
 				},
+				{
+					name: "Treetop - Chest 1",
+					sections: [{id: 0x011}],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 1016,
+							y: 936
+						}
+					]
+				},
+				{
+					name: "Treetop - Chest 2",
+					sections: [{id: 0x012}],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 1064,
+							y: 936
+						}
+					]
+				},
+				
 				{
 					name: "Stable",
 					sections: [
@@ -296,7 +343,21 @@ function greatlog() {
 							y: 488
 						}
 					]
-				}
+				},
+				{
+					name: "Treetop Chests",
+					sections: [
+						{name: "Chest 1", ref: 0x11},
+						{name: "Chest 2", ref: 0x12},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 392,
+							y: 56
+						}
+					]
+				},
 			],
 		}
 	]
@@ -1351,12 +1412,507 @@ function ice() {
 						}
 					]
 				},
+				{
+					name: "Lake Tower",
+					children: [
+						{
+							name: "1F Right Chest",
+							sections: [{id: 0x30D}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower1,
+									x: 184,
+									y: 120
+								}
+							]
+						},
+						{
+							name: "1F Left Chest",
+							sections: [{id: 0x30E}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower1,
+									x: 136,
+									y: 168
+								}
+							]
+						},
+						{
+							name: "2F Left Chest",
+							sections: [{id: 0x30F}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower2,
+									x: 24,
+									y: 72
+								}
+							]
+						},
+						{
+							name: "2F Right Chest",
+							sections: [{id: 0x310}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower2,
+									x: 72,
+									y: 88
+								}
+							]
+						},
+						{
+							name: "4F Left Chest",
+							sections: [{id: 0x311}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower4,
+									x: 24,
+									y: 72
+								}
+							]
+						},
+						{
+							name: "4F Right Chest",
+							sections: [{id: 0x312}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower4,
+									x: 56,
+									y: 72
+								}
+							]
+						},
+						{
+							name: "5F Left Chest",
+							sections: [{id: 0x313}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower5,
+									x: 56,
+									y: 120
+								}
+							]
+						},
+						{
+							name: "5F Right Chest",
+							sections: [{id: 0x314}],
+							map_locations: [
+								{
+									map: vars.MapNames.LakeTower5,
+									x: 104,
+									y: 120
+								}
+							]
+						},
+					],
+					sections: [
+						{name: "1F Right Chest", ref: 0x30D},
+						{name: "1F Left Chest", ref: 0x30E},
+						{name: "2F Left Chest", ref: 0x30F},
+						{name: "2F Right Chest", ref: 0x310},
+						{name: "4F Left Chest", ref: 0x311},
+						{name: "4F Right Chest", ref: 0x312},
+						{name: "5F Left Chest", ref: 0x313},
+						{name: "5F Right Chest", ref: 0x314},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Ice,
+							x: 1352,
+							y: 1080
+						}
+					]
+				},
 			]
 		}
 	]
 
 	return locs
 }
+
+function sky() {
+	let locs: Parent[] = [
+		{
+			name: "Sky",
+			chest_unopened_img: "images/chest_closed.png",
+			chest_opened_img: "images/chest_open.png",
+			access_rules: [vars.Items.SkyKey],
+			children: [
+				{
+					name: "Fhunt",
+					children: [
+						// {
+						// 	name: "Gravestone",
+						// 	sections: [{id: 0x400}],
+						// 	map_locations: [
+						// 		{
+						// 			map: vars.MapNames.Fhunt,
+						// 			x: 40,
+						// 			y: 360
+						// 		}
+						// 	]
+						// }
+					],
+					sections: [
+						// {name: "Fhunt - Gravestone", ref: 0x400},
+						{name: "Sage Tower - 1F Chest", ref: 0x401},
+						{name: "Sage Tower - 4F Chest 1", ref: 0x402},
+						// {name: "Sage Tower - 4F Chest 2", ref: 0x403},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 1966,
+							y: 280
+						}
+					]
+				},
+				{
+					name: "Sage Tower",
+					children: [
+						{
+							name: "1F Chest",
+							sections: [{id: 0x401}],
+							map_locations: [
+								{
+									map: vars.MapNames.SageTower,
+									x: 136,
+									y: 472
+								}
+							]
+						},
+						{
+							name: "4F Chest 1",
+							sections: [{id: 0x402}],
+							map_locations: [
+								{
+									map: vars.MapNames.SageTower,
+									x: 376,
+									y: 88
+								}
+							]
+						},
+						{
+							name: "4F Chest 2",
+							sections: [{id: 0x403}],
+							map_locations: [
+								{
+									map: vars.MapNames.SageTower,
+									x: 456,
+									y: 104
+								}
+							]
+						}
+					]
+				},
+				{
+					name: "Mad Condor's Nest",
+					children: [
+						{
+							name: "Boss Defeated",
+							sections: [{id: 0x404}],
+							map_locations: [
+								{
+									map: vars.MapNames.CondorNest,
+									x: 136,
+									y: 472
+								}
+							]
+						},
+						{
+							name: "Chest",
+							sections: [{id: 0x405}],
+							map_locations: [
+								{
+									map: vars.MapNames.CondorNest,
+									x: 376,
+									y: 88
+								}
+							]
+						}
+					],
+					sections: [
+						{name: "Boss Defeated", ref: 0x404},
+						{name: "Chest", ref: 0x405}
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 206,
+							y: 710
+						}
+					]
+				},
+				{
+					name: "Small Cave",
+					children: [
+						{
+							name: "East Chest",
+							sections: [{id: 0x406}],
+							map_locations: [
+								{
+									map: vars.MapNames.SmallCave1,
+									x: 408,
+									y: 360
+								}
+							]
+						},
+						{
+							name: "Boss Defeated",
+							sections: [{id: 0x407, name: "Metabble"}],
+							map_locations: [
+								{
+									map: vars.MapNames.SmallCave2,
+									x: 72,
+									y: 342
+								}
+							]
+						},
+						{
+							name: "West Chest",
+							sections: [{id: 0x408}],
+							map_locations: [
+								{
+									map: vars.MapNames.SmallCave2,
+									x: 104,
+									y: 312
+								}
+							]
+						},
+					],
+					sections: [
+						{name: "East Chest", ref: 0x406},
+						{name: "Boss Defeated", ref: 0x407},
+						{name: "West Chest", ref: 0x408},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 1006,
+							y: 1720
+						}
+					]
+				},
+				{
+					name: "Wind Tower",
+					children: [
+						{
+							name: "Chest",
+							sections: [{id: 0x409}],
+							map_locations: [
+								{
+									map: vars.MapNames.WindTower1,
+									x: 248,
+									y: 40
+								}
+							]
+						},
+					],
+					sections: [
+						{name: "Chest", ref: 0x409}
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 366,
+							y: 1720
+						}
+					]
+				},
+				{
+					name: "Graveyard",
+					children: [
+						{
+							name: "Boss Defeated",
+							sections: [{id: 0x40A, name: "Niterich"}],
+							map_locations: [
+								{
+									map: vars.MapNames.Graveyard3,
+									x: 232,
+									y: 56
+								}
+							]
+						},
+						{
+							name: "Chest",
+							sections: [{id: 0x40B}],
+							map_locations: [
+								{
+									map: vars.MapNames.Graveyard3,
+									x: 232,
+									y: 40
+								}
+							]
+						},
+					],
+					sections: [
+						{name: "Boss Defeated", ref: 0x40A},
+						{name: "Chest", ref: 0x40B}
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 1974,
+							y: 1574
+						}
+					]
+				},
+				{
+					name: "Hitano",
+					children: [
+						{
+							name: "Vase",
+							sections: [{id: 0x40D}],
+							map_locations: [
+								{
+									map: vars.MapNames.Hitano,
+									x: 120,
+									y: 200
+								}
+							]
+						},
+					],
+					sections: [
+						{name: "Vase", ref: 0x40D}
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 1014,
+							y: 1430
+						}
+					]
+				},
+				{
+					name: "Demon Castle",
+					children: [
+						// {
+						// 	name: "1F Vase",
+						// 	sections: [{id: 0x40D}],
+						// 	map_locations: [
+						// 		{
+						// 			map: vars.MapNames.Hitano,
+						// 			x: 200,
+						// 			y: 344
+						// 		}
+						// 	]
+						// },
+						{
+							name: "1F Chest",
+							sections: [{id: 0x40E}],
+							map_locations: [
+								{
+									map: vars.MapNames.DemonCastle1,
+									x: 392,
+									y: 72
+								}
+							]
+						},
+						{
+							name: "B2F Chest",
+							sections: [{id: 0x40F}],
+							map_locations: [
+								{
+									map: vars.MapNames.DemonCastle2,
+									x: 72,
+									y: 72
+								}
+							]
+						},
+						{
+							name: "B4F Chest",
+							sections: [{id: 0x410}],
+							map_locations: [
+								{
+									map: vars.MapNames.DemonCastle2,
+									x: 184,
+									y: 392
+								}
+							]
+						},
+						{
+							name: "B6F Chest",
+							sections: [{id: 0x411}],
+							map_locations: [
+								{
+									map: vars.MapNames.DemonCastle2,
+									x: 296,
+									y: 552
+								}
+							]
+						},
+						{
+							name: "Boss Defeated",
+							sections: [{id: 0x412, name: "Mudou"}],
+							map_locations: [
+								{
+									map: vars.MapNames.DemonCastle2,
+									x: 400,
+									y: 176
+								}
+							]
+						},
+						// {
+						// 	name: "Boss Gift",
+						// 	sections: [{id: 0x413}],
+						// 	map_locations: [
+						// 		{
+						// 			map: vars.MapNames.Hitano,
+						// 			x: 392,
+						// 			y: 72
+						// 		}
+						// 	]
+						// },
+					],
+					sections: [
+						// {name: "1F Vase", ref: 0x40D},
+						{name: "1F Chest", ref: 0x40E},
+						{name: "B2F Chest", ref: 0x40F},
+						{name: "B4F Chest", ref: 0x410},
+						{name: "B6F Chest", ref: 0x411},
+						{name: "Boss Defeated", ref: 0x412},
+						// {name: "Boss Gift", ref: 0x413},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.Sky,
+							x: 854,
+							y: 278
+						}
+					]
+				},
+			]
+		}
+	]
+
+	return locs
+}
+
+function limbo() {
+	let locs: Parent[] = [
+		{
+			name: "Limbo",
+			chest_unopened_img: "images/chest_closed.png",
+			chest_opened_img: "images/chest_open.png",
+			access_rules: [vars.Items.LimboKey],
+			children: [
+				{
+					name: "Boss Defeated",
+					sections: [{id: 0x500, name: "Darck"}],
+					map_locations: [
+						{
+							map: vars.MapNames.Limbo,
+							x: 240,
+							y: 216
+						}
+					]
+				}
+			]
+		}
+	]
+
+	return locs
+}
+
 
 // @ts-ignore
 if (import.meta.main) {

@@ -189,8 +189,210 @@
 											"type": "map",
 											"maps": ["eastria"]
 										}
+									},
+									{
+										"title": "Lake Tower",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "1F",
+													"content": {
+														"type": "map",
+														"maps": ["lake_tower1"]
+													}
+												},
+												{
+													"title": "2F",
+													"content": {
+														"type": "map",
+														"maps": ["lake_tower2"]
+													}
+												},
+												{
+													"title": "3F",
+													"content": {
+														"type": "map",
+														"maps": ["lake_tower3"]
+													}
+												},
+												{
+													"title": "4F",
+													"content": {
+														"type": "map",
+														"maps": ["lake_tower4"]
+													}
+												},
+												{
+													"title": "5F",
+													"content": {
+														"type": "map",
+														"maps": ["lake_tower5"]
+													}
+												}
+											]
+										}
 									}
 								]
+							}
+						},
+						{
+							"title": "Sky",
+							"content": {
+								"type": "tabbed",
+								"tabs": [
+									{
+										"title": "Overworld",
+										"content": {
+											"type": "map",
+											"maps": ["sky"]
+										}
+									},
+									{
+										"title": "Fhunt",
+										"content": {
+											"type": "map",
+											"maps": ["fhunt"]
+										}
+									},
+									{
+										"title": "Sage Tower",
+										"content": {
+											"type": "map",
+											"maps": ["sage_tower"]
+										}
+									},
+									{
+										"title": "Mad Condor's Nest",
+										"content": {
+											"type": "map",
+											"maps": ["condor_nest"]
+										}
+									},
+									{
+										"title": "Small Cave",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "1F",
+													"content": {
+														"type": "map",
+														"maps": ["small_cave1"]
+													}
+												},
+												{
+													"title": "B1F",
+													"content": {
+														"type": "map",
+														"maps": ["small_cave2"]
+													}
+												}
+											]
+										}
+									},
+									{
+										"title": "Wind Tower",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "1F",
+													"content": {
+														"type": "map",
+														"maps": ["wind_tower1"]
+													}
+												},
+												{
+													"title": "2F",
+													"content": {
+														"type": "map",
+														"maps": ["wind_tower2"]
+													}
+												},
+												{
+													"title": "3F",
+													"content": {
+														"type": "map",
+														"maps": ["wind_tower3"]
+													}
+												},
+												{
+													"title": "4F",
+													"content": {
+														"type": "map",
+														"maps": ["wind_tower4"]
+													}
+												}
+											]
+										}
+									},
+									{
+										"title": "Graveyard",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "1F",
+													"content": {
+														"type": "map",
+														"maps": ["graveyard1"]
+													}
+												},
+												{
+													"title": "B1F",
+													"content": {
+														"type": "map",
+														"maps": ["graveyard2"]
+													}
+												},
+												{
+													"title": "Courtyard",
+													"content": {
+														"type": "map",
+														"maps": ["graveyard3"]
+													}
+												}
+											]
+										}
+									},
+									{
+										"title": "Hitano",
+										"content": {
+											"type": "map",
+											"maps": ["hitano"]
+										}
+									},
+									{
+										"title": "Demon Castle",
+										"content": {
+											"type": "tabbed",
+											"tabs": [
+												{
+													"title": "1F - B1F",
+													"content": {
+														"type": "map",
+														"maps": ["demon_castle1"]
+													}
+												},
+												{
+													"title": "B2F - B7F",
+													"content": {
+														"type": "map",
+														"maps": ["demon_castle2"]
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"title": "Limbo",
+							"content": {
+								"type": "map",
+								"maps": ["limbo"]
 							}
 						}
 					]

@@ -273,7 +273,209 @@ function createTrackerLayouts() {
 										// 		maps: [vars.MapNames.EastMountain]
 										// 	}
 										// },
+										{
+											title: "Lake Tower",
+											content: {
+												type: "tabbed",
+												tabs: [
+													{
+														title: "1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.LakeTower1]
+														}
+													},
+													{
+														title: "2F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.LakeTower2]
+														}
+													},
+													{
+														title: "3F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.LakeTower3]
+														}
+													},
+													{
+														title: "4F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.LakeTower4]
+														}
+													},
+													{
+														title: "5F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.LakeTower5]
+														}
+													}
+												]
+											}
+										},
 									]
+								}
+							},
+							{
+								title: "Sky",
+								content: {
+									type: "tabbed",
+									tabs: [
+										{
+											title: "Overworld",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.Sky]
+											}
+										},
+										{
+											title: "Fhunt",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.Fhunt]
+											}
+										},
+										{
+											title: "Sage Tower",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.SageTower]
+											}
+										},
+										{
+											title: "Mad Condor's Nest",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.CondorNest]
+											}
+										},
+										{
+											title: "Small Cave",
+											content: {
+												type: "tabbed",
+												tabs: [
+													{
+														title: "1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.SmallCave1]
+														}
+													},
+													{
+														title: "B1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.SmallCave2]
+														}
+													}
+												]
+											}
+										},
+										{
+											title: "Wind Tower",
+											content: {
+												type: "tabbed",
+												tabs: [
+													{
+														title: "1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.WindTower1]
+														}
+													},
+													{
+														title: "2F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.WindTower2]
+														}
+													},
+													{
+														title: "3F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.WindTower3]
+														}
+													},
+													{
+														title: "4F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.WindTower4]
+														}
+													}
+												]
+											}
+										},
+										{
+											title: "Graveyard",
+											content: {
+												type: "tabbed",
+												tabs: [
+													{
+														title: "1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.Graveyard1]
+														}
+													},
+													{
+														title: "B1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.Graveyard2]
+														}
+													},
+													{
+														title: "Courtyard",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.Graveyard3]
+														}
+													}
+												]
+											}
+										},
+										{
+											title: "Hitano",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.Hitano]
+											}
+										},
+										{
+											title: "Demon Castle",
+											content: {
+												type: "tabbed",
+												tabs: [
+													{
+														title: "1F - B1F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.DemonCastle1]
+														}
+													},
+													{
+														title: "B2F - B7F",
+														content: {
+															type: "map",
+															maps: [vars.MapNames.DemonCastle2]
+														}
+													}
+												]
+											}
+										},
+									]
+								}
+							},
+							{
+								title: "Limbo",
+								content: {
+									type: "map",
+									maps: [vars.MapNames.Limbo]
 								}
 							},
 						]

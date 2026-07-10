@@ -31,8 +31,8 @@
 	},
 	{
 		"name": "pirate",
-		"location_size": 26,
-		"location_border_thickness": 2,
+		"location_size": 32,
+		"location_border_thickness": 4,
 		"img": "images/maps/pirate.png"
 	},
 	{
@@ -43,8 +43,8 @@
 	},
 	{
 		"name": "polona",
-		"location_size": 10,
-		"location_border_thickness": 1,
+		"location_size": 18,
+		"location_border_thickness": 2,
 		"img": "images/maps/polona.png"
 	},
 	{
@@ -55,20 +55,20 @@
 	},
 	{
 		"name": "west_cape",
-		"location_size": 10,
-		"location_border_thickness": 1,
+		"location_size": 16,
+		"location_border_thickness": 2,
 		"img": "images/maps/west_cape.png"
 	},
 	{
 		"name": "ghost_ship",
-		"location_size": 10,
+		"location_size": 14,
 		"location_border_thickness": 1,
 		"img": "images/maps/ghost_ship.png"
 	},
 	{
 		"name": "lighthouse",
-		"location_size": 10,
-		"location_border_thickness": 1,
+		"location_size": 22,
+		"location_border_thickness": 2,
 		"img": "images/maps/lighthouse.png"
 	},
 	{
@@ -79,20 +79,20 @@
 	},
 	{
 		"name": "volcano2",
-		"location_size": 10,
-		"location_border_thickness": 1,
+		"location_size": 16,
+		"location_border_thickness": 2,
 		"img": "images/maps/volcano2.png"
 	},
 	{
 		"name": "volcano3",
-		"location_size": 10,
-		"location_border_thickness": 1,
+		"location_size": 16,
+		"location_border_thickness": 2,
 		"img": "images/maps/volcano3.png"
 	},
 	{
 		"name": "ice",
-		"location_size": 42,
-		"location_border_thickness": 3,
+		"location_size": 48,
+		"location_border_thickness": 4,
 		"img": "images/maps/ice.png"
 	},
 	{
@@ -103,13 +103,13 @@
 	},
 	{
 		"name": "gold_mine",
-		"location_size": 20,
+		"location_size": 22,
 		"location_border_thickness": 2,
 		"img": "images/maps/gold_mine.png"
 	},
 	{
 		"name": "weston",
-		"location_size": 8,
+		"location_size": 12,
 		"location_border_thickness": 1,
 		"img": "images/maps/weston.png"
 	},
@@ -120,19 +120,18 @@
 		"img": "images/maps/westania_castle.png"
 	},
 	{
-		"name": "south_forest",
+		"name": "southern_forest",
 		"location_size": 10,
 		"location_border_thickness": 1,
 		"img": "images/maps/southern_forest.png"
 	},
 	{
 		"name": "eastria",
-		"location_size": 14,
-		"location_border_thickness": 1,
+		"location_size": 16,
+		"location_border_thickness": 2,
 		"img": "images/maps/eastria.png"
 	},
 	{
-		// no point?
 		"name": "nofor",
 		"location_size": 10,
 		"location_border_thickness": 1,
@@ -144,4 +143,136 @@
 		"location_border_thickness": 1,
 		"img": "images/maps/east_mountain.png"
 	},
+	{
+		"name": "lake_tower1",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lake_tower1.png"
+	},
+	{
+		"name": "lake_tower2",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lake_tower2.png"
+	},
+	{
+		"name": "lake_tower3",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lake_tower3.png"
+	},
+	{
+		"name": "lake_tower4",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lake_tower4.png"
+	},
+	{
+		"name": "lake_tower5",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/lake_tower5.png"
+	},
+	{
+		"name": "sky",
+		"location_size": 48,
+		"location_border_thickness": 4,
+		"img": "images/maps/sky.png"
+	},
+	{
+		"name": "fhunt",
+		"location_size": 10,
+		"location_border_thickness": 1,
+		"img": "images/maps/fhunt.png"
+	},
+	{
+		"name": "sage_tower",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/sage_tower.png"
+	},
+	{
+		"name": "condor_nest",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/condor_nest.png"
+	},
+	{
+		"name": "small_cave1",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/small_cave1.png"
+	},
+	{
+		"name": "small_cave2",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/small_cave2.png"
+	},
+	{
+		"name": "wind_tower1",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/wind_tower1.png"
+	},
+	{
+		"name": "wind_tower2",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/wind_tower2.png"
+	},
+	{
+		"name": "wind_tower3",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/wind_tower3.png"
+	},
+	{
+		"name": "wind_tower4",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/wind_tower4.png"
+	},
+	{
+		"name": "graveyard1",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/graveyard1.png"
+	},
+	{
+		"name": "graveyard2",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/graveyard2.png"
+	},
+	{
+		"name": "graveyard3",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/graveyard3.png"
+	},
+	{
+		"name": "hitano",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/hitano.png"
+	},
+	{
+		"name": "demon_castle1",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/demon_castle1.png"
+	},
+	{
+		"name": "demon_castle2",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/demon_castle2.png"
+	},
+	{
+		"name": "limbo",
+		"location_size": 14,
+		"location_border_thickness": 1,
+		"img": "images/maps/limbo.png"
+	}
 ]

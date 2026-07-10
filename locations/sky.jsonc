@@ -1,0 +1,369 @@
+[
+	{
+		"name": "Sky",
+		"chest_unopened_img": "images/chest_closed.png",
+		"chest_opened_img": "images/chest_open.png",
+		"access_rules": ["SkyKey"],
+		"children": [
+			{
+				"name": "Fhunt",
+				"children": [],
+				"sections": [
+					{
+						"name": "Sage Tower - 1F Chest",
+						"ref": "Sky/Sage Tower/1F Chest/"
+					},
+					{
+						"name": "Sage Tower - 4F Chest 1",
+						"ref": "Sky/Sage Tower/4F Chest 1/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 1966,
+						"y": 280
+					}
+				]
+			},
+			{
+				"name": "Sage Tower",
+				"children": [
+					{
+						"name": "1F Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "sage_tower",
+								"x": 136,
+								"y": 472
+							}
+						]
+					},
+					{
+						"name": "4F Chest 1",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "sage_tower",
+								"x": 376,
+								"y": 88
+							}
+						]
+					},
+					{
+						"name": "4F Chest 2",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "sage_tower",
+								"x": 456,
+								"y": 104
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Mad Condor's Nest",
+				"children": [
+					{
+						"name": "Boss Defeated",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "condor_nest",
+								"x": 136,
+								"y": 472
+							}
+						]
+					},
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "condor_nest",
+								"x": 376,
+								"y": 88
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Boss Defeated",
+						"ref": "Sky/Mad Condor's Nest/Boss Defeated/"
+					},
+					{
+						"name": "Chest",
+						"ref": "Sky/Mad Condor's Nest/Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 206,
+						"y": 710
+					}
+				]
+			},
+			{
+				"name": "Small Cave",
+				"children": [
+					{
+						"name": "East Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "small_cave1",
+								"x": 408,
+								"y": 360
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "Metabble"}
+						],
+						"map_locations": [
+							{
+								"map": "small_cave2",
+								"x": 72,
+								"y": 342
+							}
+						]
+					},
+					{
+						"name": "West Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "small_cave2",
+								"x": 104,
+								"y": 312
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "East Chest",
+						"ref": "Sky/Small Cave/East Chest/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Sky/Small Cave/Boss Defeated/Metabble"
+					},
+					{
+						"name": "West Chest",
+						"ref": "Sky/Small Cave/West Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 1006,
+						"y": 1720
+					}
+				]
+			},
+			{
+				"name": "Wind Tower",
+				"children": [
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "wind_tower1",
+								"x": 248,
+								"y": 40
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest",
+						"ref": "Sky/Wind Tower/Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 366,
+						"y": 1720
+					}
+				]
+			},
+			{
+				"name": "Graveyard",
+				"children": [
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "Niterich"}
+						],
+						"map_locations": [
+							{
+								"map": "graveyard3",
+								"x": 232,
+								"y": 56
+							}
+						]
+					},
+					{
+						"name": "Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "graveyard3",
+								"x": 232,
+								"y": 40
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Boss Defeated",
+						"ref": "Sky/Graveyard/Boss Defeated/Niterich"
+					},
+					{
+						"name": "Chest",
+						"ref": "Sky/Graveyard/Chest/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 1974,
+						"y": 1574
+					}
+				]
+			},
+			{
+				"name": "Hitano",
+				"children": [
+					{
+						"name": "Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "hitano",
+								"x": 120,
+								"y": 200
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Vase",
+						"ref": "Sky/Hitano/Vase/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 1014,
+						"y": 1430
+					}
+				]
+			},
+			{
+				"name": "Demon Castle",
+				"children": [
+					{
+						"name": "1F Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "demon_castle1",
+								"x": 392,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "B2F Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "demon_castle2",
+								"x": 72,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "B4F Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "demon_castle2",
+								"x": 184,
+								"y": 392
+							}
+						]
+					},
+					{
+						"name": "B6F Chest",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "demon_castle2",
+								"x": 296,
+								"y": 552
+							}
+						]
+					},
+					{
+						"name": "Boss Defeated",
+						"sections": [
+							{"name": "Mudou"}
+						],
+						"map_locations": [
+							{
+								"map": "demon_castle2",
+								"x": 400,
+								"y": 176
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "1F Chest",
+						"ref": "Sky/Demon Castle/1F Chest/"
+					},
+					{
+						"name": "B2F Chest",
+						"ref": "Sky/Demon Castle/B2F Chest/"
+					},
+					{
+						"name": "B4F Chest",
+						"ref": "Sky/Demon Castle/B4F Chest/"
+					},
+					{
+						"name": "B6F Chest",
+						"ref": "Sky/Demon Castle/B6F Chest/"
+					},
+					{
+						"name": "Boss Defeated",
+						"ref": "Sky/Demon Castle/Boss Defeated/Mudou"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "sky",
+						"x": 854,
+						"y": 278
+					}
+				]
+			}
+		]
+	}
+]
