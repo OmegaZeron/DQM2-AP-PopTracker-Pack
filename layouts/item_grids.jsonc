@@ -1,18 +1,22 @@
 {
 	"keys": {
 		"type": "itemgrid",
+		"h_alignment": "left",
 		"item_size": 48,
 		"rows": [
-			["OasisKey", "PirateKey", "IceKey"]
+			["OasisComplete", "PirateComplete", "IceComplete"],
+			["SkyComplete", "LimboComplete"]
 		]
 	},
 	"keyItems": {
 		"type": "itemgrid",
+		"item_size": 48,
 		"h_alignment": "left",
 		"rows": [
 			["WaterCall", "TidalBell", "MoonRock"],
 			["HarMirror", "Crest", "YunaSoul"],
-			["SleepHerb", "SkyShield"]
+			["SleepHerb", "SkyShield", "ChangeStaff"],
+			["HeavenItems"]
 		]
 	},
 	"itemGrid": {

@@ -102,7 +102,7 @@ function OnClear(slot_data)
 			if item then
 				if itemData[2] == "toggle" then
 					item.Active = false
-				elseif itemData[2] == "progressive" or itemData[2] == "progressive_set" then
+				elseif itemData[2] == "progressive" then
 					item.CurrentStage = 0
 				elseif itemData[2] == "consumable" then
 					item.AcquiredCount = 0
@@ -113,6 +113,10 @@ function OnClear(slot_data)
 				print(string.format("onClear: could not find object for code %s", itemData[1]))
 			end
 		end
+	end
+	-- reset completion overlays
+	for _, world in pairs(CompletionData) do
+		Tracker:FindObjectForCode(world).Active = false
 	end
 
 	if Archipelago.PlayerNumber > -1 then
@@ -235,7 +239,7 @@ end
 
 function OnNotify(key, value, old_value)
 	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
-		print(string.format("called onNotify: %s, %s, %s", key, DumpTable(value), old_value))
+		print(string.format("called onNotify: %s, %s", key, DumpTable(value)))
 	end
 
 	if value == nil or value == old_value then
@@ -249,27 +253,24 @@ function OnNotify(key, value, old_value)
 			end
 		end
 	elseif key == DataStoreID then
-		-- TODO figure out how this works for subsequent messages
 		local mapID = value["Map ID"]
-		local mapX = value["Map X"]
-		local mapY = value["Map Y"]
+		if AutoTabData[mapID] then
+			for _, tab in ipairs(AutoTabData[mapID]) do
+				Tracker:UiHint("ActivateTab", tab)
+			end
+		end
+		-- local mapX = value["Map X"]
+		-- local mapY = value["Map Y"]
 		-- local playerX = value["Player X"]
 		-- local playerY = value["Player Y"]
 
-		-- TODO move these into a table or something
-		local oasis = value["Desert World Complete"]
-		local pirate = value["Pirate World Complete"]
-		local ice = value["Ice World Complete"]
-		local sky = value["Sky World Complete"]
-		local limbo = value["Limbo World Complete"]
-		local elf = value["Elf World Complete"]
-		local lonely = value["Lonely World Complete"]
-		local traveler = value["Traveler World Complete"]
-		local brawn = value["Brawn World Complete"]
-		local baffle = value["Baffle World Complete"]
-		local soul = value["Soul World Complete"]
+		for k, v in pairs(CompletionData) do
+			if value[k] ~= nil then
+				Tracker:FindObjectForCode(v).Active = value[k]
+			end
+		end
 	elseif key == ClientStatusID then
-		-- TODO clear goal location
+		-- TODO clear goal location?
 	end
 end
 
@@ -301,11 +302,11 @@ function UpdateHints(locationID, status)
 end
 
 -- called when a bounce message is received 
-function OnBounce(json)
-	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
-		print(string.format("called onBounce: %s", DumpTable(json)))
-	end
-end
+-- function OnBounce(json)
+-- 	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
+-- 		print(string.format("called onBounce: %s", DumpTable(json)))
+-- 	end
+-- end
 
 ---@param location LocationSection
 function ManualLocationHandler(location)

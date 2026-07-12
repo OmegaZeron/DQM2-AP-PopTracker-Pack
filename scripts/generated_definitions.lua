@@ -1,0 +1,52 @@
+-- Items
+
+TinyMedal = "TinyMedal"
+WaterCall = "WaterCall"
+MoonRock = "MoonRock"
+Crest = "Crest"
+YunaSoul = "YunaSoul"
+SleepHerb = "SleepHerb"
+ChangeStaff = "ChangeStaff"
+TidalBell = "TidalBell"
+HarMirror = "HarMirror"
+SkyShield = "SkyShield"
+HeavenHelmet = "HeavenHelmet"
+HeavenSword = "HeavenSword"
+HeavenArmor = "HeavenArmor"
+HeavenSet = "HeavenItems"
+WizStone = "WizStone"
+PrettyRing = "PrettyRing"
+OasisKey = "OasisKey"
+PirateKey = "PirateKey"
+IceKey = "IceKey"
+SkyKey = "SkyKey"
+LimboKey = "LimboKey"
+ElfKey = "ElfKey"
+LonelyKey = "LonelyKey"
+TravelKey = "TravelKey"
+BrawnKey = "BrawnKey"
+BaffleKey = "BaffleKey"
+SoulKey = "SoulKey"
+
+-- Worlds
+
+OasisDone = "OasisComplete"
+PirateDone = "PirateComplete"
+IceDone = "IceComplete"
+SkyDone = "SkyComplete"
+LimboDone = "LimboComplete"
+
+-- Settings
+
+GameVersion = "GameVersion"
+VersionCobi = "CobisJourney"
+VersionTara = "TarasAdventure"
+Character = "Character"
+PlayerCobi = "Cobi"
+PlayerTara = "Tara"
+GoalSetting = "GoalSetting"
+GoalDarck = "GoalDarck"
+RandomizeKeys = "RandomizeKeys"
+RandomizeKeysOn = "RandomizeKeysOn"
+RandomizeKeysOff = "RandomizeKeysOff"
+

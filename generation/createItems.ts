@@ -1,5 +1,18 @@
 import { vars, imgPath, writeToFile, hexStr } from './utils.ts';
 
+class ItemData {
+	id!: number;
+	name!: string;
+	mapCode!: string;
+	img!: string;
+	codes?: string;
+	type!: string;
+	allow_disabled?: boolean;
+	stages?: any[];
+	max_quantity?: number;
+	additionalIDs?: number[]
+}
+
 class Stage {
 	name: string;
 	img: string;
@@ -48,7 +61,7 @@ function progressive(id: number, name: string, mapCode: string, stageData: Stage
 	}
 	return item;
 }
-function consumable(id: number, name: string, mapCode: string, max_quantity: number, codes: string[]) {
+function consumable(id: number, name: string, mapCode: string, max_quantity: number, codes: string[], additionalIDs: number[] = []) {
 	return {
 		id,
 		name,
@@ -56,11 +69,21 @@ function consumable(id: number, name: string, mapCode: string, max_quantity: num
 		mapCode,
 		img: imgPath("items", codes[0]),
 		max_quantity,
+		codes: codes.join(", "),
+		additionalIDs
+	}
+}
+function badge(name: string, baseItem: string, codes: string[]) {
+	return {
+		name,
+		type: "toggle_badged",
+		base_item: baseItem,
+		img: "images/check.png",
 		codes: codes.join(", ")
 	}
 }
 
-const itemData = [
+const itemData: ItemData[] = [
 	consumable(0x2C, "Tiny Medal", vars.Items.TinyMedal, 0, [vars.Items.TinyMedal]),
 
 	generic(0x30, "Water Call", "toggle", vars.Items.WaterCall, vars.Items.WaterCall, [vars.Items.WaterCall]),
@@ -72,12 +95,21 @@ const itemData = [
 	generic(0x36, "Tidal Bell", "toggle", vars.Items.TidalBell, vars.Items.TidalBell, [vars.Items.TidalBell]),
 	generic(0x37, "Har Mirror", "toggle", vars.Items.HarMirror, vars.Items.HarMirror, [vars.Items.HarMirror]),
 	generic(0x38, "Sky Shield", "toggle", vars.Items.SkyShield, vars.Items.SkyShield, [vars.Items.SkyShield]),
+	consumable(0x39, "Heaven Set", vars.Items.HeavenSet, 3, [vars.Items.HeavenSet], [0x3A, 0x3B]),
 
 	generic(0x82, "Oasis Key", "static", vars.Items.OasisKey, vars.Items.OasisKey, [vars.Items.OasisKey]),
 	generic(0x83, "Pirate Key", "toggle", vars.Items.PirateKey, vars.Items.PirateKey, [vars.Items.PirateKey]),
 	generic(0x84, "Ice Key", "toggle", vars.Items.IceKey, vars.Items.IceKey, [vars.Items.IceKey]),
 	generic(0x85, "Sky Key", "toggle", vars.Items.SkyKey, vars.Items.SkyKey, [vars.Items.SkyKey]),
 	generic(0x86, "Limbo Key", "toggle", vars.Items.LimboKey, vars.Items.LimboKey, [vars.Items.LimboKey]),
+]
+
+const worldCompletionData = [
+	badge("Oasis", vars.Items.OasisKey, [vars.Worlds.OasisDone]),
+	badge("Pirate", vars.Items.PirateKey, [vars.Worlds.PirateDone]),
+	badge("Ice", vars.Items.IceKey, [vars.Worlds.IceDone]),
+	badge("Sky", vars.Items.SkyKey, [vars.Worlds.SkyDone]),
+	badge("Limbo", vars.Items.LimboKey, [vars.Worlds.LimboDone]),
 ]
 
 const settingsData = [
@@ -98,10 +130,18 @@ export default function createItems() {
 	itemData.sort((a, b) => a.id - b.id)
 	let output = "ITEM_MAPPING = {\n"
 	for (let item of itemData) {
-		output += `\t[${hexStr(item.id)}] = {"${item.mapCode}", "${item.type}"},\n`
+		if (item.id >= 0) {
+			output += `\t[${hexStr(item.id)}] = {"${item.mapCode}", "${item.type}"},\n`
+		}
+		if (item.additionalIDs) {
+			for (let id of item.additionalIDs) {
+				output += `\t[${hexStr(id)}] = {"${item.mapCode}", "${item.type}"},\n`
+			}
+		}
 	}
 	output += "}"
-	writeToFile("items/items.jsonc", JSON.stringify(itemData, (k, v) => k == "id" || k == "mapCode" ? undefined : v, '\t'))
+	let blacklist = ["id", "mapCode", "additionalIDs"]
+	writeToFile("items/items.jsonc", JSON.stringify([...itemData, ...worldCompletionData], (k, v) => blacklist.includes(k) ? undefined : v, '\t'))
 	writeToFile("scripts/autotracking/item_mapping.lua", output)
 	writeToFile("items/pack_settings.jsonc", JSON.stringify(settingsData, (k, v) => k == "id" || k == "mapCode" ? undefined : v, '\t'))
 }

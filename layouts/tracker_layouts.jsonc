@@ -1,6 +1,7 @@
 {
 	"tracker_default": {
 		"type": "dock",
+		"background": "#212121",
 		"content": [
 			{
 				"type": "layout",

@@ -5,30 +5,53 @@
 		"chest_opened_img": "images/chest_open.png",
 		"children": [
 			{
-				"name": "Stable - Vase 1",
-				"sections": [{}],
-				"map_locations": [
+				"name": "Stable",
+				"access_rules": ["OasisComplete, PirateComplete, IceComplete"],
+				"children": [
 					{
-						"map": "greatlog",
-						"x": 914,
-						"y": 600
+						"name": "Stable - Vase 1",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 914,
+								"y": 600
+							}
+						]
+					},
+					{
+						"name": "Stable - Vase 2",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 942,
+								"y": 600
+							}
+						]
 					}
-				]
-			},
-			{
-				"name": "Stable - Vase 2",
-				"sections": [{}],
+				],
+				"sections": [
+					{
+						"name": "Vase 1",
+						"ref": "GreatLog/Stable/Stable - Vase 1/"
+					},
+					{
+						"name": "Vase 2",
+						"ref": "GreatLog/Stable/Stable - Vase 2/"
+					}
+				],
 				"map_locations": [
 					{
 						"map": "greatlog",
-						"x": 942,
-						"y": 600
+						"x": 744,
+						"y": 632
 					}
 				]
 			},
 			{
 				"name": "Key Shop Vase",
-				"access_rules": ["@Oasis/Boss Defeated/CurseLamp"],
+				"access_rules": ["OasisComplete"],
 				"sections": [{}],
 				"map_locations": [
 					{
@@ -39,110 +62,127 @@
 				]
 			},
 			{
-				"name": "Arena - Vase",
-				"sections": [{}],
-				"map_locations": [
+				"name": "Arena",
+				"access_rules": ["OasisComplete"],
+				"children": [
 					{
-						"map": "greatlog",
-						"x": 662,
-						"y": 392
-					}
-				]
-			},
-			{
-				"name": "Housing - Vase",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 790,
-						"y": 248
-					}
-				]
-			},
-			{
-				"name": "Housing - Old Man Vase",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 886,
-						"y": 216
-					}
-				]
-			},
-			{
-				"name": "Kameha's Room - Chest 1",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 456,
-						"y": 200
-					}
-				]
-			},
-			{
-				"name": "Kameha's Room - Chest 2",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 456,
-						"y": 248
-					}
-				]
-			},
-			{
-				"name": "Treetop - Vase",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 56,
-						"y": 72
-					}
-				]
-			},
-			{
-				"name": "Treetop - Chest 1",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 1016,
-						"y": 936
-					}
-				]
-			},
-			{
-				"name": "Treetop - Chest 2",
-				"sections": [{}],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 1064,
-						"y": 936
-					}
-				]
-			},
-			{
-				"name": "Stable",
-				"sections": [
-					{
-						"name": "Vase 1",
-						"ref": "GreatLog/Stable - Vase 1/"
+						"name": "Arena - Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 662,
+								"y": 392
+							}
+						]
 					},
 					{
-						"name": "Vase 2",
-						"ref": "GreatLog/Stable - Vase 2/"
+						"name": "Housing - Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 790,
+								"y": 248
+							}
+						]
+					},
+					{
+						"name": "Housing - Old Man Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 886,
+								"y": 216
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Kameha's Room",
+				"access_rules": ["OasisComplete, PirateComplete, IceComplete, SkyComplete"],
+				"children": [
+					{
+						"name": "Kameha's Room - Chest 1",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 456,
+								"y": 200
+							}
+						]
+					},
+					{
+						"name": "Kameha's Room - Chest 2",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 456,
+								"y": 248
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Treetop",
+				"access_rules": ["OasisComplete, PirateComplete, IceComplete"],
+				"children": [
+					{
+						"name": "Treetop - Vase",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 56,
+								"y": 72
+							}
+						]
+					},
+					{
+						"name": "Treetop - Chest 1",
+						"access_rules": ["SkyShield, SkyComplete"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 1016,
+								"y": 936
+							}
+						]
+					},
+					{
+						"name": "Treetop - Chest 2",
+						"access_rules": ["SkyShield, SkyComplete"],
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 1064,
+								"y": 936
+							}
+						]
+					}
+				],
+				"sections": [
+					{
+						"name": "Chest 1",
+						"ref": "GreatLog/Treetop/Treetop - Chest 1/"
+					},
+					{
+						"name": "Chest 2",
+						"ref": "GreatLog/Treetop/Treetop - Chest 2/"
 					}
 				],
 				"map_locations": [
 					{
 						"map": "greatlog",
-						"x": 744,
-						"y": 632
+						"x": 392,
+						"y": 56
 					}
 				]
 			},
@@ -167,15 +207,15 @@
 				"sections": [
 					{
 						"name": "Arena - Vase",
-						"ref": "GreatLog/Arena - Vase/"
+						"ref": "GreatLog/Arena/Arena - Vase/"
 					},
 					{
 						"name": "Housing - Vase",
-						"ref": "GreatLog/Housing - Vase/"
+						"ref": "GreatLog/Arena/Housing - Vase/"
 					},
 					{
 						"name": "Housing - Old Man Vase",
-						"ref": "GreatLog/Housing - Old Man Vase/"
+						"ref": "GreatLog/Arena/Housing - Old Man Vase/"
 					}
 				],
 				"map_locations": [
@@ -183,26 +223,6 @@
 						"map": "greatlog",
 						"x": 200,
 						"y": 488
-					}
-				]
-			},
-			{
-				"name": "Treetop Chests",
-				"sections": [
-					{
-						"name": "Chest 1",
-						"ref": "GreatLog/Treetop - Chest 1/"
-					},
-					{
-						"name": "Chest 2",
-						"ref": "GreatLog/Treetop - Chest 2/"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "greatlog",
-						"x": 392,
-						"y": 56
 					}
 				]
 			}

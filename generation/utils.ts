@@ -53,12 +53,12 @@ export const vars = Object.freeze({
 		SkyShield: "SkyShield",
 		// misc
 		HeavenHelmet: "HeavenHelmet",
-		HeavenArmor: "HeavenArmor",
 		HeavenSword: "HeavenSword",
+		HeavenArmor: "HeavenArmor",
+		HeavenSet: "HeavenItems",
 		WizStone: "WizStone",
 		PrettyRing: "PrettyRing",
 		// magic keys
-		GreatLogKey: "GreatLogKey",
 		OasisKey: "OasisKey",
 		PirateKey: "PirateKey",
 		IceKey: "IceKey",
@@ -71,6 +71,13 @@ export const vars = Object.freeze({
 		BaffleKey: "BaffleKey",
 		SoulKey: "SoulKey"
 	},
+	Worlds: {
+		OasisDone: "OasisComplete",
+		PirateDone: "PirateComplete",
+		IceDone: "IceComplete",
+		SkyDone: "SkyComplete",
+		LimboDone: "LimboComplete",
+	},
 	Settings: {
 		GameVersion: "GameVersion",
 		VersionCobi: "CobisJourney",
@@ -80,6 +87,9 @@ export const vars = Object.freeze({
 		PlayerTara: "Tara",
 		GoalSetting: "GoalSetting",
 		GoalDarck: "GoalDarck",
+		RandomizeKeys: "RandomizeKeys",
+		RandomizeKeysOn: "RandomizeKeysOn",
+		RandomizeKeysOff: "RandomizeKeysOff",
 	},
 	MapNames: {
 		GreatLog: "greatlog",
@@ -130,4 +140,10 @@ export const vars = Object.freeze({
 		DemonCastle2: "demon_castle2",
 		Limbo: "limbo",
 	}
+})
+
+export const varDefinitions = Object.freeze({
+	Items: vars.Items,
+	Worlds: vars.Worlds,
+	Settings: vars.Settings
 })

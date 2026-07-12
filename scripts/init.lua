@@ -1,5 +1,6 @@
 require("scripts.utils")
 require("scripts.logic.logic")
+require("scripts.generated_definitions")
 require("scripts.definitions")
 require("scripts.logic.logic_helper")
 require("scripts.autotracking")

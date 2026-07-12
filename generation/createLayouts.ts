@@ -9,18 +9,23 @@ function createItemGrids() {
 	let grids = {
 		keys: {
 			type: "itemgrid",
+			h_alignment: "left",
 			item_size: 48,
 			rows: [
-				[vars.Items.OasisKey, vars.Items.PirateKey, vars.Items.IceKey]
+				[vars.Worlds.OasisDone, vars.Worlds.PirateDone, vars.Worlds.IceDone],
+				[vars.Worlds.SkyDone, vars.Worlds.LimboDone]
 			]
 		},
 		keyItems: {
 			type: "itemgrid",
+			item_size: 48,
 			h_alignment: "left",
 			rows: [
 				[vars.Items.WaterCall, vars.Items.TidalBell, vars.Items.MoonRock],
 				[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul],
-				[vars.Items.SleepHerb, vars.Items.SkyShield]
+				[vars.Items.SleepHerb, vars.Items.SkyShield, vars.Items.ChangeStaff],
+				[vars.Items.HeavenSet], // change this to one consumable item?
+				
 			]
 		},
 		itemGrid: {
@@ -63,6 +68,7 @@ function createTrackerLayouts() {
 	let layout = {
 		tracker_default: {
 			type: "dock",
+			background: "#212121",
 			content: [
 				{
 					type: "layout",

@@ -3,10 +3,14 @@
 		"name": "Limbo",
 		"chest_unopened_img": "images/chest_closed.png",
 		"chest_opened_img": "images/chest_open.png",
-		"access_rules": ["LimboKey"],
+		"access_rules": [
+			"LimboKey",
+			"RandomizeKeysOff, SkyKey, SkyComplete"
+		],
 		"children": [
 			{
 				"name": "Boss Defeated",
+				"access_rules": ["TidalBell, HarMirror, SkyShield"],
 				"sections": [
 					{"name": "Darck"}
 				],

@@ -3,113 +3,123 @@
 		"name": "Ice",
 		"chest_unopened_img": "images/chest_closed.png",
 		"chest_opened_img": "images/chest_open.png",
-		"access_rules": ["IceKey"],
+		"access_rules": [
+			"IceKey",
+			"RandomizeKeysOff, PirateComplete"
+		],
 		"children": [
 			{
-				"name": "Norden",
+				"name": "Ice North",
 				"children": [
 					{
-						"name": "Vase",
-						"sections": [{}],
-						"map_locations": [
+						"name": "Norden",
+						"children": [
 							{
-								"map": "norden",
-								"x": 40,
-								"y": 552
+								"name": "Vase",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "norden",
+										"x": 40,
+										"y": 552
+									}
+								]
+							},
+							{
+								"name": "Boss Defeated",
+								"access_rules": ["HarMirror"],
+								"sections": [
+									{"name": "AgDevil"}
+								],
+								"map_locations": [
+									{
+										"map": "norden",
+										"x": 72,
+										"y": 72
+									}
+								]
 							}
-						]
-					},
-					{
-						"name": "Boss Defeated",
-						"access_rules": ["HarMirror"],
+						],
 						"sections": [
-							{"name": "AgDevil"}
+							{
+								"name": "Vase",
+								"ref": "Ice/Ice North/Norden/Vase/"
+							},
+							{
+								"name": "Boss Defeated",
+								"ref": "Ice/Ice North/Norden/Boss Defeated/AgDevil"
+							}
 						],
 						"map_locations": [
 							{
-								"map": "norden",
-								"x": 72,
-								"y": 72
+								"map": "ice",
+								"x": 1360,
+								"y": 360
 							}
 						]
-					}
-				],
-				"sections": [
-					{
-						"name": "Vase",
-						"ref": "Ice/Norden/Vase/"
 					},
 					{
-						"name": "Boss Defeated",
-						"ref": "Ice/Norden/Boss Defeated/AgDevil"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 1360,
-						"y": 360
-					}
-				]
-			},
-			{
-				"name": "Spirit's Spring",
-				"children": [
-					{
-						"name": "Chest",
-						"sections": [{}],
-						"map_locations": [
+						"name": "Spirit's Spring",
+						"children": [
 							{
-								"map": "spirit",
-								"x": 40,
-								"y": 552
+								"name": "Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "spirit",
+										"x": 40,
+										"y": 552
+									}
+								]
+							},
+							{
+								"name": "Boss Defeated",
+								"access_rules": ["HarMirror, Crest, YunaSoul, SleepHerb"],
+								"sections": [
+									{"name": "GoatHorn and the ArcDemons"}
+								],
+								"map_locations": [
+									{
+										"map": "spirit",
+										"x": 72,
+										"y": 72
+									}
+								]
+							},
+							{
+								"name": "Sky Shield",
+								"access_rules": ["HarMirror, Crest, YunaSoul, SleepHerb"],
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "spirit",
+										"x": 72,
+										"y": 72
+									}
+								]
 							}
-						]
-					},
-					{
-						"name": "Boss Defeated",
+						],
 						"sections": [
-							{"name": "GoatHorn and the ArcDemons"}
+							{
+								"name": "Chest",
+								"ref": "Ice/Ice North/Spirit's Spring/Chest/"
+							},
+							{
+								"name": "Boss Defeated",
+								"ref": "Ice/Ice North/Spirit's Spring/Boss Defeated/GoatHorn and the ArcDemons"
+							},
+							{
+								"name": "Sky Shield",
+								"ref": "Ice/Ice North/Spirit's Spring/Sky Shield/"
+							}
 						],
 						"map_locations": [
 							{
-								"map": "spirit",
-								"x": 72,
+								"map": "ice",
+								"x": 880,
 								"y": 72
 							}
 						]
-					},
-					{
-						"name": "Sky Shield",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "spirit",
-								"x": 72,
-								"y": 72
-							}
-						]
-					}
-				],
-				"sections": [
-					{
-						"name": "Chest",
-						"ref": "Ice/Spirit's Spring/Chest/"
-					},
-					{
-						"name": "Boss Defeated",
-						"ref": "Ice/Spirit's Spring/Boss Defeated/GoatHorn and the ArcDemons"
-					},
-					{
-						"name": "Sky Shield",
-						"ref": "Ice/Spirit's Spring/Sky Shield/"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 880,
-						"y": 72
 					}
 				]
 			},
@@ -161,274 +171,236 @@
 				]
 			},
 			{
-				"name": "Weston",
-				"access_rules": ["HarMirror"],
+				"name": "Ice South",
+				"access_rules": ["Crest, HarMirror"],
 				"children": [
 					{
-						"name": "Barrel",
-						"sections": [{}],
-						"map_locations": [
+						"name": "Weston",
+						"children": [
 							{
-								"map": "weston",
-								"x": 152,
-								"y": 232
+								"name": "Barrel",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "weston",
+										"x": 152,
+										"y": 232
+									}
+								]
 							}
-						]
-					}
-				],
-				"sections": [
-					{
-						"name": "Barrel",
-						"ref": "Ice/Weston/Barrel/"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 720,
-						"y": 1224
-					}
-				]
-			},
-			{
-				"name": "Westania Castle",
-				"children": [
-					{
-						"name": "Boss Defeated",
-						"access_rules": ["YunaSoul"],
+						],
 						"sections": [
-							{"name": "Puppetor"}
+							{
+								"name": "Barrel",
+								"ref": "Ice/Ice South/Weston/Barrel/"
+							}
 						],
 						"map_locations": [
 							{
-								"map": "westania_castle",
-								"x": 104,
-								"y": 200
+								"map": "ice",
+								"x": 720,
+								"y": 1224
 							}
 						]
-					}
-				],
-				"sections": [
+					},
 					{
-						"name": "Boss Defeated",
-						"ref": "Ice/Westania Castle/Boss Defeated/Puppetor"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 400,
-						"y": 1368
-					}
-				]
-			},
-			{
-				"name": "Estria",
-				"children": [
-					{
-						"name": "Boss Defeated",
-						"access_rules": ["SleepHerb"],
+						"name": "Westania Castle",
+						"children": [
+							{
+								"name": "Boss Defeated",
+								"access_rules": ["YunaSoul"],
+								"sections": [
+									{"name": "Puppetor"}
+								],
+								"map_locations": [
+									{
+										"map": "westania_castle",
+										"x": 104,
+										"y": 200
+									}
+								]
+							}
+						],
 						"sections": [
-							{"name": "GoatHorn"}
+							{
+								"name": "Boss Defeated",
+								"ref": "Ice/Ice South/Westania Castle/Boss Defeated/Puppetor"
+							}
 						],
 						"map_locations": [
 							{
-								"map": "eastria",
-								"x": 552,
-								"y": 56
+								"map": "ice",
+								"x": 400,
+								"y": 1368
 							}
 						]
-					}
-				],
-				"sections": [
+					},
 					{
-						"name": "Boss Defeated",
-						"ref": "Ice/Estria/Boss Defeated/GoatHorn"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 1520,
-						"y": 1368
-					}
-				]
-			},
-			{
-				"name": "Eastern Mountain",
-				"children": [
-					{
-						"name": "Sleep Herb",
-						"sections": [{}],
+						"name": "Estria",
+						"children": [
+							{
+								"name": "Boss Defeated",
+								"access_rules": ["SleepHerb"],
+								"sections": [
+									{"name": "GoatHorn"}
+								],
+								"map_locations": [
+									{
+										"map": "eastria",
+										"x": 552,
+										"y": 56
+									}
+								]
+							}
+						],
+						"sections": [
+							{
+								"name": "Boss Defeated",
+								"ref": "Ice/Ice South/Estria/Boss Defeated/GoatHorn"
+							}
+						],
 						"map_locations": [
 							{
-								"map": "east_mountain",
-								"x": 216,
-								"y": 56
+								"map": "ice",
+								"x": 1520,
+								"y": 1368
 							}
 						]
 					},
 					{
-						"name": "Chest",
-						"sections": [{}],
+						"name": "Lake Tower",
+						"access_rules": ["TidalBell, SkyShield, IceComplete"],
+						"children": [
+							{
+								"name": "1F Right Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower1",
+										"x": 184,
+										"y": 120
+									}
+								]
+							},
+							{
+								"name": "1F Left Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower1",
+										"x": 136,
+										"y": 168
+									}
+								]
+							},
+							{
+								"name": "2F Left Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower2",
+										"x": 24,
+										"y": 72
+									}
+								]
+							},
+							{
+								"name": "2F Right Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower2",
+										"x": 72,
+										"y": 88
+									}
+								]
+							},
+							{
+								"name": "4F Left Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower4",
+										"x": 24,
+										"y": 72
+									}
+								]
+							},
+							{
+								"name": "4F Right Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower4",
+										"x": 56,
+										"y": 72
+									}
+								]
+							},
+							{
+								"name": "5F Left Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower5",
+										"x": 56,
+										"y": 120
+									}
+								]
+							},
+							{
+								"name": "5F Right Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "lake_tower5",
+										"x": 104,
+										"y": 120
+									}
+								]
+							}
+						],
+						"sections": [
+							{
+								"name": "1F Right Chest",
+								"ref": "Ice/Ice South/Lake Tower/1F Right Chest/"
+							},
+							{
+								"name": "1F Left Chest",
+								"ref": "Ice/Ice South/Lake Tower/1F Left Chest/"
+							},
+							{
+								"name": "2F Left Chest",
+								"ref": "Ice/Ice South/Lake Tower/2F Left Chest/"
+							},
+							{
+								"name": "2F Right Chest",
+								"ref": "Ice/Ice South/Lake Tower/2F Right Chest/"
+							},
+							{
+								"name": "4F Left Chest",
+								"ref": "Ice/Ice South/Lake Tower/4F Left Chest/"
+							},
+							{
+								"name": "4F Right Chest",
+								"ref": "Ice/Ice South/Lake Tower/4F Right Chest/"
+							},
+							{
+								"name": "5F Left Chest",
+								"ref": "Ice/Ice South/Lake Tower/5F Left Chest/"
+							},
+							{
+								"name": "5F Right Chest",
+								"ref": "Ice/Ice South/Lake Tower/5F Right Chest/"
+							}
+						],
 						"map_locations": [
 							{
-								"map": "east_mountain",
-								"x": 280,
-								"y": 184
+								"map": "ice",
+								"x": 1352,
+								"y": 1080
 							}
 						]
-					}
-				],
-				"sections": [
-					{
-						"name": "Sleep Herb",
-						"ref": "Ice/Eastern Mountain/Sleep Herb/"
-					},
-					{
-						"name": "Chest",
-						"ref": "Ice/Eastern Mountain/Chest/"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 1672,
-						"y": 792
-					}
-				]
-			},
-			{
-				"name": "Lake Tower",
-				"children": [
-					{
-						"name": "1F Right Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower1",
-								"x": 184,
-								"y": 120
-							}
-						]
-					},
-					{
-						"name": "1F Left Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower1",
-								"x": 136,
-								"y": 168
-							}
-						]
-					},
-					{
-						"name": "2F Left Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower2",
-								"x": 24,
-								"y": 72
-							}
-						]
-					},
-					{
-						"name": "2F Right Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower2",
-								"x": 72,
-								"y": 88
-							}
-						]
-					},
-					{
-						"name": "4F Left Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower4",
-								"x": 24,
-								"y": 72
-							}
-						]
-					},
-					{
-						"name": "4F Right Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower4",
-								"x": 56,
-								"y": 72
-							}
-						]
-					},
-					{
-						"name": "5F Left Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower5",
-								"x": 56,
-								"y": 120
-							}
-						]
-					},
-					{
-						"name": "5F Right Chest",
-						"sections": [{}],
-						"map_locations": [
-							{
-								"map": "lake_tower5",
-								"x": 104,
-								"y": 120
-							}
-						]
-					}
-				],
-				"sections": [
-					{
-						"name": "1F Right Chest",
-						"ref": "Ice/Lake Tower/1F Right Chest/"
-					},
-					{
-						"name": "1F Left Chest",
-						"ref": "Ice/Lake Tower/1F Left Chest/"
-					},
-					{
-						"name": "2F Left Chest",
-						"ref": "Ice/Lake Tower/2F Left Chest/"
-					},
-					{
-						"name": "2F Right Chest",
-						"ref": "Ice/Lake Tower/2F Right Chest/"
-					},
-					{
-						"name": "4F Left Chest",
-						"ref": "Ice/Lake Tower/4F Left Chest/"
-					},
-					{
-						"name": "4F Right Chest",
-						"ref": "Ice/Lake Tower/4F Right Chest/"
-					},
-					{
-						"name": "5F Left Chest",
-						"ref": "Ice/Lake Tower/5F Left Chest/"
-					},
-					{
-						"name": "5F Right Chest",
-						"ref": "Ice/Lake Tower/5F Right Chest/"
-					}
-				],
-				"map_locations": [
-					{
-						"map": "ice",
-						"x": 1352,
-						"y": 1080
 					}
 				]
 			}

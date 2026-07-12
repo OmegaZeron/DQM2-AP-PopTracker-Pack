@@ -61,6 +61,13 @@
 		"codes": "SkyShield"
 	},
 	{
+		"name": "Heaven Set",
+		"type": "consumable",
+		"img": "images/items/HeavenItems.png",
+		"max_quantity": 3,
+		"codes": "HeavenItems"
+	},
+	{
 		"name": "Oasis Key",
 		"type": "static",
 		"img": "images/items/OasisKey.png",
@@ -89,5 +96,40 @@
 		"type": "toggle",
 		"img": "images/items/LimboKey.png",
 		"codes": "LimboKey"
+	},
+	{
+		"name": "Oasis",
+		"type": "toggle_badged",
+		"base_item": "OasisKey",
+		"img": "images/check.png",
+		"codes": "OasisComplete"
+	},
+	{
+		"name": "Pirate",
+		"type": "toggle_badged",
+		"base_item": "PirateKey",
+		"img": "images/check.png",
+		"codes": "PirateComplete"
+	},
+	{
+		"name": "Ice",
+		"type": "toggle_badged",
+		"base_item": "IceKey",
+		"img": "images/check.png",
+		"codes": "IceComplete"
+	},
+	{
+		"name": "Sky",
+		"type": "toggle_badged",
+		"base_item": "SkyKey",
+		"img": "images/check.png",
+		"codes": "SkyComplete"
+	},
+	{
+		"name": "Limbo",
+		"type": "toggle_badged",
+		"base_item": "LimboKey",
+		"img": "images/check.png",
+		"codes": "LimboComplete"
 	}
 ]
