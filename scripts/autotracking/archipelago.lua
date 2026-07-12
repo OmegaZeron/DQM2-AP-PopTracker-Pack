@@ -162,7 +162,6 @@ function OnItem(index, itemID, itemName, playerNumber)
 	if index <= CUR_INDEX then
 		return
 	end
-	SetAsStale()
 	CUR_INDEX = index
 	local itemData = ITEM_MAPPING[itemID]
 	if not itemData then
@@ -210,7 +209,6 @@ end
 ---@param locationName string
 function OnLocation(locationID, locationName)
 	IS_MANUAL_CLICK = false
-	SetAsStale()
 	local location_array = LOCATION_MAPPING[locationID]
 	if not location_array or not location_array[1] then
 		print(string.format("onLocation: could not find location mapping for id %s", locationID))
