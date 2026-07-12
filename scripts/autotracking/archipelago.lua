@@ -236,8 +236,8 @@ function OnLocation(locationID, locationName)
 end
 
 function OnNotify(key, value, old_value)
+	print(string.format("called onNotify: %s, %s", key, DumpTable(value)))
 	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
-		print(string.format("called onNotify: %s, %s", key, DumpTable(value)))
 	end
 
 	if value == nil or value == old_value then
