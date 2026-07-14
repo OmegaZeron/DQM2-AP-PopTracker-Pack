@@ -132,10 +132,10 @@ export default function createMaps() {
 			img: img(vars.MapNames.SouthForest)
 		},
 		{
-			name: vars.MapNames.Eastria,
+			name: vars.MapNames.Estria,
 			location_size: 16,
 			location_border_thickness: 2,
-			img: img(vars.MapNames.Eastria)
+			img: img(vars.MapNames.Estria)
 		},
 		{
 			// no point?

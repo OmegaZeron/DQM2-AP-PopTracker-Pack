@@ -271,10 +271,10 @@ function createTrackerLayouts() {
 											}
 										},
 										{
-											title: "Eastria",
+											title: "Estria",
 											content: {
 												type: "map",
-												maps: [vars.MapNames.Eastria]
+												maps: [vars.MapNames.Estria]
 											}
 										},
 										// {

@@ -1370,7 +1370,7 @@ function ice() {
 									sections: [{id: 0x30A, name: "GoatHorn"}],
 									map_locations: [
 										{
-											map: vars.MapNames.Eastria,
+											map: vars.MapNames.Estria,
 											x: 552,
 											y: 56
 										}

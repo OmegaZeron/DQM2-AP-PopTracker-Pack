@@ -57,7 +57,7 @@ AutoTabData = {
 	[88] = {tab = {"Ice", "Weston"}},
 	[90] = {tab = {"Ice", "Westania Castle"}},
 	[93] = {tab = {"Ice", "Southern Forest"}},
-	[94] = {tab = {"Ice", "Eastria"}},
+	[94] = {tab = {"Ice", "Estria"}},
 	[98] = {tab = {"Ice", "Eastern Mountain"}},
 	[99] = {tab = {"Ice", "Lake Tower", "1F"}},
 	[100] = {tab = {"Ice", "Lake Tower", "2F"}},

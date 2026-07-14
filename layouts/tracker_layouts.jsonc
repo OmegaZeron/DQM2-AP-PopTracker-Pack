@@ -192,10 +192,10 @@
 										}
 									},
 									{
-										"title": "Eastria",
+										"title": "Estria",
 										"content": {
 											"type": "map",
-											"maps": ["eastria"]
+											"maps": ["estria"]
 										}
 									},
 									{

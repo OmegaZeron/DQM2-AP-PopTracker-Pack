@@ -115,7 +115,7 @@ export const vars = Object.freeze({
 		Weston: "weston",
 		WestaniaCastle: "westania_castle",
 		SouthForest: "southern_forest",
-		Eastria: "eastria",
+		Estria: "estria",
 		Nofor: "nofor",
 		EastMountain: "east_mountain",
 		LakeTower1: "lake_tower1",

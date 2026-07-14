@@ -126,10 +126,10 @@
 		"img": "images/maps/southern_forest.png"
 	},
 	{
-		"name": "eastria",
+		"name": "estria",
 		"location_size": 16,
 		"location_border_thickness": 2,
-		"img": "images/maps/eastria.png"
+		"img": "images/maps/estria.png"
 	},
 	{
 		"name": "nofor",
