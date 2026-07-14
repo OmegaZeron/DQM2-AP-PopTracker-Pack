@@ -1579,8 +1579,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 1966,
-									y: 280
+									x: 1832,
+									y: 216
 								}
 							]
 						},
@@ -1661,8 +1661,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 206,
-									y: 710
+									x: 72,
+									y: 648
 								}
 							]
 						},
@@ -1712,8 +1712,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 1006,
-									y: 1720
+									x: 872,
+									y: 1656
 								}
 							]
 						},
@@ -1739,8 +1739,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 366,
-									y: 1720
+									x: 232,
+									y: 1656
 								}
 							]
 						},
@@ -1778,8 +1778,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 1974,
-									y: 1574
+									x: 1840,
+									y: 1512
 								}
 							]
 						},
@@ -1805,8 +1805,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 1014,
-									y: 1430
+									x: 880,
+									y: 1368
 								}
 							]
 						},
@@ -1892,8 +1892,8 @@ function sky() {
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
-									x: 854,
-									y: 278
+									x: 720,
+									y: 216
 								}
 							]
 						},
