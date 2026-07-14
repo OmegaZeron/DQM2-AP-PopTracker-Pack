@@ -79,9 +79,6 @@ export const vars = Object.freeze({
 		LimboDone: "LimboComplete",
 	},
 	Settings: {
-		GameVersion: "GameVersion",
-		VersionCobi: "CobisJourney",
-		VersionTara: "TarasAdventure",
 		Character: "Character",
 		PlayerCobi: "Cobi",
 		PlayerTara: "Tara",
@@ -90,6 +87,10 @@ export const vars = Object.freeze({
 		RandomizeKeys: "RandomizeKeys",
 		RandomizeKeysOn: "RandomizeKeysOn",
 		RandomizeKeysOff: "RandomizeKeysOff",
+		AutoTab: "AutoTab",
+		AutoTabOn: "AutoTabOn",
+		AutoTabPanZoom: "AutoTabPanZoom",
+		AutoTabOff: "AutoTabOff",
 	},
 	MapNames: {
 		GreatLog: "greatlog",
@@ -145,5 +146,6 @@ export const vars = Object.freeze({
 export const varDefinitions = Object.freeze({
 	Items: vars.Items,
 	Worlds: vars.Worlds,
-	Settings: vars.Settings
+	Settings: vars.Settings,
+	MapNames: vars.MapNames
 })

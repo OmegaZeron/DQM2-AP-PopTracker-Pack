@@ -1,25 +1,5 @@
 [
 	{
-		"name": "Game Version",
-		"type": "progressive",
-		"allow_disabled": false,
-		"loop": true,
-		"stages": [
-			{
-				"name": "Cobi's Journey",
-				"img": "images/settings/CobisJourney.png",
-				"codes": "GameVersion, CobisJourney",
-				"inherit_codes": false
-			},
-			{
-				"name": "Tara's Adventure",
-				"img": "images/settings/TarasAdventure.png",
-				"codes": "GameVersion, TarasAdventure",
-				"inherit_codes": false
-			}
-		]
-	},
-	{
 		"name": "Character",
 		"type": "progressive",
 		"allow_disabled": false,
@@ -46,9 +26,29 @@
 		"loop": true,
 		"stages": [
 			{
-				"name": "Cobi",
+				"name": "Darck",
 				"img": "images/settings/GoalDarck.png",
 				"codes": "GoalSetting, GoalDarck",
+				"inherit_codes": false
+			}
+		]
+	},
+	{
+		"name": "Autotab",
+		"type": "progressive",
+		"allow_disabled": false,
+		"loop": true,
+		"stages": [
+			{
+				"name": "Autotab Enabled",
+				"img": "images/settings/AutoTabOn.png",
+				"codes": "AutoTab, AutoTabOn",
+				"inherit_codes": false
+			},
+			{
+				"name": "Autotab Disabled",
+				"img": "images/settings/AutoTabOff.png",
+				"codes": "AutoTab, AutoTabOff",
 				"inherit_codes": false
 			}
 		]

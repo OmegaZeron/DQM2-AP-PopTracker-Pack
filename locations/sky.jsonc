@@ -5,7 +5,7 @@
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
 			"SkyKey",
-			"RandomizeKeysOff, IceComplete"
+			"IceComplete"
 		],
 		"children": [
 			{
@@ -13,8 +13,24 @@
 				"children": [
 					{
 						"name": "Fhunt",
-						"children": [],
+						"children": [
+							{
+								"name": "Gravestone",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "fhunt",
+										"x": 41,
+										"y": 361
+									}
+								]
+							}
+						],
 						"sections": [
+							{
+								"name": "Fhunt - Gravestone",
+								"ref": "Sky/Shrine Island/Fhunt/Gravestone/"
+							},
 							{
 								"name": "Sage Tower - 1F Chest",
 								"ref": "Sky/Shrine Island/Sage Tower/1F Chest/"
@@ -22,6 +38,10 @@
 							{
 								"name": "Sage Tower - 4F Chest 1",
 								"ref": "Sky/Shrine Island/Sage Tower/4F Chest 1/"
+							},
+							{
+								"name": "Sage Tower - 4F Chest 2",
+								"ref": "Sky/Shrine Island/Sage Tower/4F Chest 2/"
 							}
 						],
 						"map_locations": [
@@ -85,8 +105,8 @@
 								"map_locations": [
 									{
 										"map": "condor_nest",
-										"x": 136,
-										"y": 472
+										"x": 72,
+										"y": 40
 									}
 								]
 							},
@@ -96,8 +116,8 @@
 								"map_locations": [
 									{
 										"map": "condor_nest",
-										"x": 376,
-										"y": 88
+										"x": 72,
+										"y": 24
 									}
 								]
 							}
@@ -267,6 +287,7 @@
 						"children": [
 							{
 								"name": "Vase",
+								"access_rules": ["HeavenItems:3"],
 								"sections": [{}],
 								"map_locations": [
 									{

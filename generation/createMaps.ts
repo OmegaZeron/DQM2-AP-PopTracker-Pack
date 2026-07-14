@@ -13,7 +13,7 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.Oasis,
-			location_size: 26,
+			location_size: 28,
 			location_border_thickness: 2,
 			img: img(vars.MapNames.Oasis)
 		},
@@ -25,13 +25,13 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.Asiya,
-			location_size: 10,
+			location_size: 14,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Asiya)
 		},
 		{
 			name: vars.MapNames.Canal,
-			location_size: 10,
+			location_size: 16,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Canal)
 		},
@@ -109,7 +109,7 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.GoldMine,
-			location_size: 22,
+			location_size: 26,
 			location_border_thickness: 2,
 			img: img(vars.MapNames.GoldMine)
 		},
@@ -121,14 +121,14 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.WestaniaCastle,
-			location_size: 12,
+			location_size: 14,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.WestaniaCastle)
 		},
 		{
 			name: vars.MapNames.SouthForest,
-			location_size: 10,
-			location_border_thickness: 1,
+			location_size: 20,
+			location_border_thickness: 2,
 			img: img(vars.MapNames.SouthForest)
 		},
 		{
@@ -146,31 +146,31 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.EastMountain,
-			location_size: 10,
-			location_border_thickness: 1,
+			location_size: 18,
+			location_border_thickness: 2,
 			img: img(vars.MapNames.EastMountain)
 		},
 		{
 			name: vars.MapNames.LakeTower1,
-			location_size: 10,
+			location_size: 12,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.LakeTower1)
 		},
 		{
 			name: vars.MapNames.LakeTower2,
-			location_size: 10,
+			location_size: 12,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.LakeTower2)
 		},
 		{
 			name: vars.MapNames.LakeTower3,
-			location_size: 10,
+			location_size: 12,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.LakeTower3)
 		},
 		{
 			name: vars.MapNames.LakeTower4,
-			location_size: 10,
+			location_size: 12,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.LakeTower4)
 		},
@@ -182,20 +182,20 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.Sky,
-			location_size: 48,
+			location_size: 54,
 			location_border_thickness: 4,
 			img: img(vars.MapNames.Sky)
 		},
 		{
 			name: vars.MapNames.Fhunt,
-			location_size: 10,
+			location_size: 14,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Fhunt)
 		},
 		{
 			name: vars.MapNames.SageTower,
-			location_size: 14,
-			location_border_thickness: 1,
+			location_size: 18,
+			location_border_thickness: 2,
 			img: img(vars.MapNames.SageTower)
 		},
 		{
@@ -206,13 +206,13 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.SmallCave1,
-			location_size: 14,
+			location_size: 18,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.SmallCave1)
 		},
 		{
 			name: vars.MapNames.SmallCave2,
-			location_size: 14,
+			location_size: 18,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.SmallCave2)
 		},
@@ -254,31 +254,31 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.Graveyard3,
-			location_size: 14,
+			location_size: 16,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Graveyard3)
 		},
 		{
 			name: vars.MapNames.Hitano,
-			location_size: 14,
+			location_size: 18,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Hitano)
 		},
 		{
 			name: vars.MapNames.DemonCastle1,
-			location_size: 14,
-			location_border_thickness: 1,
+			location_size: 26,
+			location_border_thickness: 2,
 			img: img(vars.MapNames.DemonCastle1)
 		},
 		{
 			name: vars.MapNames.DemonCastle2,
-			location_size: 14,
-			location_border_thickness: 1,
+			location_size: 20,
+			location_border_thickness: 2,
 			img: img(vars.MapNames.DemonCastle2)
 		},
 		{
 			name: vars.MapNames.Limbo,
-			location_size: 14,
+			location_size: 16,
 			location_border_thickness: 1,
 			img: img(vars.MapNames.Limbo)
 		},

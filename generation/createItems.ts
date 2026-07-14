@@ -113,16 +113,17 @@ const worldCompletionData = [
 ]
 
 const settingsData = [
-	progressive(-1, "Game Version", vars.Settings.GameVersion, [
-		new Stage("Cobi's Journey", vars.Settings.VersionCobi, [vars.Settings.VersionCobi], "settings"),
-		new Stage("Tara's Adventure", vars.Settings.VersionTara, [vars.Settings.VersionTara], "settings")
-	], true, false, false),
 	progressive(-1, "Character", vars.Settings.Character, [
 		new Stage("Cobi", vars.Settings.PlayerCobi, [vars.Settings.PlayerCobi], "settings"),
 		new Stage("Tara", vars.Settings.PlayerTara, [vars.Settings.PlayerTara], "settings")
 	], true, false, false),
 	progressive(-1, "Goal", vars.Settings.GoalSetting, [
-		new Stage("Cobi", vars.Settings.GoalDarck, [vars.Settings.GoalDarck], "settings"),
+		new Stage("Darck", vars.Settings.GoalDarck, [vars.Settings.GoalDarck], "settings"),
+	], true, false, false),
+	progressive(-1, "Autotab", vars.Settings.AutoTab, [
+		new Stage("Autotab Enabled", vars.Settings.AutoTabOn, [vars.Settings.AutoTabOn], "settings"),
+		// new Stage("Autotab+ Enabled", vars.Settings.AutoTabPanZoom, [vars.Settings.AutoTabOn, vars.Settings.AutoTabPanZoom], "settings"),
+		new Stage("Autotab Disabled", vars.Settings.AutoTabOff, [vars.Settings.AutoTabOff], "settings"),
 	], true, false, false),
 ]
 

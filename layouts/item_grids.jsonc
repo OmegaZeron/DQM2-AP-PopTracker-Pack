@@ -44,10 +44,66 @@
 		]
 	},
 	"settings": {
-		"type": "itemgrid",
-		"item_size": "160, 80",
-		"rows": [
-			["GameVersion", "Character"]
+		"type": "array",
+		"orientation": "horizontal",
+		"content": [
+			{
+				"type": "dock",
+				"content": [
+					{
+						"dock": "top",
+						"type": "text",
+						"h_alignment": "center",
+						"text": "Goal"
+					},
+					{
+						"dock": "top",
+						"type": "itemgrid",
+						"item_size": 64,
+						"rows": [
+							["GoalSetting"]
+						]
+					}
+				]
+			},
+			{
+				"type": "dock",
+				"content": [
+					{
+						"dock": "top",
+						"type": "text",
+						"h_alignment": "center",
+						"text": "Character"
+					},
+					{
+						"dock": "top",
+						"type": "itemgrid",
+						"item_size": 64,
+						"rows": [
+							["Character"]
+						]
+					}
+				]
+			},
+			{
+				"type": "dock",
+				"content": [
+					{
+						"dock": "top",
+						"type": "text",
+						"h_alignment": "center",
+						"text": "Autotab"
+					},
+					{
+						"dock": "top",
+						"type": "itemgrid",
+						"item_size": 64,
+						"rows": [
+							["AutoTab"]
+						]
+					}
+				]
+			}
 		]
 	}
 }

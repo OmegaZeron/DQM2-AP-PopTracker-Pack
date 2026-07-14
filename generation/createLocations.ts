@@ -170,7 +170,7 @@ function greatlog() {
 			children: [
 				{
 					name: "Stable",
-					access_rules: [and(vars.Worlds.OasisDone, vars.Worlds.PirateDone, vars.Worlds.IceDone)],
+					access_rules: [vars.Worlds.IceDone],
 					children: [
 						{
 							name: "Stable - Vase 1",
@@ -207,18 +207,18 @@ function greatlog() {
 						}
 					]
 				},
-				// {
-				// 	name: "Rare Key Shelf",
-				// 	access_rules: [and(vars.Worlds.OasisDone, vars.Worlds.PirateDone, vars.Worlds.IceDone)],
-				// 	sections: [{id: 0x009}],
-				// 	map_locations: [
-				// 		{
-				// 			map: vars.MapNames.GreatLog,
-				// 			x: 536,
-				// 			y: 8
-				// 		}
-				// 	]
-				// },
+				{
+					name: "Rare Key Shelf",
+					access_rules: [vars.Worlds.IceDone],
+					sections: [{id: 0x009}],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 536,
+							y: 8
+						}
+					]
+				},
 				{
 					name: "Key Shop Vase",
 					access_rules: [vars.Worlds.OasisDone],
@@ -272,7 +272,7 @@ function greatlog() {
 				},
 				{
 					name: "Kameha's Room",
-					access_rules: [and(vars.Worlds.OasisDone, vars.Worlds.PirateDone, vars.Worlds.IceDone, vars.Worlds.SkyDone)],
+					access_rules: [vars.Worlds.SkyDone],
 					children: [
 						{
 							name: "Kameha's Room - Chest 1",
@@ -300,7 +300,7 @@ function greatlog() {
 				},
 				{
 					name: "Treetop",
-					access_rules: [and(vars.Worlds.OasisDone, vars.Worlds.PirateDone, vars.Worlds.IceDone)],
+					access_rules: [vars.Worlds.IceDone],
 					children: [
 						{
 							name: "Treetop - Vase",
@@ -365,6 +365,19 @@ function greatlog() {
 					]
 				},
 				{
+					name: "Rare Key Collector",
+					sections: [
+						{name: "Rare Key Shelf", ref: 0x009},
+					],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 88,
+							y: 232
+						}
+					]
+				},
+				{
 					name: "Arena/Housing",
 					sections: [
 						{name: "Arena - Vase", ref: 0x05},
@@ -392,7 +405,7 @@ function oasis() {
 			name: "Oasis",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.OasisKey, vars.Settings.RandomizeKeysOff],
+			// access_rules: [vars.Items.OasisKey, vars.Settings.RandomizeKeysOff],
 			children: [
 				{
 					name: "Kalka",
@@ -613,7 +626,7 @@ function pirate() {
 			name: "Pirate",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.PirateKey, and(vars.Settings.RandomizeKeysOff, vars.Worlds.OasisDone)],
+			access_rules: [vars.Items.PirateKey, and(/*vars.Settings.RandomizeKeysOff, */vars.Worlds.OasisDone)],
 			children: [
 				{
 					name: "Yold",
@@ -643,16 +656,22 @@ function pirate() {
 				},
 				{
 					name: "Polona",
-					// not implemented yet
-					// children: [
-					// 	{
-					// 		name: "Dance",
-					// 		sections: [{id: 0x201}],
-					// 		map_locations: []
-					// 	}
-					// ],
+					children: [
+						{
+							name: "Dance",
+							sections: [{id: 0x201}],
+							map_locations: [
+								{
+									map: vars.MapNames.Polona,
+									x: 264,
+									y: 152
+								}
+							]
+						}
+					],
 					sections: [
-						{name: "Mermaid Queen", ref: 0x202}
+						{name: "Dance", ref: 0x201},
+						{name: "Mermaid Queen", ref: 0x202},
 					],
 					map_locations: [
 						{
@@ -1128,7 +1147,7 @@ function ice() {
 			name: "Ice",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.IceKey, and(vars.Settings.RandomizeKeysOff, vars.Worlds.PirateDone)],
+			access_rules: [vars.Items.IceKey, and(/*vars.Settings.RandomizeKeysOff, */vars.Worlds.PirateDone)],
 			children: [
 				{
 					name: "Ice North",
@@ -1318,30 +1337,30 @@ function ice() {
 								}
 							]
 						},
-						// {
-						// 	name: "Southern Forest",
-						// 	children: [
-						// 		{
-						// 			name: "Yuna's Soul",
-						// 			sections: [{id: 0x309}],
-						// 			map_locations: [
-						// 				{
-						// 					map: vars.MapNames.SouthForest,
-						// 					x: 408,
-						// 					y: 504
-						// 				}
-						// 			]
-						// 		}
-						// 	],
-						// 	sections: [{name: "Yuna's Soul", ref: 0x309}],
-						// 	map_locations: [
-						// 		{
-						// 			map: vars.MapNames.Ice,
-						// 			x: 880,
-						// 			y: 1496
-						// 		}
-						// 	]
-						// },
+						{
+							name: "Southern Forest",
+							children: [
+								{
+									name: "Yuna's Soul",
+									sections: [{id: 0x309}],
+									map_locations: [
+										{
+											map: vars.MapNames.SouthForest,
+											x: 408,
+											y: 504
+										}
+									]
+								}
+							],
+							sections: [{name: "Yuna's Soul", ref: 0x309}],
+							map_locations: [
+								{
+									map: vars.MapNames.Ice,
+									x: 880,
+									y: 1496
+								}
+							]
+						},
 						{
 							name: "Estria",
 							children: [
@@ -1367,44 +1386,44 @@ function ice() {
 								}
 							]
 						},
-						// {
-						// 	name: "Eastern Mountain",
-						// 	children: [
-						// 		{
-						// 			name: "Sleep Herb",
-						// 			sections: [{id: 0x30B}],
-						// 			map_locations: [
-						// 				{
-						// 					map: vars.MapNames.EastMountain,
-						// 					x: 216,
-						// 					y: 56
-						// 				}
-						// 			]
-						// 		},
-						// 		{
-						// 			name: "Chest",
-						// 			sections: [{id: 0x30C}],
-						// 			map_locations: [
-						// 				{
-						// 					map: vars.MapNames.EastMountain,
-						// 					x: 280,
-						// 					y: 184
-						// 				}
-						// 			]
-						// 		},
-						// 	],
-						// 	sections: [
-						// 		{name: "Sleep Herb", ref: 0x30B},
-						// 		{name: "Chest", ref: 0x30C}
-						// 	],
-						// 	map_locations: [
-						// 		{
-						// 			map: vars.MapNames.Ice,
-						// 			x: 1672,
-						// 			y: 792
-						// 		}
-						// 	]
-						// },
+						{
+							name: "Eastern Mountain",
+							children: [
+								{
+									name: "Sleep Herb",
+									sections: [{id: 0x30B}],
+									map_locations: [
+										{
+											map: vars.MapNames.EastMountain,
+											x: 216,
+											y: 56
+										}
+									]
+								},
+								{
+									name: "Chest",
+									sections: [{id: 0x30C}],
+									map_locations: [
+										{
+											map: vars.MapNames.EastMountain,
+											x: 280,
+											y: 184
+										}
+									]
+								},
+							],
+							sections: [
+								{name: "Sleep Herb", ref: 0x30B},
+								{name: "Chest", ref: 0x30C}
+							],
+							map_locations: [
+								{
+									map: vars.MapNames.Ice,
+									x: 1672,
+									y: 792
+								}
+							]
+						},
 						{
 							name: "Lake Tower",
 							access_rules: [and(vars.Items.TidalBell, vars.Items.SkyShield, vars.Worlds.IceDone)],
@@ -1531,7 +1550,7 @@ function sky() {
 			name: "Sky",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.SkyKey, and(vars.Settings.RandomizeKeysOff, vars.Worlds.IceDone)],
+			access_rules: [vars.Items.SkyKey, and(/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.IceDone)],
 			children: [
 				{
 					name: "Shrine Island",
@@ -1539,23 +1558,23 @@ function sky() {
 						{
 							name: "Fhunt",
 							children: [
-								// {
-								// 	name: "Gravestone",
-								// 	sections: [{id: 0x400}],
-								// 	map_locations: [
-								// 		{
-								// 			map: vars.MapNames.Fhunt,
-								// 			x: 40,
-								// 			y: 360
-								// 		}
-								// 	]
-								// }
+								{
+									name: "Gravestone",
+									sections: [{id: 0x400}],
+									map_locations: [
+										{
+											map: vars.MapNames.Fhunt,
+											x: 41,
+											y: 361
+										}
+									]
+								}
 							],
 							sections: [
-								// {name: "Fhunt - Gravestone", ref: 0x400},
+								{name: "Fhunt - Gravestone", ref: 0x400},
 								{name: "Sage Tower - 1F Chest", ref: 0x401},
 								{name: "Sage Tower - 4F Chest 1", ref: 0x402},
-								// {name: "Sage Tower - 4F Chest 2", ref: 0x403},
+								{name: "Sage Tower - 4F Chest 2", ref: 0x403},
 							],
 							map_locations: [
 								{
@@ -1618,8 +1637,8 @@ function sky() {
 									map_locations: [
 										{
 											map: vars.MapNames.CondorNest,
-											x: 136,
-											y: 472
+											x: 72,
+											y: 40
 										}
 									]
 								},
@@ -1629,8 +1648,8 @@ function sky() {
 									map_locations: [
 										{
 											map: vars.MapNames.CondorNest,
-											x: 376,
-											y: 88
+											x: 72,
+											y: 24
 										}
 									]
 								}
@@ -1769,6 +1788,7 @@ function sky() {
 							children: [
 								{
 									name: "Vase",
+									access_rules: [has(vars.Items.HeavenSet, 3)],
 									sections: [{id: 0x40D}],
 									map_locations: [
 										{
@@ -1794,17 +1814,6 @@ function sky() {
 							name: "Demon Castle",
 							access_rules: [has(vars.Items.HeavenSet, 3)],
 							children: [
-								// {
-								// 	name: "1F Vase",
-								// 	sections: [{id: 0x40D}],
-								// 	map_locations: [
-								// 		{
-								// 			map: vars.MapNames.Hitano,
-								// 			x: 200,
-								// 			y: 344
-								// 		}
-								// 	]
-								// },
 								{
 									name: "1F Chest",
 									sections: [{id: 0x40E}],
@@ -1865,7 +1874,7 @@ function sky() {
 								// 	sections: [{id: 0x413}],
 								// 	map_locations: [
 								// 		{
-								// 			map: vars.MapNames.Hitano,
+								// 			map: vars.MapNames.DemonCastle2,
 								// 			x: 392,
 								// 			y: 72
 								// 		}
@@ -1873,7 +1882,6 @@ function sky() {
 								// },
 							],
 							sections: [
-								// {name: "1F Vase", ref: 0x40D},
 								{name: "1F Chest", ref: 0x40E},
 								{name: "B2F Chest", ref: 0x40F},
 								{name: "B4F Chest", ref: 0x410},
@@ -1904,7 +1912,7 @@ function limbo() {
 			name: "Limbo",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.LimboKey, and(vars.Settings.RandomizeKeysOff, vars.Items.SkyKey, vars.Worlds.SkyDone)],
+			access_rules: [vars.Items.LimboKey, and(/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.SkyDone)],
 			children: [
 				{
 					name: "Boss Defeated",

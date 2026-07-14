@@ -1,44 +1,43 @@
 require("scripts.autotracking.item_mapping")
 require("scripts.autotracking.location_mapping")
 
-local CUR_INDEX = -1
-local SLOT_DATA = {}
-local WORLD_VERSION <const> = "20"
-local IGNORE_VERSION = false
-local ALL_LOCATIONS = {}
-local IS_MANUAL_CLICK = true
+local currentIndex = -1
+local slotData = {}
+local allLocations = {}
+local isManualClick = true
 local DEFAULT_SEED <const> = "default"
-local ROOM_SEED = DEFAULT_SEED
-local IsHighlightUpdate = false
+local roomSeed = DEFAULT_SEED
+local isHighlightUpdate = false
+local hasGoaled = false
 
 function PreOnClear()
-	PLAYER_ID = Archipelago.PlayerNumber or -1
-	TEAM_NUMBER = Archipelago.TeamNumber or 0
+	PlayerID = Archipelago.PlayerNumber or -1
+	TeamNumber = Archipelago.TeamNumber or 0
 
 	if Archipelago.PlayerNumber > -1 then
-		if #ALL_LOCATIONS > 0 then
-			ALL_LOCATIONS = {}
+		if #allLocations > 0 then
+			allLocations = {}
 		end
 		for _, value in pairs(Archipelago.MissingLocations) do
-			table.insert(ALL_LOCATIONS, #ALL_LOCATIONS + 1, value)
+			table.insert(allLocations, #allLocations + 1, value)
 		end
 
 		for _, value in pairs(Archipelago.CheckedLocations) do
-			table.insert(ALL_LOCATIONS, #ALL_LOCATIONS + 1, value)
+			table.insert(allLocations, #allLocations + 1, value)
 		end
 	end
 
 	local manualStorageItem = Tracker:FindObjectForCode(ManualStorageCode).ItemState --[[@as ManualTrackerState]]
-	local seedBase = (Archipelago.Seed or #ALL_LOCATIONS).."_"..Archipelago.TeamNumber.."_"..Archipelago.PlayerNumber
-	if manualStorageItem and (ROOM_SEED == DEFAULT_SEED or ROOM_SEED ~= seedBase) then
-		ROOM_SEED = seedBase
+	local seedBase = (Archipelago.Seed or #allLocations).."_"..Archipelago.TeamNumber.."_"..Archipelago.PlayerNumber
+	if manualStorageItem and (roomSeed == DEFAULT_SEED or roomSeed ~= seedBase) then
+		roomSeed = seedBase
 		if #manualStorageItem.ManualLocations > 10 then
 			manualStorageItem.ManualLocations[manualStorageItem.ManualLocationsOrder[1]] = nil
 			table.remove(manualStorageItem.ManualLocationsOrder, 1)
 		end
-		if manualStorageItem.ManualLocations[ROOM_SEED] == nil then
-			manualStorageItem.ManualLocations[ROOM_SEED] = {locations = {}, items = {}}
-			table.insert(manualStorageItem.ManualLocationsOrder, ROOM_SEED)
+		if manualStorageItem.ManualLocations[roomSeed] == nil then
+			manualStorageItem.ManualLocations[roomSeed] = {locations = {}, items = {}}
+			table.insert(manualStorageItem.ManualLocationsOrder, roomSeed)
 		end
 	end
 end
@@ -46,7 +45,7 @@ end
 function OnClear(slot_data)
 	print(string.format("called OnClear, slot_data:\n%s", DumpTable(slot_data)))
 
-	SLOT_DATA = slot_data
+	slotData = slot_data
 
 	-- reset manual items
 	for code, itemData in pairs(ManualItemFilter) do
@@ -64,7 +63,7 @@ function OnClear(slot_data)
 		end
 	end
 
-	IS_MANUAL_CLICK = false
+	isManualClick = false
 	if Tracker:FindObjectForCode(ManualStorageCode) == nil then
 		CreateLuaManualLocationStorage(ManualStorageCode)
 	end
@@ -72,7 +71,7 @@ function OnClear(slot_data)
 
 	PreOnClear()
 
-	CUR_INDEX = -1
+	currentIndex = -1
 	-- reset locations
 	for _, location_array in pairs(LOCATION_MAPPING) do
 		for _, location in pairs(location_array) do
@@ -80,8 +79,8 @@ function OnClear(slot_data)
 			if obj then
 				if location:sub(1, 1) == "@" then
 					---@cast obj LocationSection
-					if manualStorageItem and manualStorageItem.ManualLocations[ROOM_SEED] and manualStorageItem.ManualLocations[ROOM_SEED].locations[obj.FullID] then
-						obj.AvailableChestCount = manualStorageItem.ManualLocations[ROOM_SEED].locations[obj.FullID]
+					if manualStorageItem and manualStorageItem.ManualLocations[roomSeed] and manualStorageItem.ManualLocations[roomSeed].locations[obj.FullID] then
+						obj.AvailableChestCount = manualStorageItem.ManualLocations[roomSeed].locations[obj.FullID]
 					else
 						obj.AvailableChestCount = obj.ChestCount
 					end
@@ -118,9 +117,10 @@ function OnClear(slot_data)
 	for _, world in pairs(CompletionData) do
 		Tracker:FindObjectForCode(world).Active = false
 	end
+	hasGoaled = false
 
 	if Archipelago.PlayerNumber > -1 then
-		local slotInfo = TEAM_NUMBER.."_"..PLAYER_ID
+		local slotInfo = TeamNumber.."_"..PlayerID
 		HintsID = "_read_hints_"..slotInfo
 		DataStoreID = "DQM2_"..slotInfo
 		ClientStatusID = "_read_client_status_"..slotInfo
@@ -131,7 +131,7 @@ function OnClear(slot_data)
 
 	-- set manual items
 	if manualStorageItem then
-		for code, data in pairs(manualStorageItem.ManualLocations[ROOM_SEED].items) do
+		for code, data in pairs(manualStorageItem.ManualLocations[roomSeed].items) do
 			local item = Tracker:FindObjectForCode(code) --[[@as JsonItem]]
 			if data["type"] == "progressive" then
 				item.CurrentStage = data["CurrentStage"]
@@ -144,7 +144,7 @@ function OnClear(slot_data)
 	-- auto tab and set the season for the starting location
 	CurrentTab = nil
 
-	IS_MANUAL_CLICK = true
+	isManualClick = true
 end
 
 -- called when an item gets collected
@@ -154,15 +154,15 @@ end
 ---@param playerNumber integer
 function OnItem(index, itemID, itemName, playerNumber)
 	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
-		print(string.format("called onItem: %s, %s, %s, %s, %s", index, itemID, itemName, playerNumber, CUR_INDEX))
+		print(string.format("called onItem: %s, %s, %s, %s, %s", index, itemID, itemName, playerNumber, currentIndex))
 	end
 	if not AUTOTRACKER_ENABLE_ITEM_TRACKING then
 		return
 	end
-	if index <= CUR_INDEX then
+	if index <= currentIndex then
 		return
 	end
-	CUR_INDEX = index
+	currentIndex = index
 	local itemData = ITEM_MAPPING[itemID]
 	if not itemData then
 		if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
@@ -208,7 +208,7 @@ end
 ---@param locationID integer
 ---@param locationName string
 function OnLocation(locationID, locationName)
-	IS_MANUAL_CLICK = false
+	isManualClick = false
 	local location_array = LOCATION_MAPPING[locationID]
 	if not location_array or not location_array[1] then
 		print(string.format("onLocation: could not find location mapping for id %s", locationID))
@@ -232,30 +232,41 @@ function OnLocation(locationID, locationName)
 		end
 	end
 
-	IS_MANUAL_CLICK = true
+	isManualClick = true
 end
 
 function OnNotify(key, value, old_value)
-	print(string.format("called onNotify: %s, %s", key, DumpTable(value)))
 	if AUTOTRACKER_ENABLE_DEBUG_LOGGING_AP then
+		print(string.format("called onNotify: %s, %s", key, DumpTable(value)))
 	end
 
 	if value == nil or value == old_value then
 		return
 	end
 
-	if key == HintsID and Highlight then
+	if key == HintsID then
 		for _, hint in ipairs(value) do
 			if hint.finding_player == Archipelago.PlayerNumber then
 				UpdateHints(hint.location, PriorityToHighlight[hint.status])
 			end
 		end
 	elseif key == DataStoreID then
+		---@type integer
 		local mapID = value["Map ID"]
-		if AutoTabData[mapID] then
-			for _, tab in ipairs(AutoTabData[mapID]) do
+		if not hasGoaled and Tracker:ProviderCountForCode(AutoTabOn) > 0 and AutoTabData[mapID] then
+			local data = AutoTabData[mapID]
+			for _, tab in ipairs(data.tab) do
 				Tracker:UiHint("ActivateTab", tab)
 			end
+			-- zoom/pan
+			-- if Tracker:ProviderCountForCode(AutoTabPanZoom) > 0 then
+			-- 	local mapCoords = string.format("%s,%s", value["Map X"], value["Map Y"])
+			-- 	if data[mapCoords] then
+			-- 		local panCoords = string.format("%s,%s", data[mapCoords].x, data[mapCoords].y)
+			-- 		Tracker:UiHint("Pan "..data[mapCoords].mapName, panCoords)
+			-- 		Tracker:UiHint("Zoom "..data[mapCoords].mapName, data[mapCoords].zoom)
+			-- 	end
+			-- end
 		end
 		-- local mapX = value["Map X"]
 		-- local mapY = value["Map Y"]
@@ -269,6 +280,7 @@ function OnNotify(key, value, old_value)
 		end
 	elseif key == ClientStatusID then
 		-- TODO clear goal location?
+		hasGoaled = true
 	end
 end
 
@@ -291,7 +303,7 @@ function UpdateHints(locationID, status)
 	for _, location in ipairs(locations) do
 		local section = Tracker:FindObjectForCode(location) --[[@as LocationSection]]
 		if section then
-			IsHighlightUpdate = true
+			isHighlightUpdate = true
 			section.Highlight = status
 		else
 			print(string.format("No object found for code: %s", location))
@@ -308,29 +320,29 @@ end
 
 ---@param location LocationSection
 function ManualLocationHandler(location)
-	if IsHighlightUpdate then
-		IsHighlightUpdate = false
+	if isHighlightUpdate then
+		isHighlightUpdate = false
 		return
 	end
-	if IS_MANUAL_CLICK then
+	if isManualClick then
 		local manualStorageItem = Tracker:FindObjectForCode(ManualStorageCode).ItemState --[[@as ManualTrackerState]]
 
-		if Archipelago.PlayerNumber == -1 and ROOM_SEED ~= DEFAULT_SEED then
+		if Archipelago.PlayerNumber == -1 and roomSeed ~= DEFAULT_SEED then
 			-- seed is from previous connection
-			ROOM_SEED = DEFAULT_SEED
-			manualStorageItem.ManualLocations[ROOM_SEED] = {locations = {}, items = {}}
+			roomSeed = DEFAULT_SEED
+			manualStorageItem.ManualLocations[roomSeed] = {locations = {}, items = {}}
 		end
 		local fullID = location.FullID
-		if not manualStorageItem.ManualLocations[ROOM_SEED] then
-			manualStorageItem.ManualLocations[ROOM_SEED] = {locations = {}, items = {}}
+		if not manualStorageItem.ManualLocations[roomSeed] then
+			manualStorageItem.ManualLocations[roomSeed] = {locations = {}, items = {}}
 		end
 		if location.AvailableChestCount < location.ChestCount then
 			-- add to list
-			manualStorageItem.ManualLocations[ROOM_SEED].locations[fullID] = location.AvailableChestCount
+			manualStorageItem.ManualLocations[roomSeed].locations[fullID] = location.AvailableChestCount
 			location.Highlight = Highlight.None
 		else
 			-- remove from list of set back to max chest count
-			manualStorageItem.ManualLocations[ROOM_SEED].locations[fullID] = nil
+			manualStorageItem.ManualLocations[roomSeed].locations[fullID] = nil
 			-- re-grab hints since it was cleared earlier
 			Archipelago:Get({HintsID})
 		end
@@ -347,9 +359,9 @@ function ManualItemHandler(codes)
 	if not manualStorageItem or not item then return end
 
 	if ManualItemFilter[code].type == "progressive" then
-		manualStorageItem.ManualLocations[ROOM_SEED].items[code] = {type = "progressive", CurrentStage = item.CurrentStage}
+		manualStorageItem.ManualLocations[roomSeed].items[code] = {type = "progressive", CurrentStage = item.CurrentStage}
 	elseif ManualItemFilter[code].type == "toggle" then
-		manualStorageItem.ManualLocations[ROOM_SEED].items[code] = {type = "toggle", Active = item.Active}
+		manualStorageItem.ManualLocations[roomSeed].items[code] = {type = "toggle", Active = item.Active}
 	end
 end
 

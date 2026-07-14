@@ -5,7 +5,7 @@
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
 			"PirateKey",
-			"RandomizeKeysOff, OasisComplete"
+			"OasisComplete"
 		],
 		"children": [
 			{
@@ -39,7 +39,24 @@
 			},
 			{
 				"name": "Polona",
+				"children": [
+					{
+						"name": "Dance",
+						"sections": [{}],
+						"map_locations": [
+							{
+								"map": "polona",
+								"x": 264,
+								"y": 152
+							}
+						]
+					}
+				],
 				"sections": [
+					{
+						"name": "Dance",
+						"ref": "Pirate/Polona/Dance/"
+					},
 					{
 						"name": "Mermaid Queen",
 						"ref": "Pirate/Mermaid's Cave/Mermaid Queen/"

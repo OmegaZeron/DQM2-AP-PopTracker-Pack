@@ -185,10 +185,24 @@
 										}
 									},
 									{
+										"title": "Southern Forest",
+										"content": {
+											"type": "map",
+											"maps": ["southern_forest"]
+										}
+									},
+									{
 										"title": "Eastria",
 										"content": {
 											"type": "map",
 											"maps": ["eastria"]
+										}
+									},
+									{
+										"title": "Eastern Mountain",
+										"content": {
+											"type": "map",
+											"maps": ["east_mountain"]
 										}
 									},
 									{
@@ -405,17 +419,12 @@
 		"type": "container",
 		"background": "#212121",
 		"content": {
-			"type": "dock",
-			"content": [
-				{
-					"type": "group",
-					"header": "settings",
-					"content": {
-						"type": "layout",
-						"key": "settings"
-					}
-				}
-			]
+			"type": "group",
+			"header": "Settings",
+			"content": {
+				"type": "layout",
+				"key": "settings"
+			}
 		}
 	}
 }

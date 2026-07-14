@@ -5,7 +5,7 @@
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
 			"IceKey",
-			"RandomizeKeysOff, PirateComplete"
+			"PirateComplete"
 		],
 		"children": [
 			{
@@ -236,6 +236,35 @@
 						]
 					},
 					{
+						"name": "Southern Forest",
+						"children": [
+							{
+								"name": "Yuna's Soul",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "southern_forest",
+										"x": 408,
+										"y": 504
+									}
+								]
+							}
+						],
+						"sections": [
+							{
+								"name": "Yuna's Soul",
+								"ref": "Ice/Ice South/Southern Forest/Yuna's Soul/"
+							}
+						],
+						"map_locations": [
+							{
+								"map": "ice",
+								"x": 880,
+								"y": 1496
+							}
+						]
+					},
+					{
 						"name": "Estria",
 						"children": [
 							{
@@ -264,6 +293,50 @@
 								"map": "ice",
 								"x": 1520,
 								"y": 1368
+							}
+						]
+					},
+					{
+						"name": "Eastern Mountain",
+						"children": [
+							{
+								"name": "Sleep Herb",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "east_mountain",
+										"x": 216,
+										"y": 56
+									}
+								]
+							},
+							{
+								"name": "Chest",
+								"sections": [{}],
+								"map_locations": [
+									{
+										"map": "east_mountain",
+										"x": 280,
+										"y": 184
+									}
+								]
+							}
+						],
+						"sections": [
+							{
+								"name": "Sleep Herb",
+								"ref": "Ice/Ice South/Eastern Mountain/Sleep Herb/"
+							},
+							{
+								"name": "Chest",
+								"ref": "Ice/Ice South/Eastern Mountain/Chest/"
+							}
+						],
+						"map_locations": [
+							{
+								"map": "ice",
+								"x": 1672,
+								"y": 792
 							}
 						]
 					},

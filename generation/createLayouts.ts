@@ -5,6 +5,16 @@ export default function createLayouts() {
 	createTrackerLayouts()
 }
 
+function textItem(text: string, code: string) {
+	return {
+		type: "dock",
+		content: [
+			{dock: "top", type: "text", h_alignment: "center", text},
+			{dock: "top", type: "itemgrid", item_size: 64, rows: [[code]]}
+		]
+	}
+}
+
 function createItemGrids() {
 	let grids = {
 		keys: {
@@ -53,10 +63,12 @@ function createItemGrids() {
 			]
 		},
 		settings: {
-			type: "itemgrid",
-			item_size: "160, 80",
-			rows: [
-				[vars.Settings.GameVersion, vars.Settings.Character]
+			type: "array",
+			orientation: "horizontal",
+			content: [
+				textItem("Goal", vars.Settings.GoalSetting),
+				textItem("Character", vars.Settings.Character),
+				textItem("Autotab", vars.Settings.AutoTab),
 			]
 		}	
 	}
@@ -251,13 +263,13 @@ function createTrackerLayouts() {
 												maps: [vars.MapNames.WestaniaCastle]
 											}
 										},
-										// {
-										// 	title: "Southern Forest",
-										// 	content: {
-										// 		type: "map",
-										// 		maps: [vars.MapNames.SouthForest]
-										// 	}
-										// },
+										{
+											title: "Southern Forest",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.SouthForest]
+											}
+										},
 										{
 											title: "Eastria",
 											content: {
@@ -272,13 +284,13 @@ function createTrackerLayouts() {
 										// 		maps: [vars.MapNames.Nofor]
 										// 	}
 										// },
-										// {
-										// 	title: "Eastern Mountain",
-										// 	content: {
-										// 		type: "map",
-										// 		maps: [vars.MapNames.EastMountain]
-										// 	}
-										// },
+										{
+											title: "Eastern Mountain",
+											content: {
+												type: "map",
+												maps: [vars.MapNames.EastMountain]
+											}
+										},
 										{
 											title: "Lake Tower",
 											content: {
@@ -493,17 +505,12 @@ function createTrackerLayouts() {
 			type: "container",
 			background: "#212121",
 			content: {
-				type: "dock",
-				content: [
-					{
-						type: "group",
-						header: "settings",
-						content: {
-							type: "layout",
-							key: "settings"
-						}	
-					}
-				]
+				type: "group",
+				header: "Settings",
+				content: {
+					type: "layout",
+					key: "settings"
+				}
 			}
 		}
 	}

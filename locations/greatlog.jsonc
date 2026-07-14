@@ -6,7 +6,7 @@
 		"children": [
 			{
 				"name": "Stable",
-				"access_rules": ["OasisComplete, PirateComplete, IceComplete"],
+				"access_rules": ["IceComplete"],
 				"children": [
 					{
 						"name": "Stable - Vase 1",
@@ -46,6 +46,18 @@
 						"map": "greatlog",
 						"x": 744,
 						"y": 632
+					}
+				]
+			},
+			{
+				"name": "Rare Key Shelf",
+				"access_rules": ["IceComplete"],
+				"sections": [{}],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 536,
+						"y": 8
 					}
 				]
 			},
@@ -102,7 +114,7 @@
 			},
 			{
 				"name": "Kameha's Room",
-				"access_rules": ["OasisComplete, PirateComplete, IceComplete, SkyComplete"],
+				"access_rules": ["SkyComplete"],
 				"children": [
 					{
 						"name": "Kameha's Room - Chest 1",
@@ -130,7 +142,7 @@
 			},
 			{
 				"name": "Treetop",
-				"access_rules": ["OasisComplete, PirateComplete, IceComplete"],
+				"access_rules": ["IceComplete"],
 				"children": [
 					{
 						"name": "Treetop - Vase",
@@ -199,6 +211,22 @@
 						"map": "greatlog",
 						"x": 216,
 						"y": 360
+					}
+				]
+			},
+			{
+				"name": "Rare Key Collector",
+				"sections": [
+					{
+						"name": "Rare Key Shelf",
+						"ref": "GreatLog/Rare Key Shelf/"
+					}
+				],
+				"map_locations": [
+					{
+						"map": "greatlog",
+						"x": 88,
+						"y": 232
 					}
 				]
 			},
