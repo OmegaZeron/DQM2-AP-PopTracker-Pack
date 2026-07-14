@@ -501,6 +501,11 @@ function createTrackerLayouts() {
 				}
 			]
 		},
+		tracker_broadcast: {
+			type: "layout",
+			key: "itemGrid",
+			dock: "left"
+		},
 		settings_popup: {
 			type: "container",
 			background: "#212121",
