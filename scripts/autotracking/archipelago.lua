@@ -43,7 +43,7 @@ function PreOnClear()
 end
 
 function OnClear(slot_data)
-	print(string.format("called OnClear, slot_data:\n%s", DumpTable(slot_data)))
+	-- print(string.format("called OnClear, slot_data:\n%s", DumpTable(slot_data)))
 
 	slotData = slot_data
 
@@ -280,7 +280,9 @@ function OnNotify(key, value, old_value)
 		end
 	elseif key == ClientStatusID then
 		-- TODO clear goal location?
-		hasGoaled = true
+		if value == Archipelago.ClientStatus.GOAL then
+			hasGoaled = true
+		end
 	end
 end
 
