@@ -3,7 +3,7 @@
 </p>
 
 # Dragon Quest Monsters 2 - Archipelago PopTracker Pack
-Tracker pack for [PopTracker](https://github.com/black-sliver/PopTracker/)</br>
+Tracker pack for [PopTracker](https://poptracker.github.io)</br>
 <b>PopTracker v0.35.1 or higher is required</b>
 
 [Archipelago Setup Guide](https://archipelago.gg/tutorial/Archipelago/setup/en)
