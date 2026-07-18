@@ -1,6 +1,12 @@
 {
 	"versions": [
 		{
+			"package_version": "1.0.2",
+			"download_url": "https://github.com/OmegaZeron/DQM2-AP-PopTracker-Pack/releases/download/v1.0.2/dqm2_ap.zip",
+			"sha256": "7c37f7d55c9a657b5fc7c43536de06d8ecc3c976533a5eebdf41c6adc5b30277",
+			"changelog": ["Logic update, location overview"]
+		},
+		{
 			"package_version": "1.0.1",
 			"download_url": "https://github.com/OmegaZeron/DQM2-AP-PopTracker-Pack/releases/download/v1.0.1/dqm2_ap.zip",
 			"sha256": "265da717a207dda21d7ee8e3b90a39322c12ac50df6b50a32c13c39f9aa7f019",
