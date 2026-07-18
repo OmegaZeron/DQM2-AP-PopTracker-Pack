@@ -1,14 +1,14 @@
 {
 	"name": "Dragon Quest Monsters 2 AP Tracker",
 	"game_name": "Dragon Quest Monsters 2",
-	"package_version": "1.0.1",
+	"package_version": "1.0.2",
 	"package_uid": "dqm2_ap",
 	"platform": "gbc",
 	"author": "OmegaZeron",
 	"min_poptracker_version": "0.35.1",
 	"variants": {
 		"standard": {
-			"display_name": "AP Autotracker v1.0.1",
+			"display_name": "AP Autotracker v1.0.2",
 			"flags": ["ap"]
 		}
 	},
