@@ -22,6 +22,19 @@
 					}
 				]
 			}
+		],
+		"sections": [
+			{
+				"name": "Darck Defeated",
+				"ref": "Limbo/Boss Defeated/Darck"
+			}
+		],
+		"map_locations": [
+			{
+				"map": "greatlog",
+				"x": 244,
+				"y": 766
+			}
 		]
 	}
 ]

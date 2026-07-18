@@ -75,6 +75,7 @@
 				"children": [
 					{
 						"name": "Mermaid Queen",
+						"access_rules": ["TidalBell"],
 						"sections": [{}],
 						"map_locations": [
 							{
@@ -649,6 +650,135 @@
 						"y": 504
 					}
 				]
+			}
+		],
+		"sections": [
+			{
+				"name": "Yold - Barrel",
+				"ref": "Pirate/Yold/Barrel/"
+			},
+			{
+				"name": "Polona - Dance",
+				"ref": "Pirate/Polona/Dance/"
+			},
+			{
+				"name": "Mermaid's Cave - Mermaid Queen",
+				"ref": "Pirate/Mermaid's Cave/Mermaid Queen/"
+			},
+			{
+				"name": "Port Ritz - Barrel",
+				"ref": "Pirate/Port Ritz/Barrel/"
+			},
+			{
+				"name": "West Cape Cave - Northwest Chest",
+				"ref": "Pirate/West Cape Cave/Northwest Chest/"
+			},
+			{
+				"name": "West Cape Cave - North Chest",
+				"ref": "Pirate/West Cape Cave/North Chest/"
+			},
+			{
+				"name": "West Cape Cave - Northeast Chest 1",
+				"ref": "Pirate/West Cape Cave/Northeast Chest 1/"
+			},
+			{
+				"name": "West Cape Cave - Northeast Chest 2",
+				"ref": "Pirate/West Cape Cave/Northeast Chest 2/"
+			},
+			{
+				"name": "West Cape Cave - Northeast Chest 3",
+				"ref": "Pirate/West Cape Cave/Northeast Chest 3/"
+			},
+			{
+				"name": "West Cape Cave - Middle Chest",
+				"ref": "Pirate/West Cape Cave/Middle Chest/"
+			},
+			{
+				"name": "West Cape Cave - Boss Defeated",
+				"ref": "Pirate/West Cape Cave/Boss Defeated/Squiz"
+			},
+			{
+				"name": "Ghost Ship - 1F Northeast Barrel",
+				"ref": "Pirate/Ghost Ship/Northeast Barrel/1F"
+			},
+			{
+				"name": "Ghost Ship - 1F Middle Barrel",
+				"ref": "Pirate/Ghost Ship/Middle Barrel/1F"
+			},
+			{
+				"name": "Ghost Ship - 1F South Vase",
+				"ref": "Pirate/Ghost Ship/South Vase/1F"
+			},
+			{
+				"name": "Ghost Ship - 1F Flooded Vase 1",
+				"ref": "Pirate/Ghost Ship/Flooded Vase 1/1F"
+			},
+			{
+				"name": "Ghost Ship - 1F Flooded Vase 2",
+				"ref": "Pirate/Ghost Ship/Flooded Vase 2/1F"
+			},
+			{
+				"name": "Ghost Ship - 2F Center Chest",
+				"ref": "Pirate/Ghost Ship/Center Chest/2F"
+			},
+			{
+				"name": "Ghost Ship - 2F Hidden Chest 1",
+				"ref": "Pirate/Ghost Ship/Hidden Chest 1/2F"
+			},
+			{
+				"name": "Ghost Ship - 2F Hidden Chest 2",
+				"ref": "Pirate/Ghost Ship/Hidden Chest 2/2F"
+			},
+			{
+				"name": "Ghost Ship - 2F Hidden Chest 3",
+				"ref": "Pirate/Ghost Ship/Hidden Chest 3/2F"
+			},
+			{
+				"name": "Ghost Ship - Deck West Barrel",
+				"ref": "Pirate/Ghost Ship/West Barrel/Deck"
+			},
+			{
+				"name": "Ghost Ship - Deck East Barrel",
+				"ref": "Pirate/Ghost Ship/East Barrel/Deck"
+			},
+			{
+				"name": "Ghost Ship - Boss Defeated",
+				"ref": "Pirate/Ghost Ship/Boss Defeated/CaptDead"
+			},
+			{
+				"name": "Ghost Ship - Captain's Quarters Chest",
+				"ref": "Pirate/Ghost Ship/Chest/Captain's Quarters"
+			},
+			{
+				"name": "Lighthouse - Chest",
+				"ref": "Pirate/Lighthouse/Chest/2F"
+			},
+			{
+				"name": "Volcano Cave - Chest 1",
+				"ref": "Pirate/Volcano Cave/Chest 1/B2F"
+			},
+			{
+				"name": "Volcano Cave - Chest 2",
+				"ref": "Pirate/Volcano Cave/Chest 2/B2F"
+			},
+			{
+				"name": "Volcano Cave - South Chest 1",
+				"ref": "Pirate/Volcano Cave/South Chest 1/B2F"
+			},
+			{
+				"name": "Volcano Cave - South Chest 2",
+				"ref": "Pirate/Volcano Cave/South Chest 2/B2F"
+			},
+			{
+				"name": "Volcano Cave - South Chest 3",
+				"ref": "Pirate/Volcano Cave/South Chest 3/B2F"
+			}
+		],
+		"map_locations": [
+			{
+				"map": "greatlog",
+				"x": 146,
+				"y": 766
 			}
 		]
 	}

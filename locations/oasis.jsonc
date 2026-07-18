@@ -253,6 +253,71 @@
 					}
 				]
 			}
+		],
+		"sections": [
+			{
+				"name": "Kalka - Vase",
+				"ref": "Oasis/Kalka/Vase/"
+			},
+			{
+				"name": "Canal - Entrance Vase",
+				"ref": "Oasis/Canal/Entrance Vase/"
+			},
+			{
+				"name": "Canal - Northwest Vase 1",
+				"ref": "Oasis/Canal/Northwest Vase 1/"
+			},
+			{
+				"name": "Canal - Northwest Vase 2",
+				"ref": "Oasis/Canal/Northwest Vase 2/"
+			},
+			{
+				"name": "Canal - Northeast Vase 1",
+				"ref": "Oasis/Canal/Northeast Vase 1/"
+			},
+			{
+				"name": "Canal - Northeast Vase 2",
+				"ref": "Oasis/Canal/Northeast Vase 2/"
+			},
+			{
+				"name": "Canal - Chest Above Boss",
+				"ref": "Oasis/Canal/Chest Above Boss/"
+			},
+			{
+				"name": "Canal - East of Boss",
+				"ref": "Oasis/Canal/East of Boss/"
+			},
+			{
+				"name": "Canal - Boss Defeated",
+				"ref": "Oasis/Canal/Boss Defeated/Biino"
+			},
+			{
+				"name": "Canal - Southwest Chest 1",
+				"ref": "Oasis/Canal/Southwest Chest 1/"
+			},
+			{
+				"name": "Canal - Southwest Chest 2",
+				"ref": "Oasis/Canal/Southwest Chest 2/"
+			},
+			{
+				"name": "Asiya - Vase",
+				"ref": "Oasis/Asiya/Vase/"
+			},
+			{
+				"name": "Asiya - Prisoner",
+				"ref": "Oasis/Asiya/Prisoner/"
+			},
+			{
+				"name": "Mirage Lake - Boss Defeated",
+				"ref": "Oasis/Boss Defeated/CurseLamp"
+			}
+		],
+		"map_locations": [
+			{
+				"map": "greatlog",
+				"x": 112,
+				"y": 766
+			}
 		]
 	}
 ]

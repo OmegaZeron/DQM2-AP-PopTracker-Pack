@@ -406,6 +406,87 @@
 					}
 				]
 			}
+		],
+		"sections": [
+			{
+				"name": "Fhunt - Gravestone",
+				"ref": "Sky/Shrine Island/Fhunt/Gravestone/"
+			},
+			{
+				"name": "Sage Tower - 1F Chest",
+				"ref": "Sky/Shrine Island/Sage Tower/1F Chest/"
+			},
+			{
+				"name": "Sage Tower - 4F Chest 1",
+				"ref": "Sky/Shrine Island/Sage Tower/4F Chest 1/"
+			},
+			{
+				"name": "Sage Tower - 4F Chest 2",
+				"ref": "Sky/Shrine Island/Sage Tower/4F Chest 2/"
+			},
+			{
+				"name": "Mad Condor's Nest - Boss Defeated",
+				"ref": "Sky/Main Area/Mad Condor's Nest/Boss Defeated/"
+			},
+			{
+				"name": "Mad Condor's Nest - Chest",
+				"ref": "Sky/Main Area/Mad Condor's Nest/Chest/"
+			},
+			{
+				"name": "Small Cave - East Chest",
+				"ref": "Sky/Main Area/Small Cave/East Chest/"
+			},
+			{
+				"name": "Small Cave - Boss Defeated",
+				"ref": "Sky/Main Area/Small Cave/Boss Defeated/Metabble"
+			},
+			{
+				"name": "Small Cave - West Chest",
+				"ref": "Sky/Main Area/Small Cave/West Chest/"
+			},
+			{
+				"name": "Wind Tower - Chest",
+				"ref": "Sky/Main Area/Wind Tower/Chest/"
+			},
+			{
+				"name": "Graveyard - Boss Defeated",
+				"ref": "Sky/Main Area/Graveyard/Boss Defeated/Niterich"
+			},
+			{
+				"name": "Graveyard - Chest",
+				"ref": "Sky/Main Area/Graveyard/Chest/"
+			},
+			{
+				"name": "Hitano - Vase",
+				"ref": "Sky/Main Area/Hitano/Vase/"
+			},
+			{
+				"name": "Demon Castle - 1F Chest",
+				"ref": "Sky/Main Area/Demon Castle/1F Chest/"
+			},
+			{
+				"name": "Demon Castle - B2F Chest",
+				"ref": "Sky/Main Area/Demon Castle/B2F Chest/"
+			},
+			{
+				"name": "Demon Castle - B4F Chest",
+				"ref": "Sky/Main Area/Demon Castle/B4F Chest/"
+			},
+			{
+				"name": "Demon Castle - B6F Chest",
+				"ref": "Sky/Main Area/Demon Castle/B6F Chest/"
+			},
+			{
+				"name": "Demon Castle - Boss Defeated",
+				"ref": "Sky/Main Area/Demon Castle/Boss Defeated/Mudou"
+			}
+		],
+		"map_locations": [
+			{
+				"map": "greatlog",
+				"x": 211,
+				"y": 766
+			}
 		]
 	}
 ]

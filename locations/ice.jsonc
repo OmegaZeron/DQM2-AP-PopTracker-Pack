@@ -477,6 +477,99 @@
 					}
 				]
 			}
+		],
+		"sections": [
+			{
+				"name": "Norden - Vase",
+				"ref": "Ice/Ice North/Norden/Vase/"
+			},
+			{
+				"name": "Norden - Boss Defeated",
+				"ref": "Ice/Ice North/Norden/Boss Defeated/AgDevil"
+			},
+			{
+				"name": "Spirit's Spring - Chest",
+				"ref": "Ice/Ice North/Spirit's Spring/Chest/"
+			},
+			{
+				"name": "Spirit's Spring - Boss Defeated",
+				"ref": "Ice/Ice North/Spirit's Spring/Boss Defeated/GoatHorn and the ArcDemons"
+			},
+			{
+				"name": "Spirit's Spring - Sky Shield",
+				"ref": "Ice/Ice North/Spirit's Spring/Sky Shield/"
+			},
+			{
+				"name": "Gold Mine - Chest",
+				"ref": "Ice/Gold Mine/Chest/"
+			},
+			{
+				"name": "Gold Mine - Boss Defeated",
+				"ref": "Ice/Gold Mine/Boss Defeated/BombCrag"
+			},
+			{
+				"name": "Weston - Barrel",
+				"ref": "Ice/Ice South/Weston/Barrel/"
+			},
+			{
+				"name": "Westania Castle - Boss Defeated",
+				"ref": "Ice/Ice South/Westania Castle/Boss Defeated/Puppetor"
+			},
+			{
+				"name": "Southern Forest - Yuna's Soul",
+				"ref": "Ice/Ice South/Southern Forest/Yuna's Soul/"
+			},
+			{
+				"name": "Estria - Boss Defeated",
+				"ref": "Ice/Ice South/Estria/Boss Defeated/GoatHorn"
+			},
+			{
+				"name": "Eastern Mountain - Sleep Herb",
+				"ref": "Ice/Ice South/Eastern Mountain/Sleep Herb/"
+			},
+			{
+				"name": "Eastern Mountain - Chest",
+				"ref": "Ice/Ice South/Eastern Mountain/Chest/"
+			},
+			{
+				"name": "Lake Tower - 1F Right Chest",
+				"ref": "Ice/Ice South/Lake Tower/1F Right Chest/"
+			},
+			{
+				"name": "Lake Tower - 1F Left Chest",
+				"ref": "Ice/Ice South/Lake Tower/1F Left Chest/"
+			},
+			{
+				"name": "Lake Tower - 2F Left Chest",
+				"ref": "Ice/Ice South/Lake Tower/2F Left Chest/"
+			},
+			{
+				"name": "Lake Tower - 2F Right Chest",
+				"ref": "Ice/Ice South/Lake Tower/2F Right Chest/"
+			},
+			{
+				"name": "Lake Tower - 4F Left Chest",
+				"ref": "Ice/Ice South/Lake Tower/4F Left Chest/"
+			},
+			{
+				"name": "Lake Tower - 4F Right Chest",
+				"ref": "Ice/Ice South/Lake Tower/4F Right Chest/"
+			},
+			{
+				"name": "Lake Tower - 5F Left Chest",
+				"ref": "Ice/Ice South/Lake Tower/5F Left Chest/"
+			},
+			{
+				"name": "Lake Tower - 5F Right Chest",
+				"ref": "Ice/Ice South/Lake Tower/5F Right Chest/"
+			}
+		],
+		"map_locations": [
+			{
+				"map": "greatlog",
+				"x": 178,
+				"y": 766
+			}
 		]
 	}
 ]

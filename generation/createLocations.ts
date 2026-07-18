@@ -613,6 +613,29 @@ function oasis() {
 						}
 					]
 				},
+			],
+			sections: [
+				{name: "Kalka - Vase", ref: 0x100},
+				{name: "Canal - Entrance Vase", ref: 0x10C},
+				{name: "Canal - Northwest Vase 1", ref: 0x103},
+				{name: "Canal - Northwest Vase 2", ref: 0x104},
+				{name: "Canal - Northeast Vase 1", ref: 0x105},
+				{name: "Canal - Northeast Vase 2", ref: 0x106},
+				{name: "Canal - Chest Above Boss", ref: 0x107},
+				{name: "Canal - East of Boss", ref: 0x108},
+				{name: "Canal - Boss Defeated", ref: 0x10B},
+				{name: "Canal - Southwest Chest 1", ref: 0x109},
+				{name: "Canal - Southwest Chest 2", ref: 0x10A},
+				{name: "Asiya - Vase", ref: 0x101},
+				{name: "Asiya - Prisoner", ref: 0x102},
+				{name: "Mirage Lake - Boss Defeated", ref: 0x10D}
+			],
+			map_locations: [
+				{
+					map: vars.MapNames.GreatLog,
+					x: 112,
+					y: 766
+				}
 			]
 		}
 	]
@@ -686,6 +709,7 @@ function pirate() {
 					children: [
 						{
 							name: "Mermaid Queen",
+							access_rules: [vars.Items.TidalBell],
 							sections: [{id: 0x202}],
 							map_locations: [
 								{
@@ -1134,6 +1158,45 @@ function pirate() {
 						}
 					]
 				},
+			],
+			sections: [
+				{name: "Yold - Barrel", ref: 0x200},
+				{name: "Polona - Dance", ref: 0x201},
+				{name: "Mermaid's Cave - Mermaid Queen", ref: 0x202},
+				{name: "Port Ritz - Barrel", ref: 0x203},
+				{name: "West Cape Cave - Northwest Chest", ref: 0x205},
+				{name: "West Cape Cave - North Chest", ref: 0x206},
+				{name: "West Cape Cave - Northeast Chest 1", ref: 0x207},
+				{name: "West Cape Cave - Northeast Chest 2", ref: 0x208},
+				{name: "West Cape Cave - Northeast Chest 3", ref: 0x209},
+				{name: "West Cape Cave - Middle Chest", ref: 0x20A},
+				{name: "West Cape Cave - Boss Defeated", ref: 0x204},
+				{name: "Ghost Ship - 1F Northeast Barrel", ref: 0x210},
+				{name: "Ghost Ship - 1F Middle Barrel", ref: 0x20F},
+				{name: "Ghost Ship - 1F South Vase", ref: 0x217},
+				{name: "Ghost Ship - 1F Flooded Vase 1", ref: 0x20D},
+				{name: "Ghost Ship - 1F Flooded Vase 2", ref: 0x20E},
+				{name: "Ghost Ship - 2F Center Chest", ref: 0x214},
+				{name: "Ghost Ship - 2F Hidden Chest 1", ref: 0x211},
+				{name: "Ghost Ship - 2F Hidden Chest 2", ref: 0x212},
+				{name: "Ghost Ship - 2F Hidden Chest 3", ref: 0x213},
+				{name: "Ghost Ship - Deck West Barrel", ref: 0x215},
+				{name: "Ghost Ship - Deck East Barrel", ref: 0x216},
+				{name: "Ghost Ship - Boss Defeated", ref: 0x20B},
+				{name: "Ghost Ship - Captain's Quarters Chest", ref: 0x20C},
+				{name: "Lighthouse - Chest", ref: 0x218},
+				{name: "Volcano Cave - Chest 1", ref: 0x21A},
+				{name: "Volcano Cave - Chest 2", ref: 0x21B},
+				{name: "Volcano Cave - South Chest 1", ref: 0x21C},
+				{name: "Volcano Cave - South Chest 2", ref: 0x21D},
+				{name: "Volcano Cave - South Chest 3", ref: 0x21E},
+			],
+			map_locations: [
+				{
+					map: vars.MapNames.GreatLog,
+					x: 146,
+					y: 766
+				}
 			]
 		}
 	]
@@ -1303,7 +1366,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [{name: "Barrel", ref: 0x307},],
+							sections: [{name: "Barrel", ref: 0x307}],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1536,6 +1599,36 @@ function ice() {
 							]
 						},
 					]
+				}
+			],
+			sections: [
+				{name: "Norden - Vase", ref: 0x301},
+				{name: "Norden - Boss Defeated", ref: 0x300},
+				{name: "Spirit's Spring - Chest", ref: 0x302},
+				{name: "Spirit's Spring - Boss Defeated", ref: 0x303},
+				{name: "Spirit's Spring - Sky Shield", ref: 0x304},
+				{name: "Gold Mine - Chest", ref: 0x305},
+				{name: "Gold Mine - Boss Defeated", ref: 0x306},
+				{name: "Weston - Barrel", ref: 0x307},
+				{name: "Westania Castle - Boss Defeated", ref: 0x308},
+				{name: "Southern Forest - Yuna's Soul", ref: 0x309},
+				{name: "Estria - Boss Defeated", ref: 0x30A},
+				{name: "Eastern Mountain - Sleep Herb", ref: 0x30B},
+				{name: "Eastern Mountain - Chest", ref: 0x30C},
+				{name: "Lake Tower - 1F Right Chest", ref: 0x30D},
+				{name: "Lake Tower - 1F Left Chest", ref: 0x30E},
+				{name: "Lake Tower - 2F Left Chest", ref: 0x30F},
+				{name: "Lake Tower - 2F Right Chest", ref: 0x310},
+				{name: "Lake Tower - 4F Left Chest", ref: 0x311},
+				{name: "Lake Tower - 4F Right Chest", ref: 0x312},
+				{name: "Lake Tower - 5F Left Chest", ref: 0x313},
+				{name: "Lake Tower - 5F Right Chest", ref: 0x314},
+			],
+			map_locations: [
+				{
+					map: vars.MapNames.GreatLog,
+					x: 178,
+					y: 766
 				}
 			]
 		}
@@ -1899,6 +1992,34 @@ function sky() {
 						},
 					]
 				}
+			],
+			sections: [
+				{name: "Fhunt - Gravestone", ref: 0x400},
+				{name: "Sage Tower - 1F Chest", ref: 0x401},
+				{name: "Sage Tower - 4F Chest 1", ref: 0x402},
+				{name: "Sage Tower - 4F Chest 2", ref: 0x403},
+				{name: "Mad Condor's Nest - Boss Defeated", ref: 0x404},
+				{name: "Mad Condor's Nest - Chest", ref: 0x405},
+				{name: "Small Cave - East Chest", ref: 0x406},
+				{name: "Small Cave - Boss Defeated", ref: 0x407},
+				{name: "Small Cave - West Chest", ref: 0x408},
+				{name: "Wind Tower - Chest", ref: 0x409},
+				{name: "Graveyard - Boss Defeated", ref: 0x40A},
+				{name: "Graveyard - Chest", ref: 0x40B},
+				{name: "Hitano - Vase", ref: 0x40D},
+				{name: "Demon Castle - 1F Chest", ref: 0x40E},
+				{name: "Demon Castle - B2F Chest", ref: 0x40F},
+				{name: "Demon Castle - B4F Chest", ref: 0x410},
+				{name: "Demon Castle - B6F Chest", ref: 0x411},
+				{name: "Demon Castle - Boss Defeated", ref: 0x412},
+				// {name: "Demon Castle - Boss Gift", ref: 0x413},
+			],
+			map_locations: [
+				{
+					map: vars.MapNames.GreatLog,
+					x: 211,
+					y: 766
+				}
 			]
 		}
 	]
@@ -1925,6 +2046,16 @@ function limbo() {
 							y: 216
 						}
 					]
+				}
+			],
+			sections: [
+				{name: "Darck Defeated", ref: 0x500},
+			],
+			map_locations: [
+				{
+					map: vars.MapNames.GreatLog,
+					x: 244,
+					y: 766
 				}
 			]
 		}
