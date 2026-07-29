@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OmegaZeron/DQM2-AP-PopTracker-Pack/refs/heads/main/header.png" alt="Dragon Quest Monsters 2 Logo"/>
+  <img src="./header.png" alt="Dragon Quest Monsters 2 Logo"/>
 </p>
 
 # Dragon Quest Monsters 2 - Archipelago PopTracker Pack
