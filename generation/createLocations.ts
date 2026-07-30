@@ -156,9 +156,12 @@ export default function createLocations() {
 
 	createLocMapping()
 	
+	let locImport = ""
 	for (let file of outFiles) {
 		outputFile(file.path, file.parents)
+		locImport += `Tracker:AddLocations("locations/${file.path}")\n`
 	}
+	writeToFile("scripts/locations.lua", locImport)
 }
 
 function greatlog() {
