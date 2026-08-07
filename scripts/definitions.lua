@@ -41,6 +41,7 @@ AutoTabData = {
 	[58] = {tab = {"Pirate", "Volcano Cave", "B3F"}},
 	[60] = {tab = {"Pirate", "Polona"}},
 	[62] = {tab = {"Pirate", "Lighthouse"}},
+	[64] = {tab = {"Pirate", "Lighthouse"}}, -- pedestal
 	[69] = {tab = {"Pirate", "Overworld"}}, -- magic door
 	[72] = {
 		tab = {"Ice", "Overworld"},
