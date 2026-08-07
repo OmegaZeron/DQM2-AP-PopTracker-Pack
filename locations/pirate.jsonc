@@ -4,8 +4,8 @@
 		"chest_unopened_img": "images/chest_closed.png",
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
-			"PirateKey",
-			"OasisComplete"
+			["PirateKey"],
+			["OasisComplete"]
 		],
 		"children": [
 			{
@@ -511,7 +511,9 @@
 			},
 			{
 				"name": "Volcano Cave",
-				"access_rules": ["TidalBell, MoonRock"],
+				"access_rules": [
+					["TidalBell", "MoonRock"]
+				],
 				"children": [
 					{
 						"name": "Chest 1",

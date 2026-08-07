@@ -4,8 +4,8 @@
 		"chest_unopened_img": "images/chest_closed.png",
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
-			"IceKey",
-			"PirateComplete"
+			["IceKey"],
+			["PirateComplete"]
 		],
 		"children": [
 			{
@@ -74,7 +74,9 @@
 							},
 							{
 								"name": "Boss Defeated",
-								"access_rules": ["HarMirror, Crest, YunaSoul, SleepHerb"],
+								"access_rules": [
+									["HarMirror", "Crest", "YunaSoul", "SleepHerb"]
+								],
 								"sections": [
 									{"name": "GoatHorn and the ArcDemons"}
 								],
@@ -88,7 +90,9 @@
 							},
 							{
 								"name": "Sky Shield",
-								"access_rules": ["HarMirror, Crest, YunaSoul, SleepHerb"],
+								"access_rules": [
+									["HarMirror", "Crest", "YunaSoul", "SleepHerb"]
+								],
 								"sections": [{}],
 								"map_locations": [
 									{
@@ -172,7 +176,9 @@
 			},
 			{
 				"name": "Ice South",
-				"access_rules": ["Crest, HarMirror"],
+				"access_rules": [
+					["Crest", "HarMirror"]
+				],
 				"children": [
 					{
 						"name": "Weston",
@@ -342,7 +348,9 @@
 					},
 					{
 						"name": "Lake Tower",
-						"access_rules": ["TidalBell, SkyShield, IceComplete"],
+						"access_rules": [
+							["TidalBell", "SkyShield", "IceComplete"]
+						],
 						"children": [
 							{
 								"name": "1F Right Chest",

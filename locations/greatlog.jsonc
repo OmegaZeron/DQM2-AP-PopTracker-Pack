@@ -157,7 +157,9 @@
 					},
 					{
 						"name": "Treetop - Chest 1",
-						"access_rules": ["SkyShield, SkyComplete"],
+						"access_rules": [
+							["SkyShield", "SkyComplete"]
+						],
 						"sections": [{}],
 						"map_locations": [
 							{
@@ -169,7 +171,9 @@
 					},
 					{
 						"name": "Treetop - Chest 2",
-						"access_rules": ["SkyShield, SkyComplete"],
+						"access_rules": [
+							["SkyShield", "SkyComplete"]
+						],
 						"sections": [{}],
 						"map_locations": [
 							{

@@ -1,10 +1,10 @@
-import { vars, writeToFile, has, and, hexStr } from "./utils.ts"
+import { vars, writeToFile, has, hexStr } from "./utils.ts"
 
 class Parent {
 	name!: string;
 	chest_unopened_img?: string;
 	chest_opened_img?: string;
-	access_rules?: string[];
+	access_rules?: string[]|string[][];
 	visibility_rules?: string[];
 	children?: Location[]|Parent[];
 	sections?: Section[];
@@ -12,7 +12,7 @@ class Parent {
 }
 class Location {
 	name!: string;
-	access_rules?: string[];
+	access_rules?: string[]|string[][];
 	visibility_rules?: string[];
 	sections!: Section[];
 	map_locations?: MapLocations[];
@@ -20,7 +20,7 @@ class Location {
 class Section {
 	id?: number;
 	name?: string;
-	access_rules?: string[];
+	access_rules?: string[]|string[][];
 	visibility_rules?: string[];
 	ref?: string|number;
 
@@ -43,7 +43,9 @@ function replacer(key: string, value: any) {
 }
 function outputFile(path: string, locs: Parent[]) {
 	let output = JSON.stringify(locs, replacer, '\t')
-	output = output.replace(/\[\n\s+(".+")\n\s+\]/g, "[$1]").replace(/\{\n\s+(.+)\n\s+\}/g, "{$1}").replace(/\[\n\t+\{\}\n\t+\]/gm, "[{}]")
+	output = output.replace(/\{\n\s+(.+)\n\s+\}/g, "{$1}")
+					.replace(/\[\n\t+\{\}\n\t+\]/gm, "[{}]")
+					.replace(/\[\s+([^\[\]\{\}]+?)\s+\]/g, (_, capture: string) => `[${capture.replace(/\s+/g, " ")}]`)
 
 	writeToFile(`locations/${path}`, output)
 }
@@ -66,36 +68,10 @@ function getSectionData(data: Parent, current: string): {id: number, path: strin
 	return final
 }
 
-function parseRules(rules: string[]): string[] {
-	let final = []
-	for (let rule of rules) {
-		let reconstructed = []
-		let parts = rule.split(", ")
-		for (let part of parts) {
-			let num = Number(part)
-			let loc = locMapping.find(data => num == data.id)
-			if (!Number.isNaN(num) && loc) {
-				reconstructed.push(`@${loc.path}`)
-			}
-			else {
-				reconstructed.push(part)
-			}
-		}
-		final.push(reconstructed.join(", "))
-	}
-	return final
-}
-
 function replaceRefs(parents: Parent[]) {
 	for (let data of parents) {
-		if (data.access_rules) {
-			data.access_rules = parseRules(data.access_rules)
-		}
 		if (data.sections) {
 			for (let section of data.sections) {
-				if (section.access_rules) {
-					section.access_rules = parseRules(section.access_rules)
-				}
 				if (section.ref && typeof(section.ref) == "number") {
 					section.ref = locMapping.find(data => section.ref == data.id)?.path
 				}
@@ -318,7 +294,7 @@ function greatlog() {
 						},
 						{
 							name: "Treetop - Chest 1",
-							access_rules: [and(vars.Items.SkyShield, vars.Worlds.SkyDone)],
+							access_rules: [[vars.Items.SkyShield, vars.Worlds.SkyDone]],
 							sections: [{id: 0x011}],
 							map_locations: [
 								{
@@ -330,7 +306,7 @@ function greatlog() {
 						},
 						{
 							name: "Treetop - Chest 2",
-							access_rules: [and(vars.Items.SkyShield, vars.Worlds.SkyDone)],
+							access_rules: [[vars.Items.SkyShield, vars.Worlds.SkyDone]],
 							sections: [{id: 0x012}],
 							map_locations: [
 								{
@@ -652,7 +628,7 @@ function pirate() {
 			name: "Pirate",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.PirateKey, and(/*vars.Settings.RandomizeKeysOff, */vars.Worlds.OasisDone)],
+			access_rules: [[vars.Items.PirateKey], [/*vars.Settings.RandomizeKeysOff, */vars.Worlds.OasisDone]],
 			children: [
 				{
 					name: "Yold",
@@ -1052,7 +1028,7 @@ function pirate() {
 				},
 				{
 					name: "Volcano Cave",
-					access_rules: [and(vars.Items.TidalBell, vars.Items.MoonRock)],
+					access_rules: [[vars.Items.TidalBell, vars.Items.MoonRock]],
 					children: [
 						{
 							name: "Chest 1",
@@ -1213,7 +1189,7 @@ function ice() {
 			name: "Ice",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.IceKey, and(/*vars.Settings.RandomizeKeysOff, */vars.Worlds.PirateDone)],
+			access_rules: [[vars.Items.IceKey], [/*vars.Settings.RandomizeKeysOff, */vars.Worlds.PirateDone]],
 			children: [
 				{
 					name: "Ice North",
@@ -1273,7 +1249,7 @@ function ice() {
 								},
 								{
 									name: "Boss Defeated",
-									access_rules: [and(vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb)],
+									access_rules: [[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb]],
 									sections: [{id: 0x303, name: "GoatHorn and the ArcDemons"}],
 									map_locations: [
 										{
@@ -1285,7 +1261,7 @@ function ice() {
 								},
 								{
 									name: "Sky Shield",
-									access_rules: [and(vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb)],
+									access_rules: [[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb]],
 									sections: [{id: 0x304}],
 									map_locations: [
 										{
@@ -1352,7 +1328,7 @@ function ice() {
 				},
 				{
 					name: "Ice South",
-					access_rules: [and(vars.Items.Crest, vars.Items.HarMirror)],
+					access_rules: [[vars.Items.Crest, vars.Items.HarMirror]],
 					children: [
 						{
 							name: "Weston",
@@ -1492,7 +1468,7 @@ function ice() {
 						},
 						{
 							name: "Lake Tower",
-							access_rules: [and(vars.Items.TidalBell, vars.Items.SkyShield, vars.Worlds.IceDone)],
+							access_rules: [[vars.Items.TidalBell, vars.Items.SkyShield, vars.Worlds.IceDone]],
 							children: [
 								{
 									name: "1F Right Chest",
@@ -1646,7 +1622,7 @@ function sky() {
 			name: "Sky",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.SkyKey, and(/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.IceDone)],
+			access_rules: [[vars.Items.SkyKey], [/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.IceDone]],
 			children: [
 				{
 					name: "Shrine Island",
@@ -2036,11 +2012,11 @@ function limbo() {
 			name: "Limbo",
 			chest_unopened_img: "images/chest_closed.png",
 			chest_opened_img: "images/chest_open.png",
-			access_rules: [vars.Items.LimboKey, and(/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.SkyDone)],
+			access_rules: [[vars.Items.LimboKey], [/* vars.Settings.RandomizeKeysOff,  */vars.Worlds.SkyDone]],
 			children: [
 				{
 					name: "Boss Defeated",
-					access_rules: [and(vars.Items.TidalBell, vars.Items.HarMirror, vars.Items.SkyShield)],
+					access_rules: [[vars.Items.TidalBell, vars.Items.HarMirror, vars.Items.SkyShield]],
 					sections: [{id: 0x500, name: "Darck"}],
 					map_locations: [
 						{

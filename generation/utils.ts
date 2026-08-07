@@ -29,10 +29,6 @@ export function has(item: string, count: number = 1) {
 	return `${item}${(count > 1 ? `:${count}` : '')}`
 }
 
-export function and(...args: (string | string[])[]) {
-	return args.flat().join(", ")
-}
-
 export function hexStr(num: number) {
 	return "0x" + num.toString(16).toUpperCase().padStart(3, '0')
 }

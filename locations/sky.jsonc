@@ -4,8 +4,8 @@
 		"chest_unopened_img": "images/chest_closed.png",
 		"chest_opened_img": "images/chest_open.png",
 		"access_rules": [
-			"SkyKey",
-			"IceComplete"
+			["SkyKey"],
+			["IceComplete"]
 		],
 		"children": [
 			{
@@ -142,10 +142,7 @@
 					},
 					{
 						"name": "Small Cave",
-						"access_rules": [
-							"SkyShield",
-							"HarMirror"
-						],
+						"access_rules": ["SkyShield", "HarMirror"],
 						"children": [
 							{
 								"name": "East Chest",
