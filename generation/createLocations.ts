@@ -45,7 +45,7 @@ function outputFile(path: string, locs: Parent[]) {
 	let output = JSON.stringify(locs, replacer, '\t')
 	output = output.replace(/\{\n\s+(.+)\n\s+\}/g, "{$1}")
 					.replace(/\[\n\t+\{\}\n\t+\]/gm, "[{}]")
-					.replace(/\[\s+([^\[\]\{\}]+?)\s+\]/g, (_, capture: string) => `[${capture.replace(/\s+/g, " ")}]`)
+					.replace(/\[\s+(((?:[^\[\]\{\}])|"\[|\]"|"\{|\}")+?)\s+\]/g, (_, capture: string) => `[${capture.replace(/\s+/g, " ")}]`)
 
 	writeToFile(`locations/${path}`, output)
 }
