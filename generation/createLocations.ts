@@ -1755,7 +1755,7 @@ function sky() {
 								},
 								{
 									name: "Boss Defeated",
-									sections: [{id: 0x407, name: "Metabble"}],
+									sections: [{id: 0x408, name: "Metabble"}],
 									map_locations: [
 										{
 											map: vars.MapNames.SmallCave2,
@@ -1766,7 +1766,7 @@ function sky() {
 								},
 								{
 									name: "West Chest",
-									sections: [{id: 0x408}],
+									sections: [{id: 0x407}],
 									map_locations: [
 										{
 											map: vars.MapNames.SmallCave2,
@@ -1778,8 +1778,8 @@ function sky() {
 							],
 							sections: [
 								{name: "East Chest", ref: 0x406},
-								{name: "Boss Defeated", ref: 0x407},
-								{name: "West Chest", ref: 0x408},
+								{name: "Boss Defeated", ref: 0x408},
+								{name: "West Chest", ref: 0x407},
 							],
 							map_locations: [
 								{
@@ -1980,8 +1980,8 @@ function sky() {
 				{name: "Mad Condor's Nest - Boss Defeated", ref: 0x404},
 				{name: "Mad Condor's Nest - Chest", ref: 0x405},
 				{name: "Small Cave - East Chest", ref: 0x406},
-				{name: "Small Cave - Boss Defeated", ref: 0x407},
-				{name: "Small Cave - West Chest", ref: 0x408},
+				{name: "Small Cave - Boss Defeated", ref: 0x408},
+				{name: "Small Cave - West Chest", ref: 0x407},
 				{name: "Wind Tower - Chest", ref: 0x409},
 				{name: "Graveyard - Boss Defeated", ref: 0x40A},
 				{name: "Graveyard - Chest", ref: 0x40B},
