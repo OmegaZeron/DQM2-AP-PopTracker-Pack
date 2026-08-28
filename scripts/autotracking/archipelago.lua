@@ -301,6 +301,8 @@ function UpdateHints(locationID, status)
 		return
 	end
 	local locations = LOCATION_MAPPING[locationID]
+	if not locations then return end
+
 	-- print("Hint", DumpTable(locations), status)
 	for _, location in ipairs(locations) do
 		local section = Tracker:FindObjectForCode(location) --[[@as LocationSection]]
