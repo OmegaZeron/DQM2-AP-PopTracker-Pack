@@ -8,7 +8,6 @@ local isManualClick = true
 local DEFAULT_SEED <const> = "default"
 local roomSeed = DEFAULT_SEED
 local isHighlightUpdate = false
-local hasGoaled = false
 
 function PreOnClear()
 	PlayerID = Archipelago.PlayerNumber or -1
@@ -117,7 +116,6 @@ function OnClear(slot_data)
 	for _, world in pairs(CompletionData) do
 		Tracker:FindObjectForCode(world).Active = false
 	end
-	hasGoaled = false
 
 	if Archipelago.PlayerNumber > -1 then
 		local slotInfo = TeamNumber.."_"..PlayerID
@@ -253,7 +251,7 @@ function OnNotify(key, value, old_value)
 	elseif key == DataStoreID then
 		---@type integer
 		local mapID = value["Map ID"]
-		if not hasGoaled and Tracker:ProviderCountForCode(AutoTabOn) > 0 and AutoTabData[mapID] then
+		if Tracker:ProviderCountForCode(AutoTabOn) > 0 and AutoTabData[mapID] then
 			local data = AutoTabData[mapID]
 			for _, tab in ipairs(data.tab) do
 				Tracker:UiHint("ActivateTab", tab)
@@ -280,9 +278,6 @@ function OnNotify(key, value, old_value)
 		end
 	elseif key == ClientStatusID then
 		-- TODO clear goal location?
-		if value == Archipelago.ClientStatus.GOAL then
-			hasGoaled = true
-		end
 	end
 end
 

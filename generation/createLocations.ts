@@ -665,8 +665,8 @@ function pirate() {
 							map_locations: [
 								{
 									map: vars.MapNames.Polona,
-									x: 264,
-									y: 152
+									x: 216,
+									y: 184
 								}
 							]
 						}

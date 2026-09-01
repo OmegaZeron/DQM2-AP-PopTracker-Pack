@@ -49,8 +49,8 @@ export default function createMaps() {
 		},
 		{
 			name: vars.MapNames.Polona,
-			location_size: 18,
-			location_border_thickness: 2,
+			location_size: 14,
+			location_border_thickness: 1,
 			img: img(vars.MapNames.Polona)
 		},
 		{
