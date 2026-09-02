@@ -1,6 +1,12 @@
 {
 	"versions": [
 		{
+			"package_version": "1.0.3",
+			"download_url": "https://github.com/OmegaZeron/DQM2-AP-PopTracker-Pack/releases/download/v1.0.3/dqm2_ap.zip",
+			"sha256": "b93f6ec9a311cbd17aae7d8e375f652c9146a9fcd7e1adfd4d5329a4ea6d4541",
+			"changelog": ["Small Cave autotracking fix, update Crest image, remove Goal autotab blocker"]
+		},
+		{
 			"package_version": "1.0.2",
 			"download_url": "https://github.com/OmegaZeron/DQM2-AP-PopTracker-Pack/releases/download/v1.0.2/dqm2_ap.zip",
 			"sha256": "7c37f7d55c9a657b5fc7c43536de06d8ecc3c976533a5eebdf41c6adc5b30277",
