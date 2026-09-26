@@ -75,6 +75,7 @@ AutoTabData = {
 	[129] = {tab = {"Sky", "Small Cave", "1F"}},
 	[130] = {tab = {"Sky", "Small Cave", "1F"}},
 	[131] = {tab = {"Sky", "Small Cave", "B1F"}},
+	[132] = {tab = {"Sky", "Small Cave", "B1F"}},
 	[133] = {tab = {"Sky", "Wind Tower", "1F"}},
 	[134] = {tab = {"Sky", "Wind Tower", "2F"}},
 	[135] = {tab = {"Sky", "Wind Tower", "3F"}},
