@@ -226,13 +226,30 @@ function greatlog() {
 							]
 						},
 						{
+							name: "Arena - Tournament",
+							sections: [
+								{name: "Kid's Class", id: 0x013},
+								{name: "C Class", id: 0x014},
+								{name: "B Class", id: 0x015, access_rules: [vars.Worlds.PirateDone]},
+								{name: "A Class", id: 0x016, access_rules: [vars.Worlds.IceDone]},
+								{name: "S Class", id: 0x017, access_rules: [vars.Worlds.SkyDone]},
+							],
+							map_locations: [
+								{
+									map: vars.MapNames.GreatLog,
+									x: 854,
+									y: 168
+								}
+							]
+						},
+						{
 							name: "Housing - Vase",
 							sections: [{id: 0x008}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
 									x: 790,
-									y: 248
+									y: 104
 								}
 							]
 						},
@@ -243,7 +260,7 @@ function greatlog() {
 								{
 									map: vars.MapNames.GreatLog,
 									x: 886,
-									y: 216
+									y: 72
 								}
 							]
 						},
@@ -318,8 +335,8 @@ function greatlog() {
 						},
 					],
 					sections: [
-						{name: "Chest 1", ref: 0x11},
-						{name: "Chest 2", ref: 0x12},
+						{name: "Chest 1", ref: 0x011},
+						{name: "Chest 2", ref: 0x012},
 					],
 					map_locations: [
 						{
@@ -359,9 +376,14 @@ function greatlog() {
 				{
 					name: "Arena/Housing",
 					sections: [
-						{name: "Arena - Vase", ref: 0x05},
-						{name: "Housing - Vase", ref: 0x08},
-						{name: "Housing - Old Man Vase", ref: 0x06},
+						{name: "Arena - Vase", ref: 0x005},
+						{name: "Arena - Kid's Class", ref: 0x013},
+						{name: "Arena - C Class", ref: 0x014},
+						{name: "Arena - B Class", ref: 0x015},
+						{name: "Arena - A Class", ref: 0x016},
+						{name: "Arena - S Class", ref: 0x017},
+						{name: "Housing - Vase", ref: 0x008},
+						{name: "Housing - Old Man Vase", ref: 0x006},
 					],
 					map_locations: [
 						{
@@ -1210,7 +1232,7 @@ function ice() {
 								},
 								{
 									name: "Boss Defeated",
-									access_rules: [vars.Items.HarMirror], // requirement to beat BombCrag
+									access_rules: [[vars.Items.HarMirror, vars.Items.Crest]], // mirror needed to beat BombCrag
 									sections: [{id: 0x300, name: "AgDevil"}],
 									map_locations: [
 										{

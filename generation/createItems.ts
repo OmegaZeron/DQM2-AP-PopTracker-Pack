@@ -95,7 +95,10 @@ const itemData: ItemData[] = [
 	generic(0x36, "Tidal Bell", "toggle", vars.Items.TidalBell, vars.Items.TidalBell, [vars.Items.TidalBell]),
 	generic(0x37, "Har Mirror", "toggle", vars.Items.HarMirror, vars.Items.HarMirror, [vars.Items.HarMirror]),
 	generic(0x38, "Sky Shield", "toggle", vars.Items.SkyShield, vars.Items.SkyShield, [vars.Items.SkyShield]),
-	consumable(0x39, "Heaven Set", vars.Items.HeavenSet, 3, [vars.Items.HeavenSet], [0x3A, 0x3B]),
+	generic(0x39, "Heaven Helmet", "toggle", vars.Items.HeavenHelmet, vars.Items.HeavenHelmet, [vars.Items.HeavenHelmet, vars.Items.HeavenSet]),
+	generic(0x3A, "Heaven Armor", "toggle", vars.Items.HeavenArmor, vars.Items.HeavenArmor, [vars.Items.HeavenArmor, vars.Items.HeavenSet]),
+	generic(0x3B, "Heaven Sword", "toggle", vars.Items.HeavenSword, vars.Items.HeavenSword, [vars.Items.HeavenSword, vars.Items.HeavenSet]),
+	// consumable(0x39, "Heaven Set", vars.Items.HeavenSet, 3, [vars.Items.HeavenSet], [0x3A, 0x3B]),
 
 	generic(0x82, "Oasis Key", "static", vars.Items.OasisKey, vars.Items.OasisKey, [vars.Items.OasisKey]),
 	generic(0x83, "Pirate Key", "toggle", vars.Items.PirateKey, vars.Items.PirateKey, [vars.Items.PirateKey]),
@@ -132,11 +135,11 @@ export default function createItems() {
 	let output = "ITEM_MAPPING = {\n"
 	for (let item of itemData) {
 		if (item.id >= 0) {
-			output += `\t[${hexStr(item.id)}] = {"${item.mapCode}", "${item.type}"},\n`
+			output += `\t[${hexStr(item.id, 2)}] = {"${item.mapCode}", "${item.type}"},\n`
 		}
 		if (item.additionalIDs) {
 			for (let id of item.additionalIDs) {
-				output += `\t[${hexStr(id)}] = {"${item.mapCode}", "${item.type}"},\n`
+				output += `\t[${hexStr(id, 2)}] = {"${item.mapCode}", "${item.type}"},\n`
 			}
 		}
 	}

@@ -16,7 +16,7 @@
 			["WaterCall", "TidalBell", "MoonRock"],
 			["HarMirror", "Crest", "YunaSoul"],
 			["SleepHerb", "SkyShield", "ChangeStaff"],
-			["HeavenItems"]
+			["HeavenHelmet", "HeavenArmor", "HeavenSword"]
 		]
 	},
 	"itemGrid": {

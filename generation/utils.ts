@@ -29,8 +29,8 @@ export function has(item: string, count: number = 1) {
 	return `${item}${(count > 1 ? `:${count}` : '')}`
 }
 
-export function hexStr(num: number) {
-	return "0x" + num.toString(16).toUpperCase().padStart(3, '0')
+export function hexStr(num: number, padding: number = 3) {
+	return "0x" + num.toString(16).toUpperCase().padStart(padding, '0')
 }
 
 export const vars = Object.freeze({

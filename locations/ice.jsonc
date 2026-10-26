@@ -27,7 +27,9 @@
 							},
 							{
 								"name": "Boss Defeated",
-								"access_rules": ["HarMirror"],
+								"access_rules": [
+									["HarMirror", "Crest"]
+								],
 								"sections": [
 									{"name": "AgDevil"}
 								],

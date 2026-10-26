@@ -61,11 +61,22 @@
 		"codes": "SkyShield"
 	},
 	{
-		"name": "Heaven Set",
-		"type": "consumable",
-		"img": "images/items/HeavenItems.png",
-		"max_quantity": 3,
-		"codes": "HeavenItems"
+		"name": "Heaven Helmet",
+		"type": "toggle",
+		"img": "images/items/HeavenHelmet.png",
+		"codes": "HeavenHelmet, HeavenItems"
+	},
+	{
+		"name": "Heaven Armor",
+		"type": "toggle",
+		"img": "images/items/HeavenArmor.png",
+		"codes": "HeavenArmor, HeavenItems"
+	},
+	{
+		"name": "Heaven Sword",
+		"type": "toggle",
+		"img": "images/items/HeavenSword.png",
+		"codes": "HeavenSword, HeavenItems"
 	},
 	{
 		"name": "Oasis Key",

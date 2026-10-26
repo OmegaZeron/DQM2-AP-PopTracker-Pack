@@ -34,7 +34,7 @@ function createItemGrids() {
 				[vars.Items.WaterCall, vars.Items.TidalBell, vars.Items.MoonRock],
 				[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul],
 				[vars.Items.SleepHerb, vars.Items.SkyShield, vars.Items.ChangeStaff],
-				[vars.Items.HeavenSet], // change this to one consumable item?
+				[vars.Items.HeavenHelmet, vars.Items.HeavenArmor, vars.Items.HeavenSword],
 				
 			]
 		},

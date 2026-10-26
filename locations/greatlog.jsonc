@@ -89,13 +89,39 @@
 						]
 					},
 					{
+						"name": "Arena - Tournament",
+						"sections": [
+							{"name": "Kid's Class"},
+							{"name": "C Class"},
+							{
+								"name": "B Class",
+								"access_rules": ["PirateComplete"]
+							},
+							{
+								"name": "A Class",
+								"access_rules": ["IceComplete"]
+							},
+							{
+								"name": "S Class",
+								"access_rules": ["SkyComplete"]
+							}
+						],
+						"map_locations": [
+							{
+								"map": "greatlog",
+								"x": 854,
+								"y": 168
+							}
+						]
+					},
+					{
 						"name": "Housing - Vase",
 						"sections": [{}],
 						"map_locations": [
 							{
 								"map": "greatlog",
 								"x": 790,
-								"y": 248
+								"y": 104
 							}
 						]
 					},
@@ -106,7 +132,7 @@
 							{
 								"map": "greatlog",
 								"x": 886,
-								"y": 216
+								"y": 72
 							}
 						]
 					}
@@ -240,6 +266,26 @@
 					{
 						"name": "Arena - Vase",
 						"ref": "GreatLog/Arena/Arena - Vase/"
+					},
+					{
+						"name": "Arena - Kid's Class",
+						"ref": "GreatLog/Arena/Arena - Tournament/Kid's Class"
+					},
+					{
+						"name": "Arena - C Class",
+						"ref": "GreatLog/Arena/Arena - Tournament/C Class"
+					},
+					{
+						"name": "Arena - B Class",
+						"ref": "GreatLog/Arena/Arena - Tournament/B Class"
+					},
+					{
+						"name": "Arena - A Class",
+						"ref": "GreatLog/Arena/Arena - Tournament/A Class"
+					},
+					{
+						"name": "Arena - S Class",
+						"ref": "GreatLog/Arena/Arena - Tournament/S Class"
 					},
 					{
 						"name": "Housing - Vase",
