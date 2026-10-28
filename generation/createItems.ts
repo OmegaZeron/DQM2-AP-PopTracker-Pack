@@ -122,6 +122,7 @@ const settingsData = [
 	], true, false, false),
 	progressive(-1, "Goal", vars.Settings.GoalSetting, [
 		new Stage("Darck", vars.Settings.GoalDarck, [vars.Settings.GoalDarck], "settings"),
+		new Stage("Arena", vars.Settings.GoalArena, [vars.Settings.GoalArena], "settings"),
 	], true, false, false),
 	progressive(-1, "Autotab", vars.Settings.AutoTab, [
 		new Stage("Autotab Enabled", vars.Settings.AutoTabOn, [vars.Settings.AutoTabOn], "settings"),

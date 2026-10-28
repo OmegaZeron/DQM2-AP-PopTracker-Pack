@@ -30,6 +30,12 @@
 				"img": "images/settings/GoalDarck.png",
 				"codes": "GoalSetting, GoalDarck",
 				"inherit_codes": false
+			},
+			{
+				"name": "Arena",
+				"img": "images/settings/GoalArena.png",
+				"codes": "GoalSetting, GoalArena",
+				"inherit_codes": false
 			}
 		]
 	},

@@ -80,6 +80,7 @@ export const vars = Object.freeze({
 		PlayerTara: "Tara",
 		GoalSetting: "GoalSetting",
 		GoalDarck: "GoalDarck",
+		GoalArena: "GoalArena",
 		RandomizeKeys: "RandomizeKeys",
 		RandomizeKeysOn: "RandomizeKeysOn",
 		RandomizeKeysOff: "RandomizeKeysOff",
