@@ -643,6 +643,18 @@
 					{
 						"name": "South Chest 3",
 						"ref": "Pirate/Volcano Cave/South Chest 3/B2F"
+					},
+					{
+						"name": "Lava Chest 1",
+						"ref": "Pirate/Volcano Cave/Lava Chest 1/B3F"
+					},
+					{
+						"name": "Lava Chest 2",
+						"ref": "Pirate/Volcano Cave/Lava Chest 2/B3F"
+					},
+					{
+						"name": "Har Mirror",
+						"ref": "Pirate/Volcano Cave/Har Mirror/B3F"
 					}
 				],
 				"map_locations": [
@@ -774,6 +786,18 @@
 			{
 				"name": "Volcano Cave - South Chest 3",
 				"ref": "Pirate/Volcano Cave/South Chest 3/B2F"
+			},
+			{
+				"name": "Volcano Cave - Lava Chest 1",
+				"ref": "Pirate/Volcano Cave/Lava Chest 1/B3F"
+			},
+			{
+				"name": "Volcano Cave - Lava Chest 2",
+				"ref": "Pirate/Volcano Cave/Lava Chest 2/B3F"
+			},
+			{
+				"name": "Volcano Cave - Har Mirror",
+				"ref": "Pirate/Volcano Cave/Har Mirror/B3F"
 			}
 		],
 		"map_locations": [
