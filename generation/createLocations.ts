@@ -1,31 +1,29 @@
 import { vars, writeToFile, has, hexStr } from "./utils.ts"
 
-class Parent {
+class Location {
 	name!: string;
 	chest_unopened_img?: string;
 	chest_opened_img?: string;
 	access_rules?: string[]|string[][];
 	visibility_rules?: string[];
-	children?: Location[]|Parent[];
+	children?: Location[];
 	sections?: Section[];
 	map_locations?: MapLocations[]
-}
-class Location {
-	name!: string;
-	access_rules?: string[]|string[][];
-	visibility_rules?: string[];
-	sections!: Section[];
-	map_locations?: MapLocations[];
 }
 class Section {
 	id?: number;
 	name?: string;
 	access_rules?: string[]|string[][];
 	visibility_rules?: string[];
-	ref?: string|number;
-
+	ref?: string;
+	
+	refs?: RefData[];
 	fallback?: string[];
 	preferFallback?: boolean
+}
+class RefData {
+	ref!: string;
+	name!: string;
 }
 class MapLocations {
 	map!: string;
@@ -34,14 +32,15 @@ class MapLocations {
 	restrict_visibility_rules?: string[]
 }
 
-let allLocations: Parent[]
+let allLocations: Location[]
 let locMapping: {id: number, path: string}[] = []
-let outFiles: {parents: Parent[], path: string}[]
+let outFiles: {locations: Location[], path: string}[]
+let refMap: Record<string, Location>
 
 function replacer(key: string, value: any) {
-	return ["id", "fallback", "preferFallback"].includes(key) ? undefined : value
+	return ["id", "fallback", "preferFallback", "refs"].includes(key) ? undefined : value
 }
-function outputFile(path: string, locs: Parent[]) {
+function outputFile(path: string, locs: Location[]) {
 	let output = JSON.stringify(locs, replacer, '\t')
 	output = output.replace(/\{\n\s+(.+)\n\s+\}/g, "{$1}")
 					.replace(/\[\n\t+\{\}\n\t+\]/gm, "[{}]")
@@ -50,7 +49,7 @@ function outputFile(path: string, locs: Parent[]) {
 	writeToFile(`locations/${path}`, output)
 }
 
-function getSectionData(data: Parent, current: string): {id: number, path: string}[] {
+function getSectionData(data: Location, current: string): {id: number, path: string}[] {
 	let final: {id: number, path: string}[] = []
 	if (data.sections) {
 		for (let section of data.sections) {
@@ -68,17 +67,22 @@ function getSectionData(data: Parent, current: string): {id: number, path: strin
 	return final
 }
 
-function replaceRefs(parents: Parent[]) {
-	for (let data of parents) {
-		if (data.sections) {
-			for (let section of data.sections) {
-				if (section.ref && typeof(section.ref) == "number") {
-					section.ref = locMapping.find(data => section.ref == data.id)?.path
+function replaceRefs(locations: Location[]) {
+	for (let location of locations) {
+		if (location.sections) {
+			for (let section of location.sections) {
+				if (section.refs) {
+					for (let data of section.refs) {
+						if (!refMap[data.ref]) {
+							throw new Error(`Section ${section.name}: refMap has no key ${data.ref}\n${JSON.stringify(refMap)}`);
+						}
+						refMap[data.ref].sections?.push({name: data.name, ref: locMapping.find(loc => loc.id == section.id)?.path})
+					}
 				}
 			}
 		}
-		if (data.children) {
-			replaceRefs(data.children)
+		if (location.children) {
+			replaceRefs(location.children)
 		}
 	}
 }
@@ -101,27 +105,43 @@ function createLocMapping() {
 	output += "}"
 
 	writeToFile("scripts/autotracking/location_mapping.lua", output)
-	// console.log(output)
 }
 
-function addLocs(parents: Parent[], path: string) {
-	if (!parents) {
+function createRefMap(location: Location, current: string = "") {
+	if (location.sections != null) {
+		// don't actually care about the sections, just need to make sure it exists
+		refMap[`${current}/${location.name}`] = location
+	}
+	if (location.children) {
+		for (let child of location.children) {
+			createRefMap(child, `${current}${(current == "" ? "" : "/")}${location.name}`)
+		}
+	}
+}
+
+function addLocs(locations: Location[], path: string) {
+	if (!locations) {
 		console.warn("addLocs: data is null")
 		return
 	}
-	if (parents.length <= 0) {
+	if (locations.length <= 0) {
 		console.warn("addLocs: data is empty")
 		return
 	}
 
-	outFiles.push({parents, path})
+	for (let location of locations) {
+		createRefMap(location)
+	}
 
-	allLocations.push(...parents)
+	outFiles.push({locations, path})
+
+	allLocations.push(...locations)
 }
 
 export default function createLocations() {
 	allLocations = []
 	outFiles = []
+	refMap = {}
 
 	addLocs(greatlog(), "greatlog.jsonc")
 	addLocs(oasis(), "oasis.jsonc")
@@ -134,14 +154,14 @@ export default function createLocations() {
 	
 	let locImport = ""
 	for (let file of outFiles) {
-		outputFile(file.path, file.parents)
+		outputFile(file.path, file.locations)
 		locImport += `Tracker:AddLocations("locations/${file.path}")\n`
 	}
 	writeToFile("scripts/locations.lua", locImport)
 }
 
 function greatlog() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "GreatLog",
 			chest_unopened_img: "images/chest_closed.png",
@@ -153,7 +173,10 @@ function greatlog() {
 					children: [
 						{
 							name: "Stable - Vase 1",
-							sections: [{id: 0x003}],
+							sections: [{
+								id: 0x003,
+								refs: [{name: "Vase 1", ref: "GreatLog/Stable"}]}
+							],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -164,7 +187,10 @@ function greatlog() {
 						},
 						{
 							name: "Stable - Vase 2",
-							sections: [{id: 0x004}],
+							sections: [{
+								id: 0x004,
+								refs: [{name: "Vase 2", ref: "GreatLog/Stable"}]}
+							],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -174,10 +200,7 @@ function greatlog() {
 							]
 						},
 					],
-					sections: [
-						{name: "Vase 1", ref: 0x003},
-						{name: "Vase 2", ref: 0x004},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -189,7 +212,10 @@ function greatlog() {
 				{
 					name: "Rare Key Shelf",
 					access_rules: [vars.Worlds.IceDone],
-					sections: [{id: 0x009}],
+					sections: [{
+						id: 0x009,
+						refs: [{name: "Rare Key Shelf", ref: "GreatLog/Rare Key Collector"}]
+					}],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -201,7 +227,10 @@ function greatlog() {
 				{
 					name: "Key Shop Vase",
 					access_rules: [vars.Worlds.OasisDone],
-					sections: [{id: 0x00A}],
+					sections: [{
+						id: 0x00A,
+						refs: [{name: "Vase", ref: "GreatLog/Key Shop"}]
+					}],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -216,7 +245,7 @@ function greatlog() {
 					children: [
 						{
 							name: "Arena - Vase",
-							sections: [{id: 0x005}],
+							sections: [{id: 0x005, refs: [{name: "Arena - Vase", ref: "GreatLog/Arena/Housing"}]}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -228,11 +257,26 @@ function greatlog() {
 						{
 							name: "Arena - Tournament",
 							sections: [
-								{name: "Kid's Class", id: 0x013},
-								{name: "C Class", id: 0x014},
-								{name: "B Class", id: 0x015, access_rules: [vars.Worlds.PirateDone]},
-								{name: "A Class", id: 0x016, access_rules: [vars.Worlds.IceDone]},
-								{name: "S Class", id: 0x017, access_rules: [vars.Worlds.SkyDone]},
+								{name: "Kid's Class", id: 0x013, refs: [{name: "Arena - Kid's Class", ref: "GreatLog/Arena/Housing"}]},
+								{name: "C Class", id: 0x014, refs: [{name: "Arena - C Class", ref: "GreatLog/Arena/Housing"}]},
+								{
+									name: "B Class",
+									id: 0x015,
+									access_rules: [vars.Worlds.PirateDone],
+									refs: [{name: "Arena - B Class", ref: "GreatLog/Arena/Housing"}]
+								},
+								{
+									name: "A Class",
+									id: 0x016,
+									access_rules: [vars.Worlds.IceDone],
+									refs: [{name: "Arena - A Class", ref: "GreatLog/Arena/Housing"}]
+								},
+								{
+									name: "S Class",
+									id: 0x017,
+									access_rules: [vars.Worlds.SkyDone],
+									refs: [{name: "Arena - S Class", ref: "GreatLog/Arena/Housing"}]
+								},
 							],
 							map_locations: [
 								{
@@ -244,7 +288,7 @@ function greatlog() {
 						},
 						{
 							name: "Housing - Vase",
-							sections: [{id: 0x008}],
+							sections: [{id: 0x008, refs: [{name: "Housing - Vase", ref: "GreatLog/Arena/Housing"}]}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -255,7 +299,7 @@ function greatlog() {
 						},
 						{
 							name: "Housing - Old Man Vase",
-							sections: [{id: 0x006}],
+							sections: [{id: 0x006, refs: [{name: "Housing - Old Man Vase", ref: "GreatLog/Arena/Housing"}]}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -267,7 +311,7 @@ function greatlog() {
 					]
 				},
 				{
-					name: "Kameha's Room",
+					name: "Kameha's Room", // add refs for these?
 					access_rules: [vars.Worlds.SkyDone],
 					children: [
 						{
@@ -312,7 +356,7 @@ function greatlog() {
 						{
 							name: "Treetop - Chest 1",
 							access_rules: [[vars.Items.SkyShield, vars.Worlds.SkyDone]],
-							sections: [{id: 0x011}],
+							sections: [{id: 0x011, refs: [{name: "Chest 1", ref: "GreatLog/Treetop"}]}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -324,7 +368,7 @@ function greatlog() {
 						{
 							name: "Treetop - Chest 2",
 							access_rules: [[vars.Items.SkyShield, vars.Worlds.SkyDone]],
-							sections: [{id: 0x012}],
+							sections: [{id: 0x012, refs: [{name: "Chest 2", ref: "GreatLog/Treetop"}]}],
 							map_locations: [
 								{
 									map: vars.MapNames.GreatLog,
@@ -334,10 +378,7 @@ function greatlog() {
 							]
 						},
 					],
-					sections: [
-						{name: "Chest 1", ref: 0x011},
-						{name: "Chest 2", ref: 0x012},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -346,12 +387,9 @@ function greatlog() {
 						}
 					]
 				},
-
 				{
 					name: "Key Shop",
-					sections: [
-						{name: "Vase", ref: 0x00A},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -362,9 +400,7 @@ function greatlog() {
 				},
 				{
 					name: "Rare Key Collector",
-					sections: [
-						{name: "Rare Key Shelf", ref: 0x009},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
@@ -375,21 +411,68 @@ function greatlog() {
 				},
 				{
 					name: "Arena/Housing",
-					sections: [
-						{name: "Arena - Vase", ref: 0x005},
-						{name: "Arena - Kid's Class", ref: 0x013},
-						{name: "Arena - C Class", ref: 0x014},
-						{name: "Arena - B Class", ref: 0x015},
-						{name: "Arena - A Class", ref: 0x016},
-						{name: "Arena - S Class", ref: 0x017},
-						{name: "Housing - Vase", ref: 0x008},
-						{name: "Housing - Old Man Vase", ref: 0x006},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.GreatLog,
 							x: 200,
 							y: 488
+						}
+					]
+				},
+				{
+					name: "Oasis",
+					sections: [],
+					map_locations:
+					[
+						{
+							map: vars.MapNames.GreatLog,
+							x: 112,
+							y: 766
+						}
+					]
+				},
+				{
+					name: "Pirate",
+					sections: [],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 146,
+							y: 766
+						}
+					]
+				},
+				{
+					name: "Ice",
+					sections: [],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 178,
+							y: 766
+						}
+					]
+				},
+				{
+					name: "Sky",
+					sections: [],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 211,
+							y: 766
+						}
+					]
+				},
+				{
+					name: "Limbo",
+					sections: [],
+					map_locations: [
+						{
+							map: vars.MapNames.GreatLog,
+							x: 244,
+							y: 766
 						}
 					]
 				},
@@ -401,7 +484,7 @@ function greatlog() {
 }
 
 function oasis() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "Oasis",
 			chest_unopened_img: "images/chest_closed.png",
@@ -413,7 +496,13 @@ function oasis() {
 					children: [
 						{
 							name: "Vase",
-							sections: [{id: 0x100}],
+							sections: [{
+								id: 0x100,
+								refs: [
+									{name: "Vase", ref: "Oasis/Kalka"},
+									{name: "Kalka - Vase", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Kalka,
@@ -423,19 +512,7 @@ function oasis() {
 							]
 						}
 					],
-					sections: [
-						{name: "Vase", ref: 0x100},
-						{name: "Canal - Entrance Vase", ref: 0x10C},
-						{name: "Canal - Northwest Vase 1", ref: 0x103},
-						{name: "Canal - Northwest Vase 2", ref: 0x104},
-						{name: "Canal - Northeast Vase 1", ref: 0x105},
-						{name: "Canal - Northeast Vase 2", ref: 0x106},
-						{name: "Canal - Chest Above Boss", ref: 0x107},
-						{name: "Canal - East of Boss", ref: 0x108},
-						{name: "Canal - Boss Defeated", ref: 0x10B},
-						{name: "Canal - Southwest Chest 1", ref: 0x109},
-						{name: "Canal - Southwest Chest 2", ref: 0x10A}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Oasis,
@@ -449,7 +526,13 @@ function oasis() {
 					children: [
 						{
 							name: "Vase",
-							sections: [{id: 0x101}],
+							sections: [{
+								id: 0x101,
+								refs: [
+									{name: "Vase", ref: "Oasis/Asiya"},
+									{name: "Asiya - Vase", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Asiya,
@@ -460,7 +543,13 @@ function oasis() {
 						},
 						{
 							name: "Prisoner",
-							sections: [{id: 0x102}],
+							sections: [{
+								id: 0x102,
+								refs: [
+									{name: "Prisoner", ref: "Oasis/Asiya"},
+									{name: "Asiya - Prisoner", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Asiya,
@@ -470,10 +559,7 @@ function oasis() {
 							]
 						}
 					],
-					sections: [
-						{name: "Vase", ref: 0x101},
-						{name: "Prisoner", ref: 0x102}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Oasis,
@@ -487,7 +573,13 @@ function oasis() {
 					children: [
 						{
 							name: "Entrance Vase",
-							sections: [{id: 0x10C}],
+							sections: [{
+								id: 0x10C,
+								refs: [
+									{name: "Canal - Entrance Vase", ref: "Oasis/Kalka"},
+									{name: "Canal - Entrance Vase", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Kalka,
@@ -498,7 +590,14 @@ function oasis() {
 						},
 						{
 							name: "Northwest Vase 1",
-							sections: [{id: 0x103}],
+							sections: [{
+								id: 0x103,
+								refs: [
+									{name: "Canal - Northwest Vase 1", ref: "Oasis/Kalka"},
+									{name: "Canal - Northwest Vase 1", ref: "Oasis/Asiya"},
+									{name: "Canal - Northwest Vase 1", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -509,7 +608,14 @@ function oasis() {
 						},
 						{
 							name: "Northwest Vase 2",
-							sections: [{id: 0x104}],
+							sections: [{
+								id: 0x104,
+								refs: [
+									{name: "Canal - Northwest Vase 2", ref: "Oasis/Kalka"},
+									{name: "Canal - Northwest Vase 2", ref: "Oasis/Asiya"},
+									{name: "Canal - Northwest Vase 2", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -521,7 +627,14 @@ function oasis() {
 						{
 							name: "Northeast Vase 1",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x105}],
+							sections: [{
+								id: 0x105,
+								refs: [
+									{name: "Canal - Northeast Vase 1", ref: "Oasis/Kalka"},
+									{name: "Canal - Northeast Vase 1", ref: "Oasis/Asiya"},
+									{name: "Canal - Northeast Vase 1", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -533,7 +646,14 @@ function oasis() {
 						{
 							name: "Northeast Vase 2",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x106}],
+							sections: [{
+								id: 0x106,
+								refs: [
+									{name: "Canal - Northeast Vase 2", ref: "Oasis/Kalka"},
+									{name: "Canal - Northeast Vase 2", ref: "Oasis/Asiya"},
+									{name: "Canal - Northeast Vase 2", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -544,7 +664,14 @@ function oasis() {
 						},
 						{
 							name: "Chest Above Boss",
-							sections: [{id: 0x107}],
+							sections: [{
+								id: 0x107,
+								refs: [
+									{name: "Canal - Chest Above Boss", ref: "Oasis/Kalka"},
+									{name: "Canal - Chest Above Boss", ref: "Oasis/Asiya"},
+									{name: "Canal - Chest Above Boss", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -556,7 +683,14 @@ function oasis() {
 						{
 							name: "East of Boss",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x108}],
+							sections: [{
+								id: 0x108,
+								refs: [
+									{name: "Canal - East of Boss", ref: "Oasis/Kalka"},
+									{name: "Canal - East of Boss", ref: "Oasis/Asiya"},
+									{name: "Canal - East of Boss", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -566,9 +700,35 @@ function oasis() {
 							]
 						},
 						{
+							name: "Boss Defeated",
+							sections: [{
+								id: 0x10B,
+								name: "Biino",
+								refs: [
+									{name: "Canal - Boss Defeated", ref: "Oasis/Kalka"},
+									{name: "Canal - Boss Defeated", ref: "Oasis/Asiya"},
+									{name: "Canal - Boss Defeated", ref: "GreatLog/Oasis"},
+								]
+							}],
+							map_locations: [
+								{
+									map: vars.MapNames.Canal,
+									x: 218,
+									y: 392
+								}
+							]
+						},
+						{
 							name: "Southwest Chest 1",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x109}],
+							sections: [{
+								id: 0x109,
+								refs: [
+									{name: "Canal - Southwest Chest 1", ref: "Oasis/Kalka"},
+									{name: "Canal - Southwest Chest 1", ref: "Oasis/Asiya"},
+									{name: "Canal - Southwest Chest 1", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -580,7 +740,14 @@ function oasis() {
 						{
 							name: "Southwest Chest 2",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x10A}],
+							sections: [{
+								id: 0x10A,
+								refs: [
+									{name: "Canal - Southwest Chest 2", ref: "Oasis/Kalka"},
+									{name: "Canal - Southwest Chest 2", ref: "Oasis/Asiya"},
+									{name: "Canal - Southwest Chest 2", ref: "GreatLog/Oasis"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Canal,
@@ -589,23 +756,16 @@ function oasis() {
 								}
 							]
 						},
-						{
-							name: "Boss Defeated",
-							sections: [{id: 0x10B, name: "Biino"}],
-							map_locations: [
-								{
-									map: vars.MapNames.Canal,
-									x: 218,
-									y: 392
-								}
-							]
-						}
 					]
 				},
 				{
 					name: "Boss Defeated",
 					access_rules: [vars.Items.WaterCall],
-					sections: [{id: 0x10D, name: "CurseLamp"}],
+					sections: [{
+						id: 0x10D,
+						name: "CurseLamp",
+						refs: [{name: "Mirage Lake - Boss Defeated", ref: "GreatLog/Oasis"}]
+					}],
 					map_locations: [
 						{
 							map: vars.MapNames.Oasis,
@@ -615,22 +775,7 @@ function oasis() {
 					]
 				},
 			],
-			sections: [
-				{name: "Kalka - Vase", ref: 0x100},
-				{name: "Canal - Entrance Vase", ref: 0x10C},
-				{name: "Canal - Northwest Vase 1", ref: 0x103},
-				{name: "Canal - Northwest Vase 2", ref: 0x104},
-				{name: "Canal - Northeast Vase 1", ref: 0x105},
-				{name: "Canal - Northeast Vase 2", ref: 0x106},
-				{name: "Canal - Chest Above Boss", ref: 0x107},
-				{name: "Canal - East of Boss", ref: 0x108},
-				{name: "Canal - Boss Defeated", ref: 0x10B},
-				{name: "Canal - Southwest Chest 1", ref: 0x109},
-				{name: "Canal - Southwest Chest 2", ref: 0x10A},
-				{name: "Asiya - Vase", ref: 0x101},
-				{name: "Asiya - Prisoner", ref: 0x102},
-				{name: "Mirage Lake - Boss Defeated", ref: 0x10D}
-			],
+			sections: [],
 			map_locations: [
 				{
 					map: vars.MapNames.GreatLog,
@@ -645,7 +790,7 @@ function oasis() {
 }
 
 function pirate() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "Pirate",
 			chest_unopened_img: "images/chest_closed.png",
@@ -657,7 +802,13 @@ function pirate() {
 					children: [
 						{
 							name: "Barrel",
-							sections: [{id: 0x200}],
+							sections: [{
+								id: 0x200,
+								refs: [
+									{name: "Barrel", ref: "Pirate/Yold"},
+									{name: "Yold - Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Yold,
@@ -667,9 +818,7 @@ function pirate() {
 							]
 						}
 					],
-					sections: [
-						{name: "Barrel", ref: 0x200}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -683,7 +832,13 @@ function pirate() {
 					children: [
 						{
 							name: "Dance",
-							sections: [{id: 0x201}],
+							sections: [{
+								id: 0x201,
+								refs: [
+									{name: "Dance", ref: "Pirate/Polona"},
+									{name: "Polona - Dance", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Polona,
@@ -693,10 +848,7 @@ function pirate() {
 							]
 						}
 					],
-					sections: [
-						{name: "Dance", ref: 0x201},
-						{name: "Mermaid Queen", ref: 0x202},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -711,7 +863,13 @@ function pirate() {
 						{
 							name: "Mermaid Queen",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x202}],
+							sections: [{
+								id: 0x202,
+								refs: [
+									{name: "Mermaid Queen", ref: "Pirate/Polona"},
+									{name: "Mermaid Queen", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Polona,
@@ -727,7 +885,13 @@ function pirate() {
 					children: [
 						{
 							name: "Barrel",
-							sections: [{id: 0x203}],
+							sections: [{
+								id: 0x203,
+								refs: [
+									{name: "Barrel", ref: "Pirate/Port Ritz"},
+									{name: "Port Ritz - Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.PortRitz,
@@ -737,9 +901,7 @@ function pirate() {
 							]
 						}
 					],
-					sections: [
-						{name: "Barrel", ref: 0x203}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -752,20 +914,15 @@ function pirate() {
 					name: "West Cape Cave",
 					children: [
 						{
-							name: "Boss Defeated",
-							sections: [{id: 0x204, name: "Squiz"}],
-							map_locations: [
-								{
-									map: vars.MapNames.WestCape,
-									x: 552,
-									y: 488
-								}
-							]
-						},
-						{
 							name: "Northwest Chest",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x205}],
+							sections: [{
+								id: 0x205,
+								refs: [
+									{name: "Northwest Chest", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Northwest Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -776,7 +933,13 @@ function pirate() {
 						},
 						{
 							name: "North Chest",
-							sections: [{id: 0x206}],
+							sections: [{
+								id: 0x206,
+								refs: [
+									{name: "North Chest", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - North Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -788,7 +951,13 @@ function pirate() {
 						{
 							name: "Northeast Chest 1",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x207}],
+							sections: [{
+								id: 0x207,
+								refs: [
+									{name: "Northeast Chest 1", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Northeast Chest 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -800,7 +969,13 @@ function pirate() {
 						{
 							name: "Northeast Chest 2",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x208}],
+							sections: [{
+								id: 0x208,
+								refs: [
+									{name: "Northeast Chest 2", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Northeast Chest 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -812,7 +987,13 @@ function pirate() {
 						{
 							name: "Northeast Chest 3",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x209}],
+							sections: [{
+								id: 0x209,
+								refs: [
+									{name: "Northeast Chest 3", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Northeast Chest 3", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -824,7 +1005,13 @@ function pirate() {
 						{
 							name: "Middle Chest",
 							access_rules: [vars.Items.TidalBell],
-							sections: [{id: 0x20A}],
+							sections: [{
+								id: 0x20A,
+								refs: [
+									{name: "Middle Chest", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Middle Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.WestCape,
@@ -833,16 +1020,26 @@ function pirate() {
 								}
 							]
 						},
+						{
+							name: "Boss Defeated",
+							sections: [{
+								id: 0x204,
+								name: "Squiz",
+								refs: [
+									{name: "Boss Defeated", ref: "Pirate/West Cape Cave"},
+									{name: "West Cape Cave - Boss Defeated", ref: "GreatLog/Pirate"},
+								]
+							}],
+							map_locations: [
+								{
+									map: vars.MapNames.WestCape,
+									x: 552,
+									y: 488
+								}
+							]
+						},
 					],
-					sections: [
-						{name: "Northwest Chest", ref: 0x205},
-						{name: "North Chest", ref: 0x206},
-						{name: "Northeast Chest 1", ref: 0x207},
-						{name: "Northeast Chest 2", ref: 0x208},
-						{name: "Northeast Chest 3", ref: 0x209},
-						{name: "Middle Chest", ref: 0x20A},
-						{name: "Boss Defeated", ref: 0x204},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -857,7 +1054,14 @@ function pirate() {
 					children: [
 						{
 							name: "Northeast Barrel",
-							sections: [{id: 0x210, name: "1F"}],
+							sections: [{
+								id: 0x210,
+								name: "1F",
+								refs: [
+									{name: "1F Northeast Barrel", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 1F Northeast Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -868,7 +1072,14 @@ function pirate() {
 						},
 						{
 							name: "Middle Barrel",
-							sections: [{id: 0x20F, name: "1F"}],
+							sections: [{
+								id: 0x20F,
+								name: "1F",
+								refs: [
+									{name: "1F Middle Barrel", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 1F Middle Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -879,7 +1090,14 @@ function pirate() {
 						},
 						{
 							name: "South Vase",
-							sections: [{id: 0x217, name: "1F"}],
+							sections: [{
+								id: 0x217,
+								name: "1F",
+								refs: [
+									{name: "1F South Vase", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 1F South Vase", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -890,7 +1108,14 @@ function pirate() {
 						},
 						{
 							name: "Flooded Vase 1",
-							sections: [{id: 0x20D, name: "1F"}],
+							sections: [{
+								id: 0x20D,
+								name: "1F",
+								refs: [
+									{name: "1F Flooded Vase 1", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 1F Flooded Vase 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -901,7 +1126,14 @@ function pirate() {
 						},
 						{
 							name: "Flooded Vase 2",
-							sections: [{id: 0x20E, name: "1F"}],
+							sections: [{
+								id: 0x20E,
+								name: "1F",
+								refs: [
+									{name: "1F Flooded Vase 2", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 1F Flooded Vase 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -912,7 +1144,14 @@ function pirate() {
 						},
 						{
 							name: "Center Chest",
-							sections: [{id: 0x214, name: "2F"}],
+							sections: [{
+								id: 0x214,
+								name: "2F",
+								refs: [
+									{name: "2F Center Chest", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 2F Center Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -923,7 +1162,14 @@ function pirate() {
 						},
 						{
 							name: "Hidden Chest 1",
-							sections: [{id: 0x211, name: "2F"}],
+							sections: [{
+								id: 0x211,
+								name: "2F",
+								refs: [
+									{name: "2F Hidden Chest 1", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 2F Hidden Chest 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -934,7 +1180,14 @@ function pirate() {
 						},
 						{
 							name: "Hidden Chest 2",
-							sections: [{id: 0x212, name: "2F"}],
+							sections: [{
+								id: 0x212,
+								name: "2F",
+								refs: [
+									{name: "2F Hidden Chest 2", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 2F Hidden Chest 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -945,7 +1198,14 @@ function pirate() {
 						},
 						{
 							name: "Hidden Chest 3",
-							sections: [{id: 0x213, name: "2F"}],
+							sections: [{
+								id: 0x213,
+								name: "2F",
+								refs: [
+									{name: "2F Hidden Chest 3", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - 2F Hidden Chest 3", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -956,7 +1216,14 @@ function pirate() {
 						},
 						{
 							name: "West Barrel",
-							sections: [{id: 0x215, name: "Deck"}],
+							sections: [{
+								id: 0x215,
+								name: "Deck",
+								refs: [
+									{name: "Deck West Barrel", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - Deck West Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -967,7 +1234,14 @@ function pirate() {
 						},
 						{
 							name: "East Barrel",
-							sections: [{id: 0x216, name: "Deck"}],
+							sections: [{
+								id: 0x216,
+								name: "Deck",
+								refs: [
+									{name: "Deck East Barrel", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - Deck East Barrel", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -978,7 +1252,14 @@ function pirate() {
 						},
 						{
 							name: "Boss Defeated",
-							sections: [{id: 0x20B, name: "CaptDead"}],
+							sections: [{
+								id: 0x20B,
+								name: "CaptDead",
+								refs: [
+									{name: "Boss Defeated", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - Boss Defeated", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -989,7 +1270,14 @@ function pirate() {
 						},
 						{
 							name: "Chest",
-							sections: [{id: 0x20C, name: "Captain's Quarters"}],
+							sections: [{
+								id: 0x20C,
+								name: "Captain's Quarters",
+								refs: [
+									{name: "Captain's Quarters Chest", ref: "Pirate/Ghost Ship"},
+									{name: "Ghost Ship - Captain's Quarters Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GhostShip,
@@ -999,21 +1287,7 @@ function pirate() {
 							]
 						},
 					],
-					sections: [
-						{name: "1F Northeast Barrel", ref: 0x210},
-						{name: "1F Middle Barrel", ref: 0x20F},
-						{name: "1F South Vase", ref: 0x217},
-						{name: "1F Flooded Vase 1", ref: 0x20D},
-						{name: "1F Flooded Vase 2", ref: 0x20E},
-						{name: "2F Center Chest", ref: 0x214},
-						{name: "2F Hidden Chest 1", ref: 0x211},
-						{name: "2F Hidden Chest 2", ref: 0x212},
-						{name: "2F Hidden Chest 3", ref: 0x213},
-						{name: "Deck West Barrel", ref: 0x215},
-						{name: "Deck East Barrel", ref: 0x216},
-						{name: "Boss Defeated", ref: 0x20B},
-						{name: "Captain's Quarters Chest", ref: 0x20C},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -1027,7 +1301,14 @@ function pirate() {
 					children: [
 						{
 							name: "Chest",
-							sections: [{id: 0x218, name: "2F"}],
+							sections: [{
+								id: 0x218,
+								name: "2F",
+								refs: [
+									{name: "Chest", ref: "Pirate/Lighthouse"},
+									{name: "Lighthouse - Chest", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.Lighthouse,
@@ -1037,9 +1318,7 @@ function pirate() {
 							]
 						}
 					],
-					sections: [
-						{name: "Chest", ref: 0x218}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -1054,7 +1333,14 @@ function pirate() {
 					children: [
 						{
 							name: "Chest 1",
-							sections: [{id: 0x21A, name: "B2F"}],
+							sections: [{
+								id: 0x21A,
+								name: "B2F",
+								refs: [
+									{name: "Chest 1", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - Chest 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB2F,
@@ -1065,7 +1351,14 @@ function pirate() {
 						},
 						{
 							name: "Chest 2",
-							sections: [{id: 0x21B, name: "B2F"}],
+							sections: [{
+								id: 0x21B,
+								name: "B2F",
+								refs: [
+									{name: "Chest 2", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - Chest 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB2F,
@@ -1077,7 +1370,14 @@ function pirate() {
 						{
 							name: "South Chest 1",
 							access_rules: [vars.Items.SkyShield],
-							sections: [{id: 0x21C, name: "B2F"}],
+							sections: [{
+								id: 0x21C,
+								name: "B2F",
+								refs: [
+									{name: "South Chest 1", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - South Chest 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB2F,
@@ -1089,7 +1389,14 @@ function pirate() {
 						{
 							name: "South Chest 2",
 							access_rules: [vars.Items.SkyShield],
-							sections: [{id: 0x21D, name: "B2F"}],
+							sections: [{
+								id: 0x21D,
+								name: "B2F",
+								refs: [
+									{name: "South Chest 2", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - South Chest 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB2F,
@@ -1101,7 +1408,14 @@ function pirate() {
 						{
 							name: "South Chest 3",
 							access_rules: [vars.Items.SkyShield],
-							sections: [{id: 0x21E, name: "B2F"}],
+							sections: [{
+								id: 0x21E,
+								name: "B2F",
+								refs: [
+									{name: "South Chest 3", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - South Chest 3", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB2F,
@@ -1112,7 +1426,14 @@ function pirate() {
 						},
 						{
 							name: "Lava Chest 1",
-							sections: [{id: 0x21F, name: "B3F"}],
+							sections: [{
+								id: 0x21F,
+								name: "B3F",
+								refs: [
+									{name: "Lava Chest 1", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - Lava Chest 1", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB3F,
@@ -1123,7 +1444,14 @@ function pirate() {
 						},
 						{
 							name: "Lava Chest 2",
-							sections: [{id: 0x220, name: "B3F"}],
+							sections: [{
+								id: 0x220,
+								name: "B3F",
+								refs: [
+									{name: "Lava Chest 2", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - Lava Chest 2", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB3F,
@@ -1134,7 +1462,14 @@ function pirate() {
 						},
 						{
 							name: "Har Mirror",
-							sections: [{id: 0x219, name: "B3F"}],
+							sections: [{
+								id: 0x219,
+								name: "B3F",
+								refs: [
+									{name: "Har Mirror", ref: "Pirate/Volcano Cave"},
+									{name: "Volcano Cave - Har Mirror", ref: "GreatLog/Pirate"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.VolcanoB3F,
@@ -1144,13 +1479,7 @@ function pirate() {
 							]
 						},
 					],
-					sections: [
-						{name: "Chest 1", ref: 0x21A},
-						{name: "Chest 2", ref: 0x21B},
-						{name: "South Chest 1", ref: 0x21C},
-						{name: "South Chest 2", ref: 0x21D},
-						{name: "South Chest 3", ref: 0x21E},
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Pirate,
@@ -1160,38 +1489,7 @@ function pirate() {
 					]
 				},
 			],
-			sections: [
-				{name: "Yold - Barrel", ref: 0x200},
-				{name: "Polona - Dance", ref: 0x201},
-				{name: "Mermaid's Cave - Mermaid Queen", ref: 0x202},
-				{name: "Port Ritz - Barrel", ref: 0x203},
-				{name: "West Cape Cave - Northwest Chest", ref: 0x205},
-				{name: "West Cape Cave - North Chest", ref: 0x206},
-				{name: "West Cape Cave - Northeast Chest 1", ref: 0x207},
-				{name: "West Cape Cave - Northeast Chest 2", ref: 0x208},
-				{name: "West Cape Cave - Northeast Chest 3", ref: 0x209},
-				{name: "West Cape Cave - Middle Chest", ref: 0x20A},
-				{name: "West Cape Cave - Boss Defeated", ref: 0x204},
-				{name: "Ghost Ship - 1F Northeast Barrel", ref: 0x210},
-				{name: "Ghost Ship - 1F Middle Barrel", ref: 0x20F},
-				{name: "Ghost Ship - 1F South Vase", ref: 0x217},
-				{name: "Ghost Ship - 1F Flooded Vase 1", ref: 0x20D},
-				{name: "Ghost Ship - 1F Flooded Vase 2", ref: 0x20E},
-				{name: "Ghost Ship - 2F Center Chest", ref: 0x214},
-				{name: "Ghost Ship - 2F Hidden Chest 1", ref: 0x211},
-				{name: "Ghost Ship - 2F Hidden Chest 2", ref: 0x212},
-				{name: "Ghost Ship - 2F Hidden Chest 3", ref: 0x213},
-				{name: "Ghost Ship - Deck West Barrel", ref: 0x215},
-				{name: "Ghost Ship - Deck East Barrel", ref: 0x216},
-				{name: "Ghost Ship - Boss Defeated", ref: 0x20B},
-				{name: "Ghost Ship - Captain's Quarters Chest", ref: 0x20C},
-				{name: "Lighthouse - Chest", ref: 0x218},
-				{name: "Volcano Cave - Chest 1", ref: 0x21A},
-				{name: "Volcano Cave - Chest 2", ref: 0x21B},
-				{name: "Volcano Cave - South Chest 1", ref: 0x21C},
-				{name: "Volcano Cave - South Chest 2", ref: 0x21D},
-				{name: "Volcano Cave - South Chest 3", ref: 0x21E},
-			],
+			sections: [],
 			map_locations: [
 				{
 					map: vars.MapNames.GreatLog,
@@ -1206,7 +1504,7 @@ function pirate() {
 }
 
 function ice() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "Ice",
 			chest_unopened_img: "images/chest_closed.png",
@@ -1221,7 +1519,13 @@ function ice() {
 							children: [
 								{
 									name: "Vase",
-									sections: [{id: 0x301}],
+									sections: [{
+										id: 0x301,
+										refs: [
+											{name: "Vase", ref: "Ice/Ice North/Norden"},
+											{name: "Norden - Vase", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Norden,
@@ -1233,7 +1537,14 @@ function ice() {
 								{
 									name: "Boss Defeated",
 									access_rules: [[vars.Items.HarMirror, vars.Items.Crest]], // mirror needed to beat BombCrag
-									sections: [{id: 0x300, name: "AgDevil"}],
+									sections: [{
+										id: 0x300,
+										name: "AgDevil",
+										refs: [
+											{name: "Boss Defeated", ref: "Ice/Ice North/Norden"},
+											{name: "Norden - Boss Defeated", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Norden,
@@ -1243,10 +1554,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [
-								{name: "Vase", ref: 0x301},
-								{name: "Boss Defeated", ref: 0x300},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1260,7 +1568,13 @@ function ice() {
 							children: [
 								{
 									name: "Chest",
-									sections: [{id: 0x302}],
+									sections: [{
+										id: 0x302,
+										refs: [
+											{name: "Chest", ref: "Ice/Ice North/Spirit's Spring"},
+											{name: "Spirit's Spring - Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Spirit,
@@ -1272,7 +1586,14 @@ function ice() {
 								{
 									name: "Boss Defeated",
 									access_rules: [[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb]],
-									sections: [{id: 0x303, name: "GoatHorn and the ArcDemons"}],
+									sections: [{
+										id: 0x303,
+										name: "GoatHorn and the ArcDemons",
+										refs: [
+											{name: "Boss Defeated", ref: "Ice/Ice North/Spirit's Spring"},
+											{name: "Spirit's Spring - Boss Defeated", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Spirit,
@@ -1284,7 +1605,13 @@ function ice() {
 								{
 									name: "Sky Shield",
 									access_rules: [[vars.Items.HarMirror, vars.Items.Crest, vars.Items.YunaSoul, vars.Items.SleepHerb]],
-									sections: [{id: 0x304}],
+									sections: [{
+										id: 0x304,
+										refs: [
+											{name: "Sky Shield", ref: "Ice/Ice North/Spirit's Spring"},
+											{name: "Spirit's Spring - Sky Shield", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Spirit,
@@ -1294,11 +1621,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [
-								{name: "Chest", ref: 0x302},
-								{name: "Boss Defeated", ref: 0x303},
-								{name: "Sky Shield", ref: 0x304},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1315,7 +1638,13 @@ function ice() {
 					children: [
 						{
 							name: "Chest",
-							sections: [{id: 0x305}],
+							sections: [{
+								id: 0x305,
+								refs: [
+									{name: "Chest", ref: "Ice/Gold Mine"},
+									{name: "Gold Mine - Chest", ref: "GreatLog/Ice"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GoldMine,
@@ -1326,7 +1655,14 @@ function ice() {
 						},
 						{
 							name: "Boss Defeated",
-							sections: [{id: 0x306, name: "BombCrag"}],
+							sections: [{
+								id: 0x306,
+								name: "BombCrag",
+								refs: [
+									{name: "Boss Defeated", ref: "Ice/Gold Mine"},
+									{name: "Gold Mine - Boss Defeated", ref: "GreatLog/Ice"},
+								]
+							}],
 							map_locations: [
 								{
 									map: vars.MapNames.GoldMine,
@@ -1336,10 +1672,7 @@ function ice() {
 							]
 						},
 					],
-					sections: [
-						{name: "Chest", ref: 0x305},
-						{name: "Boss Defeated", ref: 0x306}
-					],
+					sections: [],
 					map_locations: [
 						{
 							map: vars.MapNames.Ice,
@@ -1357,7 +1690,13 @@ function ice() {
 							children: [
 								{
 									name: "Barrel",
-									sections: [{id: 0x307}],
+									sections: [{
+										id: 0x307,
+										refs: [
+											{name: "Barrel", ref: "Ice/Ice South/Weston"},
+											{name: "Weston - Barrel", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Weston,
@@ -1367,7 +1706,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [{name: "Barrel", ref: 0x307}],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1382,7 +1721,14 @@ function ice() {
 								{
 									name: "Boss Defeated",
 									access_rules: [vars.Items.YunaSoul],
-									sections: [{id: 0x308, name: "Puppetor"}],
+									sections: [{
+										id: 0x308,
+										name: "Puppetor",
+										refs: [
+											{name: "Boss Defeated", ref: "Ice/Ice South/Westania Castle"},
+											{name: "Westania Castle - Boss Defeated", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.WestaniaCastle,
@@ -1392,7 +1738,7 @@ function ice() {
 									]
 								}
 							],
-							sections: [{name: "Boss Defeated", ref: 0x308}],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1406,7 +1752,13 @@ function ice() {
 							children: [
 								{
 									name: "Yuna's Soul",
-									sections: [{id: 0x309}],
+									sections: [{
+										id: 0x309,
+										refs: [
+											{name: "Yuna's Soul", ref: "Ice/Ice South/Southern Forest"},
+											{name: "Southern Forest - Yuna's Soul", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SouthForest,
@@ -1416,7 +1768,7 @@ function ice() {
 									]
 								}
 							],
-							sections: [{name: "Yuna's Soul", ref: 0x309}],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1431,7 +1783,14 @@ function ice() {
 								{
 									name: "Boss Defeated",
 									access_rules: [vars.Items.SleepHerb],
-									sections: [{id: 0x30A, name: "GoatHorn"}],
+									sections: [{
+										id: 0x30A,
+										name: "GoatHorn",
+										refs: [
+											{name: "Boss Defeated", ref: "Ice/Ice South/Estria"},
+											{name: "Estria - Boss Defeated", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Estria,
@@ -1441,7 +1800,7 @@ function ice() {
 									]
 								}
 							],
-							sections: [{name: "Boss Defeated", ref: 0x30A}],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1455,7 +1814,13 @@ function ice() {
 							children: [
 								{
 									name: "Sleep Herb",
-									sections: [{id: 0x30B}],
+									sections: [{
+										id: 0x30B,
+										refs: [
+											{name: "Sleep Herb", ref: "Ice/Ice South/Eastern Mountain"},
+											{name: "Eastern Mountain - Sleep Herb", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.EastMountain,
@@ -1466,7 +1831,13 @@ function ice() {
 								},
 								{
 									name: "Chest",
-									sections: [{id: 0x30C}],
+									sections: [{
+										id: 0x30C,
+										refs: [
+											{name: "Chest", ref: "Ice/Ice South/Eastern Mountain"},
+											{name: "Eastern Mountain - Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.EastMountain,
@@ -1476,10 +1847,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [
-								{name: "Sleep Herb", ref: 0x30B},
-								{name: "Chest", ref: 0x30C}
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1494,7 +1862,13 @@ function ice() {
 							children: [
 								{
 									name: "1F Right Chest",
-									sections: [{id: 0x30D}],
+									sections: [{
+										id: 0x30D,
+										refs: [
+											{name: "1F Right Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 1F Right Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower1,
@@ -1505,7 +1879,13 @@ function ice() {
 								},
 								{
 									name: "1F Left Chest",
-									sections: [{id: 0x30E}],
+									sections: [{
+										id: 0x30E,
+										refs: [
+											{name: "1F Left Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 1F Left Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower1,
@@ -1516,7 +1896,13 @@ function ice() {
 								},
 								{
 									name: "2F Left Chest",
-									sections: [{id: 0x30F}],
+									sections: [{
+										id: 0x30F,
+										refs: [
+											{name: "2F Left Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 2F Left Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower2,
@@ -1527,7 +1913,13 @@ function ice() {
 								},
 								{
 									name: "2F Right Chest",
-									sections: [{id: 0x310}],
+									sections: [{
+										id: 0x310,
+										refs: [
+											{name: "2F Right Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 2F Right Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower2,
@@ -1538,7 +1930,13 @@ function ice() {
 								},
 								{
 									name: "4F Left Chest",
-									sections: [{id: 0x311}],
+									sections: [{
+										id: 0x311,
+										refs: [
+											{name: "4F Left Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 4F Left Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower4,
@@ -1549,7 +1947,13 @@ function ice() {
 								},
 								{
 									name: "4F Right Chest",
-									sections: [{id: 0x312}],
+									sections: [{
+										id: 0x312,
+										refs: [
+											{name: "4F Right Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 4F Right Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower4,
@@ -1560,7 +1964,13 @@ function ice() {
 								},
 								{
 									name: "5F Left Chest",
-									sections: [{id: 0x313}],
+									sections: [{
+										id: 0x313,
+										refs: [
+											{name: "5F Left Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 5F Left Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower5,
@@ -1571,7 +1981,13 @@ function ice() {
 								},
 								{
 									name: "5F Right Chest",
-									sections: [{id: 0x314}],
+									sections: [{
+										id: 0x314,
+										refs: [
+											{name: "5F Right Chest", ref: "Ice/Ice South/Lake Tower"},
+											{name: "Lake Tower - 5F Right Chest", ref: "GreatLog/Ice"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.LakeTower5,
@@ -1581,16 +1997,7 @@ function ice() {
 									]
 								},
 							],
-							sections: [
-								{name: "1F Right Chest", ref: 0x30D},
-								{name: "1F Left Chest", ref: 0x30E},
-								{name: "2F Left Chest", ref: 0x30F},
-								{name: "2F Right Chest", ref: 0x310},
-								{name: "4F Left Chest", ref: 0x311},
-								{name: "4F Right Chest", ref: 0x312},
-								{name: "5F Left Chest", ref: 0x313},
-								{name: "5F Right Chest", ref: 0x314},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Ice,
@@ -1602,29 +2009,7 @@ function ice() {
 					]
 				}
 			],
-			sections: [
-				{name: "Norden - Vase", ref: 0x301},
-				{name: "Norden - Boss Defeated", ref: 0x300},
-				{name: "Spirit's Spring - Chest", ref: 0x302},
-				{name: "Spirit's Spring - Boss Defeated", ref: 0x303},
-				{name: "Spirit's Spring - Sky Shield", ref: 0x304},
-				{name: "Gold Mine - Chest", ref: 0x305},
-				{name: "Gold Mine - Boss Defeated", ref: 0x306},
-				{name: "Weston - Barrel", ref: 0x307},
-				{name: "Westania Castle - Boss Defeated", ref: 0x308},
-				{name: "Southern Forest - Yuna's Soul", ref: 0x309},
-				{name: "Estria - Boss Defeated", ref: 0x30A},
-				{name: "Eastern Mountain - Sleep Herb", ref: 0x30B},
-				{name: "Eastern Mountain - Chest", ref: 0x30C},
-				{name: "Lake Tower - 1F Right Chest", ref: 0x30D},
-				{name: "Lake Tower - 1F Left Chest", ref: 0x30E},
-				{name: "Lake Tower - 2F Left Chest", ref: 0x30F},
-				{name: "Lake Tower - 2F Right Chest", ref: 0x310},
-				{name: "Lake Tower - 4F Left Chest", ref: 0x311},
-				{name: "Lake Tower - 4F Right Chest", ref: 0x312},
-				{name: "Lake Tower - 5F Left Chest", ref: 0x313},
-				{name: "Lake Tower - 5F Right Chest", ref: 0x314},
-			],
+			sections: [],
 			map_locations: [
 				{
 					map: vars.MapNames.GreatLog,
@@ -1639,7 +2024,7 @@ function ice() {
 }
 
 function sky() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "Sky",
 			chest_unopened_img: "images/chest_closed.png",
@@ -1654,7 +2039,13 @@ function sky() {
 							children: [
 								{
 									name: "Gravestone",
-									sections: [{id: 0x400}],
+									sections: [{
+										id: 0x400,
+										refs: [
+											{name: "Fhunt - Gravestone", ref: "Sky/Shrine Island/Fhunt"},
+											{name: "Fhunt - Gravestone", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Fhunt,
@@ -1664,12 +2055,7 @@ function sky() {
 									]
 								}
 							],
-							sections: [
-								{name: "Fhunt - Gravestone", ref: 0x400},
-								{name: "Sage Tower - 1F Chest", ref: 0x401},
-								{name: "Sage Tower - 4F Chest 1", ref: 0x402},
-								{name: "Sage Tower - 4F Chest 2", ref: 0x403},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1683,7 +2069,13 @@ function sky() {
 							children: [
 								{
 									name: "1F Chest",
-									sections: [{id: 0x401}],
+									sections: [{
+										id: 0x401,
+										refs: [
+											{name: "Sage Tower - 1F Chest", ref: "Sky/Shrine Island/Fhunt"},
+											{name: "Sage Tower - 1F Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SageTower,
@@ -1694,7 +2086,13 @@ function sky() {
 								},
 								{
 									name: "4F Chest 1",
-									sections: [{id: 0x402}],
+									sections: [{
+										id: 0x402,
+										refs: [
+											{name: "Sage Tower - 4F Chest 1", ref: "Sky/Shrine Island/Fhunt"},
+											{name: "Sage Tower - 4F Chest 1", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SageTower,
@@ -1705,7 +2103,13 @@ function sky() {
 								},
 								{
 									name: "4F Chest 2",
-									sections: [{id: 0x403}],
+									sections: [{
+										id: 0x403,
+										refs: [
+											{name: "Sage Tower - 4F Chest 2", ref: "Sky/Shrine Island/Fhunt"},
+											{name: "Sage Tower - 4F Chest 2", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SageTower,
@@ -1727,7 +2131,13 @@ function sky() {
 							children: [
 								{
 									name: "Boss Defeated",
-									sections: [{id: 0x404}],
+									sections: [{
+										id: 0x404,
+										refs: [
+											{name: "Boss Defeated", ref: "Sky/Main Area/Mad Condor's Nest"},
+											{name: "Mad Condor's Nest - Boss Defeated", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.CondorNest,
@@ -1738,7 +2148,13 @@ function sky() {
 								},
 								{
 									name: "Chest",
-									sections: [{id: 0x405}],
+									sections: [{
+										id: 0x405,
+										refs: [
+											{name: "Chest", ref: "Sky/Main Area/Mad Condor's Nest"},
+											{name: "Mad Condor's Nest - Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.CondorNest,
@@ -1748,10 +2164,7 @@ function sky() {
 									]
 								}
 							],
-							sections: [
-								{name: "Boss Defeated", ref: 0x404},
-								{name: "Chest", ref: 0x405}
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1766,7 +2179,13 @@ function sky() {
 							children: [
 								{
 									name: "East Chest",
-									sections: [{id: 0x406}],
+									sections: [{
+										id: 0x406,
+										refs: [
+											{name: "East Chest", ref: "Sky/Main Area/Small Cave"},
+											{name: "Small Cave - East Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SmallCave1,
@@ -1777,7 +2196,14 @@ function sky() {
 								},
 								{
 									name: "Boss Defeated",
-									sections: [{id: 0x408, name: "Metabble"}],
+									sections: [{
+										id: 0x408,
+										name: "Metabble",
+										refs: [
+											{name: "Boss Defeated", ref: "Sky/Main Area/Small Cave"},
+											{name: "Small Cave - Boss Defeated", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SmallCave2,
@@ -1788,7 +2214,13 @@ function sky() {
 								},
 								{
 									name: "West Chest",
-									sections: [{id: 0x407}],
+									sections: [{
+										id: 0x407,
+										refs: [
+											{name: "West Chest", ref: "Sky/Main Area/Small Cave"},
+											{name: "Small Cave - West Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.SmallCave2,
@@ -1798,11 +2230,7 @@ function sky() {
 									]
 								},
 							],
-							sections: [
-								{name: "East Chest", ref: 0x406},
-								{name: "Boss Defeated", ref: 0x408},
-								{name: "West Chest", ref: 0x407},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1817,7 +2245,13 @@ function sky() {
 							children: [
 								{
 									name: "Chest",
-									sections: [{id: 0x409}],
+									sections: [{
+										id: 0x409,
+										refs: [
+											{name: "Chest", ref: "Sky/Main Area/Wind Tower"},
+											{name: "Wind Tower - Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.WindTower1,
@@ -1827,9 +2261,7 @@ function sky() {
 									]
 								},
 							],
-							sections: [
-								{name: "Chest", ref: 0x409}
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1844,7 +2276,14 @@ function sky() {
 							children: [
 								{
 									name: "Boss Defeated",
-									sections: [{id: 0x40A, name: "Niterich"}],
+									sections: [{
+										id: 0x40A,
+										name: "Niterich",
+										refs: [
+											{name: "Boss Defeated", ref: "Sky/Main Area/Graveyard"},
+											{name: "Graveyard - Boss Defeated", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Graveyard3,
@@ -1855,7 +2294,13 @@ function sky() {
 								},
 								{
 									name: "Chest",
-									sections: [{id: 0x40B}],
+									sections: [{
+										id: 0x40B,
+										refs: [
+											{name: "Chest", ref: "Sky/Main Area/Graveyard"},
+											{name: "Graveyard - Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Graveyard3,
@@ -1865,10 +2310,7 @@ function sky() {
 									]
 								},
 							],
-							sections: [
-								{name: "Boss Defeated", ref: 0x40A},
-								{name: "Chest", ref: 0x40B}
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1883,7 +2325,13 @@ function sky() {
 								{
 									name: "Vase",
 									access_rules: [has(vars.Items.HeavenSet, 3)],
-									sections: [{id: 0x40D}],
+									sections: [{
+										id: 0x40D,
+										refs: [
+											{name: "Vase", ref: "Sky/Main Area/Hitano"},
+											{name: "Hitano - Vase", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.Hitano,
@@ -1893,9 +2341,7 @@ function sky() {
 									]
 								},
 							],
-							sections: [
-								{name: "Vase", ref: 0x40D}
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1910,7 +2356,13 @@ function sky() {
 							children: [
 								{
 									name: "1F Chest",
-									sections: [{id: 0x40E}],
+									sections: [{
+										id: 0x40E,
+										refs: [
+											{name: "1F Chest", ref: "Sky/Main Area/Demon Castle"},
+											{name: "Demon Castle - 1F Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.DemonCastle1,
@@ -1921,7 +2373,13 @@ function sky() {
 								},
 								{
 									name: "B2F Chest",
-									sections: [{id: 0x40F}],
+									sections: [{
+										id: 0x40F,
+										refs: [
+											{name: "B2F Chest", ref: "Sky/Main Area/Demon Castle"},
+											{name: "Demon Castle - B2F Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.DemonCastle2,
@@ -1932,7 +2390,13 @@ function sky() {
 								},
 								{
 									name: "B4F Chest",
-									sections: [{id: 0x410}],
+									sections: [{
+										id: 0x410,
+										refs: [
+											{name: "B4F Chest", ref: "Sky/Main Area/Demon Castle"},
+											{name: "Demon Castle - B4F Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.DemonCastle2,
@@ -1943,7 +2407,13 @@ function sky() {
 								},
 								{
 									name: "B6F Chest",
-									sections: [{id: 0x411}],
+									sections: [{
+										id: 0x411,
+										refs: [
+											{name: "B6F Chest", ref: "Sky/Main Area/Demon Castle"},
+											{name: "Demon Castle - B6F Chest", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.DemonCastle2,
@@ -1954,7 +2424,14 @@ function sky() {
 								},
 								{
 									name: "Boss Defeated",
-									sections: [{id: 0x412, name: "Mudou"}],
+									sections: [{
+										id: 0x412,
+										name: "Mudou",
+										refs: [
+											{name: "Boss Defeated", ref: "Sky/Main Area/Demon Castle"},
+											{name: "Demon Castle - Boss Defeated", ref: "GreatLog/Sky"},
+										]
+									}],
 									map_locations: [
 										{
 											map: vars.MapNames.DemonCastle2,
@@ -1965,7 +2442,13 @@ function sky() {
 								},
 								// {
 								// 	name: "Boss Gift",
-								// 	sections: [{id: 0x413}],
+								// 	sections: [{
+								// 		id: 0x413,
+								// 		refs: [
+								// 			{name: "Boss Gift", ref: "Sky/Main Area/Demon Castle"},
+								// 			{name: "Demon Castle - Boss Gift", ref: "GreatLog/Sky"},
+								// 		]
+								// 	}],
 								// 	map_locations: [
 								// 		{
 								// 			map: vars.MapNames.DemonCastle2,
@@ -1975,14 +2458,7 @@ function sky() {
 								// 	]
 								// },
 							],
-							sections: [
-								{name: "1F Chest", ref: 0x40E},
-								{name: "B2F Chest", ref: 0x40F},
-								{name: "B4F Chest", ref: 0x410},
-								{name: "B6F Chest", ref: 0x411},
-								{name: "Boss Defeated", ref: 0x412},
-								// {name: "Boss Gift", ref: 0x413},
-							],
+							sections: [],
 							map_locations: [
 								{
 									map: vars.MapNames.Sky,
@@ -1994,27 +2470,7 @@ function sky() {
 					]
 				}
 			],
-			sections: [
-				{name: "Fhunt - Gravestone", ref: 0x400},
-				{name: "Sage Tower - 1F Chest", ref: 0x401},
-				{name: "Sage Tower - 4F Chest 1", ref: 0x402},
-				{name: "Sage Tower - 4F Chest 2", ref: 0x403},
-				{name: "Mad Condor's Nest - Boss Defeated", ref: 0x404},
-				{name: "Mad Condor's Nest - Chest", ref: 0x405},
-				{name: "Small Cave - East Chest", ref: 0x406},
-				{name: "Small Cave - Boss Defeated", ref: 0x408},
-				{name: "Small Cave - West Chest", ref: 0x407},
-				{name: "Wind Tower - Chest", ref: 0x409},
-				{name: "Graveyard - Boss Defeated", ref: 0x40A},
-				{name: "Graveyard - Chest", ref: 0x40B},
-				{name: "Hitano - Vase", ref: 0x40D},
-				{name: "Demon Castle - 1F Chest", ref: 0x40E},
-				{name: "Demon Castle - B2F Chest", ref: 0x40F},
-				{name: "Demon Castle - B4F Chest", ref: 0x410},
-				{name: "Demon Castle - B6F Chest", ref: 0x411},
-				{name: "Demon Castle - Boss Defeated", ref: 0x412},
-				// {name: "Demon Castle - Boss Gift", ref: 0x413},
-			],
+			sections: [],
 			map_locations: [
 				{
 					map: vars.MapNames.GreatLog,
@@ -2029,7 +2485,7 @@ function sky() {
 }
 
 function limbo() {
-	let locs: Parent[] = [
+	let locs: Location[] = [
 		{
 			name: "Limbo",
 			chest_unopened_img: "images/chest_closed.png",
@@ -2039,7 +2495,13 @@ function limbo() {
 				{
 					name: "Boss Defeated",
 					access_rules: [[vars.Items.TidalBell, vars.Items.HarMirror, vars.Items.SkyShield]],
-					sections: [{id: 0x500, name: "Darck"}],
+					sections: [{
+						id: 0x500,
+						name: "Darck",
+						refs: [
+							{name: "Darck Defeated", ref: "GreatLog/Limbo"},
+						]
+					}],
 					map_locations: [
 						{
 							map: vars.MapNames.Limbo,
@@ -2047,16 +2509,6 @@ function limbo() {
 							y: 216
 						}
 					]
-				}
-			],
-			sections: [
-				{name: "Darck Defeated", ref: 0x500},
-			],
-			map_locations: [
-				{
-					map: vars.MapNames.GreatLog,
-					x: 244,
-					y: 766
 				}
 			]
 		}
